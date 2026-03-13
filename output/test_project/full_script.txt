@@ -1,0 +1,34 @@
+============================================================
+CHARACTER ROSTER
+============================================================
+  HUMAN: Bald human in an orange space suit with dark shoulder pads; expressive wide eyes.
+  ALIEN: Small green alien with big round eyes, a pink gem on its forehead, and a white robotic walking rig with two segmented legs.
+  BUNNY_SMALL: Teal rabbit-like creature with black eyes, tall ears, and small head antennas; normal animal size.
+  BUNNY_GIANT: Enormous teal rabbit-like creature, same look as smaller one but towering over characters and sporting sharp fangs.
+
+============================================================
+SCRIPT (Chronological Order)
+============================================================
+
+--- PAGE 1 ---
+  ALIEN: [cheerfully proud] See? They look nearly identical to your Earth "bunny."
+  ALIEN: [lightly amused] Well, besides the color and antennas of course.
+
+--- PAGE 2 ---
+  HUMAN: [uneasy] Uh... It's also quite a bit bigger.
+  ALIEN: [blithely enthusiastic] Most certainly!
+
+--- PAGE 3 ---
+  HUMAN: [worried realization] It also has fangs.
+  ALIEN: [matter-of-fact] It's a carnivore.
+  ALIEN: [cheerfully confirming] Most certainly!
+  ALIEN: [playfully emphatic] Mooost certainly!
+
+--- PAGE 4 ---
+  HUMAN: [accusingly anxious] You DID NOT mean to teleport this close to it, did you.
+  ALIEN: [panicked insistence] Most certainly NOT!
+  HUMAN: [urgently pleading] You should teleport us back.
+  ALIEN: [agreeing in a panic] Most certainly!
+  ALIEN: [frantic self-aware] Unfortunately, however, it seems I have become utterly paralyzed by fear!
+  ALIEN: [grimly humorous resignation] Therefore, if I may use a bit of Earth slang, I suspect we have become toast.
+  HUMAN: [deadpan dread] Most certainly.

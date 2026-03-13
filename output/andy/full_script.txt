@@ -1,0 +1,52 @@
+============================================================
+CHARACTER ROSTER
+============================================================
+  BARBER: Young man with short dark hair, medium skin, wearing a brown T‑shirt and jeans; holds clippers or scissors while cutting hair.
+  CUSTOMER: Light‑skinned man, initially in gray T‑shirt and red beanie, later in blue barber cape; scruffy facial hair and expressive eyes.
+  RED_IMP: Small red, devilish inner‑voice creature with sharp teeth and yellow eyes, often angry or mocking.
+  BLUE_IMP: Small blue, friendly inner‑voice creature with smooth features, usually calm and reassuring.
+
+============================================================
+SCRIPT (Chronological Order)
+============================================================
+
+--- PAGE 1 ---
+  BARBER: [professional and casual] Take a seat.
+  BARBER: [friendly and curious] So, what kinda **haircut** do you want?
+  CUSTOMER: [eager and cheerful] Here, I've got some **pictures**.
+
+--- PAGE 2 ---
+  CUSTOMER: [enthusiastic] Something like this!
+
+--- PAGE 3 ---
+  CUSTOMER: [optimistic and satisfied] That's pretty much the look I'm going for.
+  BARBER: [nervous and uncertain] Uh... sure, man. I'll do my best.
+
+--- PAGE 4 ---
+  BARBER: [chatty and mildly anxious] What do you do for **work**, man?
+  CUSTOMER: [matter‑of‑fact and a little proud] I'm a **comic artist**.
+  BARBER: [genuinely impressed] Oh, that's cool!
+  CUSTOMER: [friendly and engaging] Yeah, I like it a lot! What about **you**?
+
+--- PAGE 5 ---
+  BARBER: [slightly confused and self‑conscious] I cut hair... I'm a **barber**.
+  CUSTOMER: [self‑deprecating and embarrassed] Oh, right! **Duh!**
+  CUSTOMER: [darkly joking and ashamed] You can go ahead and cut off my tongue with those scissors.
+  BARBER: [puzzled] Huh? What was that?
+  CUSTOMER: [sheepish and dismissive] Nothing.
+
+--- PAGE 6 ---
+  RED_IMP: [loud and aggressively taunting] **KNOCK KNOCK!**
+  RED_IMP: [scornful and ranting] Anyone home? What kinda **stupid question** was that?!
+
+--- PAGE 7 ---
+  BLUE_IMP: [firm but caring] Hey! **Not nice.** We don't talk like that anymore, remember?
+
+--- PAGE 8 ---
+  BLUE_IMP: [reassuring and lightly humorous] Everyone says **dumb-dumb stupid idiot things** on occasion.
+  BLUE_IMP: [comforting] It happens to the best of us.
+
+--- PAGE 9 ---
+  BARBER: [mildly annoyed but humorous] Hey man, can you move your **symbolic manifestations of inner-dialogue** outta the way?
+  BARBER: [slightly exasperated] I can't see what I'm working on.
+  CUSTOMER: [apologetic and flustered] Oh, sure. Sorry.

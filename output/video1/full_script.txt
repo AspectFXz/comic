@@ -1,0 +1,45 @@
+============================================================
+CHARACTER ROSTER
+============================================================
+  HUMAN: Bald human in an orange space suit with brown shoulder pads and a circular emblem on the chest.
+  ALIEN: Small green alien with big round eyes, a single pink gem on its forehead, seated in a white robotic walking chair with two mechanical legs.
+  EARTH_BUNNY: Small brown Earth rabbit with long ears, seen on the grassy field on page 1.
+  ALIEN_BUNNY: Large teal rabbit-like alien creature with antennas on its head and later shown with sharp fangs.
+
+============================================================
+SCRIPT (Chronological Order)
+============================================================
+
+--- PAGE 1 ---
+  HUMAN: [casually informative] And this is what we Earthlings call a "bunny."
+  ALIEN: [pleasantly intrigued] How interesting. We have a strikingly similar creature on our planet.
+  HUMAN: [curious and slightly surprised] You do?
+  ALIEN: [cheerfully confident] Most certainly!
+
+--- PAGE 2 ---
+  ALIEN: [eagerly demonstrating] I'll show you! Allow me to simply [concentrating] locate one aaand...
+  SYSTEM: [mechanical] TELEPORTATION IN PROGRESS
+  ALIEN: [mildly satisfied] Ah, here we go.
+
+--- PAGE 3 ---
+  ALIEN: [proudly explanatory] See? They look nearly identical to your Earth "bunny."
+  ALIEN: [sheepishly corrective] Well, besides the color and antennas of course.
+
+--- PAGE 4 ---
+  HUMAN: [nervously stating the obvious] Uh... It's also quite a bit bigger.
+  ALIEN: [cheerfully oblivious] Most certainly!
+
+--- PAGE 5 ---
+  HUMAN: [alarmed but trying to stay calm] It also has fangs.
+  HUMAN: [increasingly worried] It's a carnivore.
+  ALIEN: [over-eager agreement] Most certainly!
+  ALIEN: [playfully emphatic then slipping into fear] Mooost [nervous] certainly!
+
+--- PAGE 6 ---
+  HUMAN: [accusingly anxious] You DID NOT mean to teleport this close to it, did you.
+  ALIEN: [frantic denial] Most certainly NOT!
+  HUMAN: [urgent but controlled] You should teleport us back.
+  ALIEN: [reflexively agreeable then panicked] Most [flustered] certainly!
+  ALIEN: [dramatically terrified] Unfortunately, however, it seems I have become utterly paralyzed by fear!
+  ALIEN: [gallows-humorous resignation] Therefore, if I may use a bit of Earth slang, I suspect we have become toast.
+  HUMAN: [deadpan acceptance] Most certainly.

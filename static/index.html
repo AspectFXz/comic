@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comic Voiceover Studio</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root{--pri:rgb(0,115,255);--bg:#000;--text:#fff;--t2:rgba(255,255,255,.65);--t3:rgba(255,255,255,.35);--border:rgba(255,255,255,.08);--glass:rgba(20,20,20,.5);--green:#10b981;--red:#ef4444}
+        *{box-sizing:border-box;margin:0;padding:0}
+        body{font-family:"DM Sans","Inter",-apple-system,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6}
+
+        .bar{position:sticky;top:0;z-index:100;background:rgba(6,6,6,.9);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);padding:12px 24px}
+        .bar-in{max-width:1400px;margin:0 auto;display:flex;align-items:center;gap:12px}
+        .title{font-size:15px;font-weight:700;display:flex;align-items:center;gap:8px;white-space:nowrap}
+        .title i{color:var(--pri);font-size:16px}
+        .spacer{flex:1}
+        .main{max-width:820px;margin:0 auto;padding:24px 24px 80px}
+        .main-full{max-width:1400px;margin:0 auto;padding:24px 24px 80px}
+
+        /* Buttons */
+        .btn{padding:8px 16px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;transition:all .2s;font-family:inherit;border:none;display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+        .btn-pri{background:linear-gradient(135deg,var(--pri),#0066dd);color:#fff}
+        .btn-pri:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 4px 14px rgba(0,115,255,.4)}
+        .btn-pri:disabled{opacity:.3;cursor:not-allowed}
+        .btn-ghost{background:none;border:1px solid var(--border);color:var(--t2);padding:7px 14px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .2s;display:flex;align-items:center;gap:6px}
+        .btn-ghost:hover:not(:disabled){background:rgba(255,255,255,.06);color:#fff}
+        .btn-ghost:disabled{opacity:.25;cursor:not-allowed}
+        .btn-ic{width:30px;height:30px;border-radius:7px;border:1px solid var(--border);background:rgba(255,255,255,.04);color:var(--t2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:12px;transition:all .2s;flex-shrink:0}
+        .btn-ic:hover:not(:disabled){background:rgba(255,255,255,.1);color:#fff}
+        .btn-ic:disabled{opacity:.2;cursor:not-allowed}
+        .btn-ic.spin{border-color:var(--pri);color:var(--pri);animation:pulse 1.4s ease-in-out infinite}
+        .btn-ic.done{border-color:rgba(16,185,129,.4);color:var(--green)}
+        @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(0,115,255,.25)}50%{box-shadow:0 0 0 5px rgba(0,115,255,0)}}
+
+        /* Gallery */
+        .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px}
+        .card{background:var(--glass);border:1px solid var(--border);border-radius:14px;overflow:hidden;cursor:pointer;transition:all .22s}
+        .card:hover{border-color:rgba(255,255,255,.18);transform:translateY(-3px);box-shadow:0 8px 28px rgba(0,0,0,.5)}
+        .card-cover{aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;font-size:40px;font-weight:800;color:rgba(255,255,255,.12)}
+        .card-body{padding:12px 14px}
+        .card-name{font-size:14px;font-weight:700;text-transform:capitalize;margin-bottom:3px}
+        .card-meta{font-size:10px;color:var(--t3);display:flex;gap:8px}
+
+        /* New project card */
+        .card-new .card-cover{border:2px dashed rgba(255,255,255,.1);background:none;color:var(--pri);font-size:32px;font-weight:400}
+        .card-new .card-name{color:var(--t2)}
+
+        /* Modal */
+        .modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(6px);z-index:200;display:none;align-items:center;justify-content:center}
+        .modal-bg.on{display:flex}
+        .modal{background:rgb(18,18,18);border:1px solid var(--border);border-radius:16px;width:90%;max-width:520px;padding:28px;max-height:90vh;overflow-y:auto}
+        .modal h3{font-size:17px;font-weight:700;margin-bottom:18px}
+        .modal-field{margin-bottom:16px}
+        .modal-label{font-size:11px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+        .modal-input{width:100%;padding:10px 14px;background:rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:#fff;font-size:13px;font-family:inherit}
+        .modal-input:focus{outline:none;border-color:var(--pri)}
+        .modal-input::placeholder{color:rgba(255,255,255,.25)}
+
+        /* Drop zone */
+        .drop{border:2px dashed rgba(255,255,255,.12);border-radius:12px;padding:32px 20px;text-align:center;cursor:pointer;transition:all .2s;color:var(--t3)}
+        .drop:hover,.drop.over{border-color:var(--pri);background:rgba(0,115,255,.04);color:var(--t2)}
+        .drop i{font-size:28px;margin-bottom:8px;display:block;color:rgba(255,255,255,.15)}
+        .drop p{font-size:12px}
+
+        /* File preview list */
+        .file-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+        .file-thumb{width:56px;height:56px;border-radius:6px;object-fit:cover;border:1px solid var(--border)}
+        .file-item{position:relative}
+        .file-remove{position:absolute;top:-4px;right:-4px;width:16px;height:16px;border-radius:50%;background:var(--red);color:#fff;font-size:8px;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center}
+
+        .modal-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:20px}
+
+        /* Processing overlay */
+        .processing{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:300;align-items:center;justify-content:center;flex-direction:column;gap:16px;color:var(--t2)}
+        .processing.on{display:flex}
+        .processing .spinner-lg{width:36px;height:36px;border:3px solid rgba(255,255,255,.1);border-top-color:var(--pri);border-radius:50%;animation:sp .8s linear infinite}
+        .processing p{font-size:14px;font-weight:500}
+
+        /* Reader — split layout */
+        .reader-split{display:flex;gap:24px;align-items:flex-start}
+        .reader-left{flex:0 0 48%;position:sticky;top:70px;max-height:calc(100vh - 90px);overflow:hidden;border-radius:12px;border:1px solid var(--border);background:rgba(0,0,0,.3)}
+        .reader-left img{width:100%;display:block}
+        .reader-right{flex:1;min-width:0}
+
+        .page-placeholder{aspect-ratio:3/4;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--t3);gap:8px;cursor:pointer;transition:all .2s}
+        .page-placeholder:hover{background:rgba(255,255,255,.03);color:var(--t2)}
+        .page-placeholder i{font-size:32px;color:rgba(255,255,255,.1)}
+        .page-placeholder span{font-size:12px}
+        .page-placeholder .upload-hint{font-size:10px;color:var(--pri);margin-top:4px}
+
+        .roster{background:var(--glass);border:1px solid var(--border);border-radius:12px;padding:14px 16px;margin-bottom:20px}
+        .roster-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--t3);margin-bottom:10px}
+        .roster-grid{display:flex;flex-wrap:wrap;gap:8px}
+        .roster-item{display:flex;align-items:center;gap:8px;background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:8px 10px}
+        .roster-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+        .roster-char{font-size:11px;font-weight:700;white-space:nowrap}
+        .roster-in{padding:5px 8px;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.1);border-radius:5px;color:#fff;font-size:11px;font-family:inherit;width:110px}
+        .roster-in:focus{outline:none;border-color:var(--pri)}
+        .roster-in::placeholder{color:rgba(255,255,255,.2)}
+
+        .prog{display:none;margin-bottom:16px;background:var(--glass);border:1px solid var(--border);border-radius:10px;padding:10px 14px}
+        .prog.on{display:block}
+        .prog-top{display:flex;justify-content:space-between;margin-bottom:6px;font-size:11px}
+        .prog-track{height:4px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden}
+        .prog-fill{height:100%;background:linear-gradient(90deg,var(--pri),var(--green));border-radius:2px;transition:width .3s;width:0%}
+
+        .page-indicator{font-size:11px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.7px;margin-bottom:14px}
+
+        .line{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:8px;transition:background .12s;margin-bottom:1px}
+        .line:hover{background:rgba(255,255,255,.025)}
+        .l-num{width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.05);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:var(--t3);flex-shrink:0}
+        .l-tag{padding:2px 7px;border-radius:4px;font-size:9px;font-weight:700;color:#fff;flex-shrink:0;min-width:48px;text-align:center;letter-spacing:.2px}
+        .l-body{flex:1;min-width:0}
+        .l-text{font-size:13px;color:rgba(255,255,255,.85);line-height:1.5}
+        .l-text .e{color:var(--pri);font-weight:500}
+        .l-acts{display:flex;gap:4px;flex-shrink:0}
+        .l-audio{display:none;padding:2px 0 6px 42px}
+        .l-audio.on{display:block}
+        .l-audio audio{width:100%;height:28px;border-radius:6px}
+
+        .page-nav{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:24px;padding-top:20px;border-top:1px solid var(--border)}
+        .page-dots{display:flex;gap:6px;align-items:center}
+        .dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.12);cursor:pointer;transition:all .2s}
+        .dot:hover{background:rgba(255,255,255,.25)}
+        .dot.active{background:var(--pri);box-shadow:0 0 8px rgba(0,115,255,.4)}
+
+        .toasts{position:fixed;bottom:18px;right:18px;z-index:9999;display:flex;flex-direction:column;gap:6px}
+        .toast{padding:9px 15px;border-radius:7px;font-size:11px;font-weight:500;backdrop-filter:blur(12px);animation:ti .3s;max-width:300px}
+        .toast.ok{background:rgba(16,185,129,.18);border:1px solid rgba(16,185,129,.3);color:#6ee7b7}
+        .toast.err{background:rgba(239,68,68,.18);border:1px solid rgba(239,68,68,.3);color:#fca5a5}
+        .toast.info{background:rgba(0,115,255,.18);border:1px solid rgba(0,115,255,.3);color:rgb(147,197,253)}
+        @keyframes ti{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+        .spinner{width:12px;height:12px;border:2px solid rgba(255,255,255,.15);border-top-color:#fff;border-radius:50%;animation:sp .7s linear infinite}
+        @keyframes sp{to{transform:rotate(360deg)}}
+
+        @media(max-width:900px){
+            .reader-split{flex-direction:column}
+            .reader-left{flex:none;width:100%;position:static;max-height:none}
+        }
+        @media(max-width:600px){
+            .grid{grid-template-columns:repeat(2,1fr)}
+            .roster-grid{flex-direction:column}
+            .line{flex-wrap:wrap;gap:6px}
+            .l-acts{width:100%;justify-content:flex-end}
+            .l-audio{padding-left:0}
+        }
+    </style>
+</head>
+<body>
+
+<!-- ═══ GALLERY ═══ -->
+<div id="vGallery">
+    <div class="bar"><div class="bar-in">
+        <div class="title"><i class="fas fa-microphone-lines"></i> Voiceover Studio</div>
+    </div></div>
+    <div class="main">
+        <div id="projectGrid" class="grid"></div>
+    </div>
+</div>
+
+<!-- ═══ READER ═══ -->
+<div id="vReader" style="display:none">
+    <div class="bar"><div class="bar-in">
+        <button class="btn-ghost" onclick="showGallery()"><i class="fas fa-arrow-left"></i> Back</button>
+        <div class="title" id="rTitle"></div>
+        <div class="spacer"></div>
+        <button class="btn btn-pri" id="genAllBtn" disabled onclick="generateAll()">
+            <i class="fas fa-bolt"></i> Generate All
+        </button>
+    </div></div>
+    <div class="main-full">
+        <div id="roster"></div>
+        <div id="progBar" class="prog">
+            <div class="prog-top"><span id="pLabel">Generating...</span><span id="pCount">0/0</span></div>
+            <div class="prog-track"><div id="pFill" class="prog-fill"></div></div>
+        </div>
+        <div class="reader-split">
+            <div class="reader-left" id="pageImage"></div>
+            <div class="reader-right">
+                <div id="pageContent"></div>
+                <div id="pageNav" class="page-nav" style="display:none"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ═══ CREATE MODAL ═══ -->
+<div id="createBg" class="modal-bg" onclick="if(event.target===this)closeCreate()">
+    <div class="modal">
+        <h3><i class="fas fa-plus" style="color:var(--pri);margin-right:8px"></i>New Project</h3>
+        <div class="modal-field">
+            <div class="modal-label">Project Name</div>
+            <input class="modal-input" id="newName" placeholder="e.g. barber_shop">
+        </div>
+        <div class="modal-field">
+            <div class="modal-label">Comic Pages (in order)</div>
+            <div class="drop" id="dropZone" onclick="document.getElementById('fileInput').click()">
+                <i class="fas fa-cloud-arrow-up"></i>
+                <p>Drop images here or click to browse</p>
+            </div>
+            <input type="file" id="fileInput" multiple accept="image/*" hidden>
+            <div class="file-list" id="fileList"></div>
+        </div>
+        <div class="modal-actions">
+            <button class="btn-ghost" onclick="closeCreate()">Cancel</button>
+            <button class="btn btn-pri" id="processBtn" onclick="processProject()" disabled>
+                <i class="fas fa-wand-magic-sparkles"></i> Process
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- ═══ PROCESSING OVERLAY ═══ -->
+<div id="procOverlay" class="processing">
+    <div class="spinner-lg"></div>
+    <p>Extracting dialogue from comic pages...</p>
+    <span style="font-size:11px;color:var(--t3)">This may take 30-60 seconds</span>
+</div>
+
+<!-- Hidden file input for page image upload -->
+<input type="file" id="pageImgInput" accept="image/*" hidden>
+
+<div id="toasts" class="toasts"></div>
+
+<script>
+/* ─── State ─── */
+const S = { project:null, characters:[], pages:[], pageIdx:0, apiKey:'', generating:new Set(), abort:false };
+let pendingFiles = [];
+
+const COLORS = ['#0073ff','#10b981','#f59e0b','#ef4444','#8b5cf6','#ec4899','#06b6d4','#84cc16'];
+let cMap={},cI=0;
+function cc(n){if(!cMap[n]){cMap[n]=COLORS[cI%COLORS.length];cI++;}return cMap[n];}
+function fmt(t){return t.replace(/\[([^\]]+)\]/g,'<span class="e">[$1]</span>');}
+
+/* ─── Toast ─── */
+function toast(m,t='info'){
+    const c=document.getElementById('toasts'),d=document.createElement('div');
+    d.className='toast '+(t==='error'?'err':t==='success'?'ok':t);
+    d.textContent=m;c.appendChild(d);
+    setTimeout(()=>{d.style.opacity='0';setTimeout(()=>d.remove(),300)},4000);
+}
+
+/* ─── Progress ─── */
+function prog(l,c,t){
+    document.getElementById('progBar').classList.add('on');
+    document.getElementById('pLabel').textContent=l;
+    document.getElementById('pCount').textContent=c+'/'+t;
+    document.getElementById('pFill').style.width=(c/t*100)+'%';
+}
+function progOff(){document.getElementById('progBar').classList.remove('on');}
+
+/* ─── Views ─── */
+function showGallery(){
+    document.getElementById('vGallery').style.display='';
+    document.getElementById('vReader').style.display='none';
+    S.project=null;loadProjects();
+}
+function showReader(){
+    document.getElementById('vGallery').style.display='none';
+    document.getElementById('vReader').style.display='';
+}
+
+/* ═══════════════════════════════════════════════════════
+   CREATE PROJECT
+   ═══════════════════════════════════════════════════════ */
+
+function openCreate(){
+    pendingFiles=[];
+    document.getElementById('newName').value='';
+    document.getElementById('fileList').innerHTML='';
+    document.getElementById('processBtn').disabled=true;
+    document.getElementById('createBg').classList.add('on');
+}
+function closeCreate(){document.getElementById('createBg').classList.remove('on');}
+
+function updateCreateBtn(){
+    const name=document.getElementById('newName').value.trim();
+    document.getElementById('processBtn').disabled=!(name&&pendingFiles.length);
+}
+
+function renderFileList(){
+    const fl=document.getElementById('fileList');
+    fl.innerHTML=pendingFiles.map((f,i)=>{
+        const url=URL.createObjectURL(f);
+        return `<div class="file-item">
+            <img src="${url}" class="file-thumb" title="${f.name}">
+            <button class="file-remove" onclick="removeFile(${i})"><i class="fas fa-times"></i></button>
+        </div>`;
+    }).join('');
+    updateCreateBtn();
+}
+
+function addFiles(files){
+    for(const f of files){
+        if(f.type.startsWith('image/')) pendingFiles.push(f);
+    }
+    renderFileList();
+}
+
+function removeFile(i){
+    pendingFiles.splice(i,1);
+    renderFileList();
+}
+
+async function processProject(){
+    const name=document.getElementById('newName').value.trim();
+    if(!name||!pendingFiles.length) return;
+
+    closeCreate();
+    document.getElementById('procOverlay').classList.add('on');
+
+    const fd=new FormData();
+    fd.append('name',name);
+    pendingFiles.forEach(f=>fd.append('images',f));
+
+    try{
+        const r=await(await fetch('/api/project/create',{method:'POST',body:fd})).json();
+        if(r.error) throw new Error(r.error);
+        document.getElementById('procOverlay').classList.remove('on');
+        toast(`Created "${name}" with ${r.lines} lines!`,'success');
+        openProject(name);
+    }catch(e){
+        document.getElementById('procOverlay').classList.remove('on');
+        toast(e.message,'error');
+    }
+}
+
+// Drop zone events
+document.addEventListener('DOMContentLoaded',()=>{
+    const dz=document.getElementById('dropZone');
+    const fi=document.getElementById('fileInput');
+
+    dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('over');});
+    dz.addEventListener('dragleave',()=>dz.classList.remove('over'));
+    dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('over');addFiles(e.dataTransfer.files);});
+    fi.addEventListener('change',e=>{addFiles(e.target.files);fi.value='';});
+    document.getElementById('newName').addEventListener('input',updateCreateBtn);
+});
+
+/* ═══════════════════════════════════════════════════════
+   PAGE IMAGE UPLOAD (existing projects)
+   ═══════════════════════════════════════════════════════ */
+
+let uploadPageNum=null;
+
+function clickUploadPageImg(pageNum){
+    uploadPageNum=pageNum;
+    document.getElementById('pageImgInput').click();
+}
+
+document.addEventListener('DOMContentLoaded',()=>{
+    document.getElementById('pageImgInput').addEventListener('change',async e=>{
+        const f=e.target.files[0];
+        if(!f||uploadPageNum===null) return;
+
+        const fd=new FormData();
+        fd.append('image',f);
+
+        try{
+            const r=await(await fetch(`/api/project/${S.project}/page/${uploadPageNum}/image`,{method:'POST',body:fd})).json();
+            if(r.error) throw new Error(r.error);
+
+            // Update local state and re-render
+            const pg=S.pages[S.pageIdx];
+            if(pg) pg.image_path=r.image_path;
+            renderPage();
+            toast('Image uploaded!','success');
+        }catch(err){
+            toast(err.message,'error');
+        }
+        e.target.value='';
+        uploadPageNum=null;
+    });
+});
+
+/* ═══════════════════════════════════════════════════════
+   GALLERY
+   ═══════════════════════════════════════════════════════ */
+
+async function loadProjects(){
+    const r=await(await fetch('/api/projects')).json();
+    const g=document.getElementById('projectGrid');
+
+    // Always show New Project card first
+    let html=`<div class="card card-new" onclick="openCreate()">
+        <div class="card-cover"><i class="fas fa-plus"></i></div>
+        <div class="card-body"><div class="card-name">New Project</div>
+        <div class="card-meta"><span>Upload comic pages</span></div></div>
+    </div>`;
+
+    html+=r.map((p,i)=>{
+        const bg=COLORS[i%COLORS.length];
+        return `<div class="card" onclick="openProject('${p.project_name}')">
+            <div class="card-cover" style="background:linear-gradient(135deg,${bg}20,${bg}08)">${p.project_name.charAt(0).toUpperCase()}</div>
+            <div class="card-body">
+                <div class="card-name">${p.project_name}</div>
+                <div class="card-meta">
+                    <span>${p.line_count} lines</span>
+                    <span>${p.page_count} pages</span>
+                    <span>${p.character_count} chars</span>
+                </div>
+            </div>
+        </div>`;
+    }).join('');
+
+    g.innerHTML=html;
+}
+
+/* ═══════════════════════════════════════════════════════
+   READER
+   ═══════════════════════════════════════════════════════ */
+
+async function openProject(name){
+    const r=await(await fetch('/api/project/'+name)).json();
+    S.project=name;S.characters=r.characters;S.pages=r.pages;S.pageIdx=0;
+    cMap={};cI=0;
+    S.characters.forEach(c=>cc(c.character_name));
+    document.getElementById('rTitle').textContent=name;
+    document.getElementById('genAllBtn').disabled=false;
+    showReader();renderRoster();renderPage();renderNav();
+}
+
+/* Voice IDs */
+let vd={};
+function onVoice(ch,val){
+    clearTimeout(vd[ch]);
+    vd[ch]=setTimeout(()=>{
+        fetch('/api/project/'+S.project+'/voice',{
+            method:'PUT',headers:{'Content-Type':'application/json'},
+            body:JSON.stringify({character:ch,voice_id:val})
+        });
+    },400);
+}
+function getVoice(ch){
+    const inp=document.getElementById('vi-'+ch);
+    if(inp&&inp.value.trim()) return inp.value.trim();
+    const c=S.characters.find(x=>x.character_name===ch);
+    return c?c.voice_id||'':'';
+}
+
+function renderRoster(){
+    document.getElementById('roster').innerHTML=`
+        <div class="roster">
+            <div class="roster-label">Characters & Voice IDs</div>
+            <div class="roster-grid">${S.characters.map(c=>`
+                <div class="roster-item">
+                    <div class="roster-dot" style="background:${cc(c.character_name)}"></div>
+                    <span class="roster-char">${c.character_name}</span>
+                    <input class="roster-in" id="vi-${c.character_name}"
+                           placeholder="Voice ID..."
+                           value="${c.voice_id||''}"
+                           oninput="onVoice('${c.character_name}',this.value)">
+                </div>`).join('')}
+            </div>
+        </div>`;
+}
+
+/* Render current page */
+function renderPage(){
+    const page=S.pages[S.pageIdx];
+    if(!page){
+        document.getElementById('pageImage').innerHTML='';
+        document.getElementById('pageContent').innerHTML='';
+        return;
+    }
+
+    // Left side: image
+    if(page.image_path){
+        document.getElementById('pageImage').innerHTML=`<img src="${page.image_path}" alt="Page ${page.page_number}">`;
+    } else {
+        document.getElementById('pageImage').innerHTML=`<div class="page-placeholder" onclick="clickUploadPageImg(${page.page_number})">
+            <i class="fas fa-cloud-arrow-up"></i>
+            <span>Page ${page.page_number}</span>
+            <span class="upload-hint">Click to upload image</span>
+        </div>`;
+    }
+
+    // Right side: lines
+    let html=`<div class="page-indicator">Page ${page.page_number} of ${S.pages.length}</div>`;
+
+    page.lines.forEach((ln,i)=>{
+        const col=cc(ln.character_name);
+        const done=ln.audio_generated;
+        const cls=done?'done':'';
+        html+=`
+            <div class="line" id="row-${ln.id}">
+                <div class="l-num">${i+1}</div>
+                <div class="l-tag" style="background:${col}">${ln.character_name}</div>
+                <div class="l-body"><div class="l-text">${fmt(ln.tagged_dialogue)}</div></div>
+                <div class="l-acts">
+                    <button class="btn-ic ${cls}" id="g-${ln.id}"
+                            onclick="genLine(${ln.id},'${ln.character_name}',${ln.char_line_index})"
+                            title="${done?'Regenerate':'Generate'}">
+                        <i class="fas ${done?'fa-rotate-right':'fa-bolt'}"></i>
+                    </button>
+                    <button class="btn-ic ${cls}" id="p-${ln.id}"
+                            onclick="togglePlay(${ln.id})" title="Play" ${done?'':'disabled'}>
+                        <i class="fas fa-play"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="l-audio ${done?'on':''}" id="ap-${ln.id}">
+                <audio id="au-${ln.id}" ${done&&ln.audio_url?'src="'+ln.audio_url+'"':''} preload="none"
+                       onended="document.querySelector('#p-${ln.id} i').className='fas fa-play'"></audio>
+            </div>`;
+    });
+
+    document.getElementById('pageContent').innerHTML=html;
+}
+
+/* Nav dots */
+function renderNav(){
+    if(S.pages.length<=1){document.getElementById('pageNav').style.display='none';return;}
+    document.getElementById('pageNav').style.display='';
+    let html=`<button class="btn-ghost" onclick="goPage(S.pageIdx-1)" ${S.pageIdx===0?'disabled':''}><i class="fas fa-chevron-left"></i> Prev</button>`;
+    html+=`<div class="page-dots">`;
+    S.pages.forEach((_,i)=>{html+=`<div class="dot ${i===S.pageIdx?'active':''}" onclick="goPage(${i})"></div>`;});
+    html+=`</div>`;
+    html+=`<button class="btn-ghost" onclick="goPage(S.pageIdx+1)" ${S.pageIdx===S.pages.length-1?'disabled':''}> Next <i class="fas fa-chevron-right"></i></button>`;
+    document.getElementById('pageNav').innerHTML=html;
+}
+
+function goPage(idx){
+    if(idx<0||idx>=S.pages.length) return;
+    S.pageIdx=idx;renderPage();renderNav();
+    window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ═══════════════════════════════════════════════════════
+   GENERATE
+   ═══════════════════════════════════════════════════════ */
+
+async function genLine(id,char,charIdx){
+    if(S.generating.has(id)) return false;
+    const voice=getVoice(char);
+    if(!voice){toast('No Voice ID for '+char,'error');return false;}
+
+    let text='';
+    for(const pg of S.pages) for(const ln of pg.lines) if(ln.id===id){text=ln.tagged_dialogue;break;}
+
+    S.generating.add(id);setBtn(id,'spin');
+
+    try{
+        const r=await(await fetch('/api/generate',{
+            method:'POST',headers:{'Content-Type':'application/json'},
+            body:JSON.stringify({
+                api_key:S.apiKey,text,voice_id:voice,
+                stability:.5,similarity:1,
+                line_id:id,comic_name:S.project,
+                character:char,char_line_index:charIdx
+            })
+        })).json();
+        if(r.error) throw new Error(r.error);
+
+        for(const pg of S.pages) for(const ln of pg.lines)
+            if(ln.id===id){ln.audio_generated=true;ln.audio_url=r.audio_url;break;}
+
+        setBtn(id,'done');
+        const au=document.getElementById('au-'+id);
+        if(au) au.src=r.audio_url+'?t='+Date.now();
+        const ap=document.getElementById('ap-'+id);
+        if(ap) ap.classList.add('on');
+        return true;
+    }catch(e){toast(e.message,'error');setBtn(id,'err');return false;}
+    finally{S.generating.delete(id);}
+}
+
+function setBtn(id,st){
+    const g=document.getElementById('g-'+id),p=document.getElementById('p-'+id);
+    if(!g) return;g.className='btn-ic';
+    if(st==='spin'){g.classList.add('spin');g.innerHTML='<div class="spinner"></div>';g.disabled=true;}
+    else if(st==='done'){g.classList.add('done');g.innerHTML='<i class="fas fa-rotate-right"></i>';g.disabled=false;if(p){p.disabled=false;p.className='btn-ic done';}}
+    else{g.innerHTML='<i class="fas fa-bolt"></i>';g.disabled=false;}
+}
+
+async function generateAll(){
+    const queue=[];
+    S.pages.forEach(pg=>pg.lines.forEach(ln=>{
+        if(!ln.audio_generated&&getVoice(ln.character_name)) queue.push(ln);
+    }));
+    if(!queue.length){toast('Nothing to generate.','info');return;}
+
+    S.abort=false;
+    const btn=document.getElementById('genAllBtn');
+    btn.disabled=true;btn.innerHTML='<div class="spinner"></div> Generating...';
+
+    for(let i=0;i<queue.length;i++){
+        if(S.abort) break;
+        prog('Generating...',i,queue.length);
+        const pgIdx=S.pages.findIndex(pg=>pg.lines.some(l=>l.id===queue[i].id));
+        if(pgIdx!==-1&&pgIdx!==S.pageIdx) goPage(pgIdx);
+        await genLine(queue[i].id,queue[i].character_name,queue[i].char_line_index);
+    }
+    prog('Done!',queue.length,queue.length);
+    setTimeout(progOff,2000);
+    btn.disabled=false;btn.innerHTML='<i class="fas fa-bolt"></i> Generate All';
+    toast('All voiceovers generated!','success');
+}
+
+/* Audio */
+function togglePlay(id){
+    const au=document.getElementById('au-'+id),btn=document.getElementById('p-'+id);
+    if(!au||!au.src) return;
+    const ap=document.getElementById('ap-'+id);if(ap)ap.classList.add('on');
+    if(au.paused){
+        document.querySelectorAll('audio').forEach(a=>{if(a!==au&&!a.paused)a.pause()});
+        document.querySelectorAll('[id^="p-"]').forEach(b=>{const i=b.querySelector('i');if(i)i.className='fas fa-play'});
+        au.play();btn.querySelector('i').className='fas fa-pause';
+    }else{au.pause();btn.querySelector('i').className='fas fa-play';}
+}
+
+/* Init */
+document.addEventListener('DOMContentLoaded',async()=>{
+    try{S.apiKey=(await(await fetch('/api/config')).json()).api_key||'';}catch{}
+    loadProjects();
+});
+</script>
+</body>
+</html>

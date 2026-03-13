@@ -1,0 +1,75 @@
+{
+  "characters": {
+    "GIRL": "Short-haired girl with black bob, glasses, red hoodie, blue pants; often looks anxious.",
+    "GUY": "Young man with light brown hair and slight stubble, green UNI sweater, blue pants, carries flashlight.",
+    "DOG": "White dog with brown spots, droopy face, expressive fearful eyes."
+  },
+  "pages": [
+    {
+      "page_number": 1,
+      "has_dialogue": true,
+      "visual_note": null,
+      "lines": [
+        {
+          "character": "GUY",
+          "dialogue": "They say this forest is haunted by a ghostly monster.",
+          "emotion": "casually spooky",
+          "emotion_shift": null,
+          "shift_at": null,
+          "bold_words": [],
+          "notes": "Spoken in a storytelling tone as he walks ahead with the flashlight, not visibly scared himself."
+        }
+      ]
+    },
+    {
+      "page_number": 2,
+      "has_dialogue": true,
+      "visual_note": null,
+      "lines": [
+        {
+          "character": "GUY",
+          "dialogue": "It has glowing red eyes, large snapping jaws full of dagger-like teeth!",
+          "emotion": "dramatically ominous",
+          "emotion_shift": "heightened intensity",
+          "shift_at": "dagger-like teeth!",
+          "bold_words": [
+            "red eyes",
+            "dagger-like teeth!"
+          ],
+          "notes": "He gestures with one finger, vividly describing the monster; emphasis on the bold details and exclamation point."
+        },
+        {
+          "character": "GUY",
+          "dialogue": "And its body is like a formless pale cloud!",
+          "emotion": "creepily enthusiastic",
+          "emotion_shift": null,
+          "shift_at": null,
+          "bold_words": [],
+          "notes": "He continues the description with almost excited energy, painting an eerie picture."
+        }
+      ]
+    },
+    {
+      "page_number": 3,
+      "has_dialogue": false,
+      "visual_note": "GIRL and DOG stare past GUY with wide, fearful eyes and tense body language, clearly seeing something terrifying behind him as he faces away, oblivious. Large white thought-cloud shapes loom above, echoing the described monster.",
+      "lines": []
+    },
+    {
+      "page_number": 4,
+      "has_dialogue": true,
+      "visual_note": null,
+      "lines": [
+        {
+          "character": "GUY",
+          "dialogue": "It's right behind me, isn't it.",
+          "emotion": "nervously resigned",
+          "emotion_shift": null,
+          "shift_at": null,
+          "bold_words": [],
+          "notes": "He looks forward with worried eyes and a tense mouth, finger half-raised, realizing the monster he described is now actually behind him; spoken dryly with dread."
+        }
+      ]
+    }
+  ]
+}

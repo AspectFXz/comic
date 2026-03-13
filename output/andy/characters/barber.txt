@@ -1,0 +1,12 @@
+============================================================
+BARBER — Young man with short dark hair, medium skin, wearing a brown T‑shirt and jeans; holds clippers or scissors while cutting hair.
+============================================================
+  [Page 1] [professional and casual] Take a seat.
+  [Page 1] [friendly and curious] So, what kinda **haircut** do you want?
+  [Page 3] [nervous and uncertain] Uh... sure, man. I'll do my best.
+  [Page 4] [chatty and mildly anxious] What do you do for **work**, man?
+  [Page 4] [genuinely impressed] Oh, that's cool!
+  [Page 5] [slightly confused and self‑conscious] I cut hair... I'm a **barber**.
+  [Page 5] [puzzled] Huh? What was that?
+  [Page 9] [mildly annoyed but humorous] Hey man, can you move your **symbolic manifestations of inner-dialogue** outta the way?
+  [Page 9] [slightly exasperated] I can't see what I'm working on.

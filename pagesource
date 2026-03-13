@@ -1,0 +1,3449 @@
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>AI Video Generator - Algrow</title>
+        <link rel="shortcut icon" href="/static/images/logo.png?v=2025" type="image/png">
+        <meta
+            name="description"
+            content="Turn any script into cinematic video scenes with AI. Generate images, animation prompts, and videos from your content automatically."
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="AI Video Generator - Algrow" />
+        <meta
+            property="og:description"
+            content="Turn any script into cinematic video scenes with AI-powered image and video generation."
+        />
+        <meta property="og:url" content="https://algrow.online/ai-video-generator" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap"
+            rel="stylesheet"
+        />
+        <!-- DataBuddy Analytics -->
+        <script
+            src="https://cdn.databuddy.cc/databuddy.js"
+            data-client-id="3ed747b8-b250-4536-9bcc-f3ee735834b7"
+            data-track-hash-changes="true"
+            data-track-attributes="true"
+            data-track-outgoing-links="true"
+            data-track-interactions="true"
+            data-track-errors="true"
+            data-track-web-vitals="true"
+            crossorigin="anonymous"
+            async
+        ></script>
+        <!-- DataFast Analytics -->
+        <script>
+            window.datafast = window.datafast || function() {
+                window.datafast.q = window.datafast.q || [];
+                window.datafast.q.push(arguments);
+            };
+        </script>
+        <script
+            defer
+            data-website-id="dfid_p1BIpVYOWTCMH108JlVzT"
+            data-domain="algrow.online"
+            src="/js/script.js"
+        ></script>
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        />
+        <link
+            rel="stylesheet"
+            href="/static/ai_video_generator/ai_video_generator.css"
+        />
+
+        <!-- Prompt Generator CSS — copied verbatim for 1:1 UI match -->
+        <style>
+            html {
+                font-size: 14px;
+            }
+
+            * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+
+            body {
+                font-family: "DM Sans", "Inter", sans-serif !important;
+                background-color: #000000 !important;
+                background-image: none !important;
+                color: #ffffff;
+                min-height: 100vh;
+                line-height: 1.6;
+            }
+
+            a {
+                color: rgb(0, 115, 255);
+                text-decoration: none;
+            }
+
+            /* Navbar */
+            .navbar {
+                position: fixed;
+                top: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: rgba(8, 8, 8, 0.2);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                padding: 16px 24px;
+                z-index: 1000;
+                width: 90%;
+                max-width: 1200px;
+                border-radius: 100px;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            .nav-container {
+                display: grid;
+                grid-template-columns: 1fr auto 1fr;
+                align-items: center;
+                padding: 0;
+                margin: 0;
+                width: 100%;
+            }
+            .logo {
+                font-size: 24px;
+                font-weight: 500;
+                color: white;
+                text-decoration: none;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+            .logo img {
+                width: 28px;
+                height: 28px;
+                object-fit: contain;
+            }
+            .nav-links {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 40px;
+            }
+            .nav-links a {
+                color: rgba(255, 255, 255, 0.7);
+                text-decoration: none;
+                font-size: 15px;
+                font-weight: 500;
+                transition: color 0.2s ease;
+                padding: 8px 0;
+            }
+            .nav-links a:hover {
+                color: white;
+            }
+            .auth-buttons {
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+            }
+            .get-started-btn {
+                background: rgb(0, 115, 255);
+                color: #fff;
+                padding: 16px 36px;
+                border-radius: 100px;
+                text-decoration: none;
+                font-size: 17px;
+                font-weight: 500;
+                transition: all 0.2s ease;
+                border: none;
+                box-shadow:
+                    0 0 20px rgba(0, 115, 255, 0.3),
+                    0 0 40px rgba(0, 115, 255, 0.1),
+                    inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+                text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+                letter-spacing: 0.3px;
+            }
+            .get-started-btn:hover {
+                transform: translateY(-1px);
+                background: rgb(30, 130, 255);
+                box-shadow:
+                    0 0 30px rgba(0, 115, 255, 0.4),
+                    0 0 60px rgba(0, 115, 255, 0.2),
+                    inset 0 0 0 1px rgba(255, 255, 255, 0.3);
+            }
+            @media (max-width: 768px) {
+                .navbar {
+                    top: 12px;
+                    padding: 12px 20px;
+                    width: calc(100% - 24px);
+                }
+                .nav-container {
+                    padding: 0;
+                }
+                .nav-links {
+                    display: none;
+                }
+                .get-started-btn {
+                    padding: 12px 28px;
+                    font-size: 15px;
+                }
+            }
+
+            :root {
+                --primary-color: rgb(0, 115, 255);
+                --primary-hover: rgb(30, 130, 255);
+                --primary-glow: rgba(0, 115, 255, 0.4);
+                --bg-color: #000000;
+                --text-color: #ffffff;
+                --text-secondary: rgba(255, 255, 255, 0.7);
+                --border-color: rgba(40, 40, 40, 0.5);
+                --glass-bg: rgba(26, 26, 26, 0.3);
+                --card-bg: rgba(26, 26, 26, 0.3);
+                --success-color: #10b981;
+                --warning-color: #f59e0b;
+            }
+
+            .prompt-generator-page * {
+                box-sizing: border-box;
+            }
+
+            .prompt-generator-page {
+                color: var(--text-color);
+                font-family:
+                    "DM Sans",
+                    "Inter",
+                    -apple-system,
+                    BlinkMacSystemFont,
+                    "Segoe UI",
+                    Roboto,
+                    sans-serif;
+                padding: 20px;
+                margin: 0;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .prompt-generator-page .page-header {
+                text-align: center;
+                margin-bottom: 30px;
+                padding: 0 20px;
+            }
+
+            .prompt-generator-page .page-title {
+                font-size: 1.8rem;
+                font-weight: 700;
+                color: white;
+                margin-bottom: 8px;
+                letter-spacing: -0.02em;
+            }
+
+            .prompt-generator-page .page-subtitle {
+                font-size: 1rem;
+                color: var(--text-secondary);
+                margin: 0 0 16px 0;
+            }
+
+            /* Wizard Steps */
+            .wizard-container {
+                max-width: 1150px;
+                margin: 0 auto;
+                width: 100%;
+            }
+
+            .wizard-progress {
+                display: flex;
+                justify-content: center;
+                gap: 8px;
+                margin-bottom: 32px;
+            }
+
+            .wizard-step {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+
+            .step-circle {
+                width: 32px;
+                height: 32px;
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.1);
+                border: 2px solid rgba(255, 255, 255, 0.2);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 14px;
+                font-weight: 600;
+                color: var(--text-secondary);
+                transition: all 0.3s ease;
+            }
+
+            .step-circle.active {
+                background: var(--primary-color);
+                border-color: var(--primary-color);
+                color: white;
+            }
+
+            .step-circle.completed {
+                background: rgba(0, 115, 255, 0.3);
+                border-color: rgba(0, 115, 255, 0.5);
+                color: white;
+            }
+
+            .step-circle.clickable {
+                cursor: pointer;
+            }
+
+            .step-circle.clickable:hover {
+                transform: scale(1.05);
+                box-shadow: 0 0 10px rgba(0, 115, 255, 0.3);
+            }
+
+            .step-label {
+                font-size: 13px;
+                color: var(--text-secondary);
+                display: none;
+            }
+
+            .wizard-step.active .step-label {
+                display: block;
+                color: white;
+            }
+
+            .step-connector {
+                width: 40px;
+                height: 2px;
+                background: rgba(255, 255, 255, 0.1);
+            }
+
+            .step-connector.completed {
+                background: var(--success-color);
+            }
+
+            /* Step Panels */
+            .step-panel {
+                display: none;
+                animation: fadeIn 0.3s ease;
+            }
+
+            .step-panel.active {
+                display: block;
+            }
+
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(10px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            /* Input Card */
+            .input-card {
+                background: var(--glass-bg);
+                backdrop-filter: blur(15px);
+                border: 1px solid var(--border-color);
+                border-radius: 16px;
+                padding: 24px;
+                margin-bottom: 20px;
+            }
+
+            .input-card h3 {
+                font-size: 16px;
+                font-weight: 600;
+                margin: 0 0 16px 0;
+                color: white;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+
+            .input-card h3 i {
+                color: var(--primary-color);
+                font-size: 18px;
+            }
+
+            .form-group {
+                margin-bottom: 16px;
+            }
+
+            .form-group:last-child {
+                margin-bottom: 0;
+            }
+
+            .form-label {
+                display: block;
+                font-size: 13px;
+                font-weight: 500;
+                color: var(--text-secondary);
+                margin-bottom: 8px;
+            }
+
+            .form-input {
+                width: 100%;
+                padding: 12px 16px;
+                background: rgba(0, 0, 0, 0.3);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 10px;
+                color: white;
+                font-size: 14px;
+                font-family: inherit;
+                transition: all 0.2s ease;
+            }
+
+            .form-input:focus {
+                outline: none;
+                border-color: var(--primary-color);
+                box-shadow: 0 0 0 3px rgba(0, 115, 255, 0.1);
+            }
+
+            .form-input::placeholder {
+                color: rgba(255, 255, 255, 0.3);
+            }
+
+            textarea.form-input {
+                resize: vertical;
+                min-height: 150px;
+                line-height: 1.6;
+            }
+
+            .form-hint {
+                font-size: 12px;
+                color: var(--text-secondary);
+                margin-top: 6px;
+            }
+
+            /* Buttons */
+            .btn {
+                padding: 12px 24px;
+                border-radius: 10px;
+                font-size: 14px;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.2s ease;
+                font-family: inherit;
+                border: none;
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+            }
+
+            .btn-primary {
+                background: linear-gradient(
+                    135deg,
+                    var(--primary-color),
+                    #0066dd
+                );
+                color: white;
+            }
+
+            .btn-primary:hover:not(:disabled) {
+                transform: translateY(-2px);
+                box-shadow: 0 6px 20px rgba(0, 115, 255, 0.4);
+            }
+
+            .btn-primary:disabled {
+                opacity: 0.5;
+                cursor: not-allowed;
+            }
+
+            .btn-secondary {
+                background: rgba(255, 255, 255, 0.05);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                color: white;
+            }
+
+            .btn-secondary:hover {
+                background: rgba(255, 255, 255, 0.1);
+            }
+
+            .btn-group {
+                display: flex;
+                gap: 12px;
+                margin-top: 20px;
+            }
+
+            /* Loading Spinner */
+            .loading-spinner {
+                width: 20px;
+                height: 20px;
+                border: 2px solid rgba(255, 255, 255, 0.3);
+                border-top-color: white;
+                border-radius: 50%;
+                animation: spin 0.8s linear infinite;
+            }
+
+            @keyframes spin {
+                to {
+                    transform: rotate(360deg);
+                }
+            }
+
+            /* Style Selection */
+            .style-options {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 12px;
+                margin-bottom: 20px;
+            }
+
+            .style-option {
+                background: rgba(0, 0, 0, 0.3);
+                border: 2px solid rgba(255, 255, 255, 0.1);
+                border-radius: 12px;
+                padding: 16px;
+                cursor: pointer;
+                transition: all 0.2s ease;
+                text-align: center;
+            }
+
+            .style-option:hover {
+                border-color: rgba(255, 255, 255, 0.2);
+            }
+
+            .style-option.selected {
+                border-color: var(--primary-color);
+                background: rgba(0, 115, 255, 0.1);
+            }
+
+            .style-option i {
+                font-size: 24px;
+                margin-bottom: 8px;
+                color: var(--primary-color);
+            }
+
+            .style-option .style-title {
+                font-size: 14px;
+                font-weight: 600;
+                color: white;
+                margin-bottom: 4px;
+            }
+
+            .style-option .style-desc {
+                font-size: 12px;
+                color: var(--text-secondary);
+            }
+
+            /* Scenes List */
+            .scenes-list {
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .scene-card {
+                background: rgba(0, 0, 0, 0.3);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 12px;
+                padding: 16px;
+                transition: all 0.2s ease;
+            }
+
+            .scene-card:hover {
+                border-color: rgba(255, 255, 255, 0.2);
+            }
+
+            .scene-header {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                margin-bottom: 12px;
+            }
+
+            .scene-number {
+                width: 28px;
+                height: 28px;
+                background: var(--primary-color);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 12px;
+                font-weight: 600;
+                color: white;
+                flex-shrink: 0;
+            }
+
+            .scene-title {
+                font-size: 14px;
+                font-weight: 500;
+                color: white;
+            }
+
+            .scene-content {
+                padding-left: 40px;
+            }
+
+            .scene-field {
+                margin-bottom: 12px;
+            }
+
+            .scene-field:last-child {
+                margin-bottom: 0;
+            }
+
+            .scene-field-label {
+                font-size: 11px;
+                font-weight: 600;
+                color: var(--text-secondary);
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                margin-bottom: 4px;
+            }
+
+            .scene-field-value {
+                font-size: 13px;
+                color: white;
+                line-height: 1.5;
+            }
+
+            /* Prompt Cards */
+            .prompt-card {
+                background: rgba(0, 0, 0, 0.3);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 12px;
+                padding: 16px;
+                margin-bottom: 12px;
+            }
+
+            .prompt-card-header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-bottom: 12px;
+            }
+
+            .prompt-card-title {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+
+            .prompt-text {
+                background: rgba(0, 0, 0, 0.3);
+                border: 1px solid rgba(255, 255, 255, 0.05);
+                border-radius: 8px;
+                padding: 12px;
+                font-size: 13px;
+                color: var(--text-secondary);
+                line-height: 1.6;
+            }
+
+            /* Image Grid */
+            .image-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 16px;
+                margin-top: 20px;
+            }
+
+            .image-card {
+                background: var(--glass-bg);
+                border: 1px solid var(--border-color);
+                border-radius: 12px;
+                overflow: hidden;
+            }
+
+            .image-card img {
+                width: 100%;
+                aspect-ratio: 9/16;
+                object-fit: cover;
+            }
+
+            .image-card-footer {
+                padding: 12px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .image-card-label {
+                font-size: 12px;
+                color: var(--text-secondary);
+            }
+
+            /* Character Name Input */
+            .character-input-group {
+                display: flex;
+                gap: 12px;
+                align-items: flex-end;
+            }
+
+            .character-input-group .form-group {
+                flex: 1;
+                margin-bottom: 0;
+            }
+
+            /* Scene Cards Grid */
+            .scene-cards-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 16px;
+                margin-top: 16px;
+            }
+
+            .scene-card-item {
+                background: rgba(0, 0, 0, 0.3);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 12px;
+                overflow: hidden;
+                transition: all 0.2s ease;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .scene-card-item:hover {
+                border-color: rgba(255, 255, 255, 0.2);
+            }
+
+            .scene-card-image {
+                aspect-ratio: 9/16;
+                background: rgba(0, 0, 0, 0.3);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: relative;
+            }
+
+            .scene-card-image img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            .scene-card-placeholder {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                padding: 20px;
+                text-align: center;
+                height: 100%;
+            }
+
+            .scene-card-placeholder i {
+                font-size: 32px;
+                color: rgba(255, 255, 255, 0.2);
+                margin-bottom: 12px;
+            }
+
+            .scene-card-placeholder span {
+                font-size: 12px;
+                color: var(--text-secondary);
+            }
+
+            .scene-card-body {
+                padding: 12px;
+                display: flex;
+                flex-direction: column;
+                flex: 1;
+            }
+
+            .scene-card-header {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                margin-bottom: 8px;
+            }
+
+            .scene-card-number {
+                width: 24px;
+                height: 24px;
+                background: var(--primary-color);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 11px;
+                font-weight: 600;
+                color: white;
+                flex-shrink: 0;
+            }
+
+            .scene-card-title {
+                font-size: 13px;
+                font-weight: 600;
+                color: white;
+            }
+
+            .scene-card-script {
+                font-size: 12px;
+                color: var(--text-secondary);
+                line-height: 1.5;
+                margin-bottom: 8px;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+
+            .scene-card-prompt {
+                font-size: 11px;
+                color: rgba(255, 255, 255, 0.5);
+                line-height: 1.5;
+                margin-bottom: 12px;
+                cursor: default;
+                background: rgba(0, 0, 0, 0.2);
+                border-radius: 8px;
+                padding: 10px;
+                border: 1px solid transparent;
+            }
+
+            .scene-card-prompt-header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-bottom: 6px;
+                padding-bottom: 6px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .scene-card-prompt-label {
+                font-size: 10px;
+                color: rgba(255, 255, 255, 0.4);
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                font-weight: 500;
+            }
+
+            .scene-card-prompt-edit {
+                font-size: 11px;
+                color: rgba(255, 255, 255, 0.4);
+                cursor: pointer;
+            }
+            .scene-card-prompt-edit i {
+                font-size: 10px;
+            }
+
+            .scene-card-prompt-text {
+                word-break: break-word;
+                display: -webkit-box;
+                -webkit-line-clamp: 5;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+
+            /* Animation Cards Grid */
+            .animation-cards-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 16px;
+                margin-top: 16px;
+            }
+
+            .animation-card-item {
+                background: rgba(0, 0, 0, 0.3);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 12px;
+                overflow: hidden;
+                transition: all 0.2s ease;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .animation-card-item:hover {
+                border-color: rgba(255, 255, 255, 0.2);
+            }
+
+            .animation-card-media {
+                display: flex;
+                gap: 2px;
+                background: rgba(0, 0, 0, 0.2);
+            }
+
+            .animation-card-source,
+            .animation-card-video {
+                flex: 1;
+                aspect-ratio: 9/16;
+                position: relative;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: rgba(0, 0, 0, 0.3);
+            }
+
+            .animation-card-source img,
+            .animation-card-video video {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            .animation-card-label {
+                position: absolute;
+                top: 8px;
+                left: 8px;
+                background: rgba(0, 0, 0, 0.7);
+                padding: 4px 8px;
+                border-radius: 4px;
+                font-size: 10px;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                color: rgba(255, 255, 255, 0.8);
+            }
+
+            .animation-card-video-placeholder {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                padding: 20px;
+                color: var(--text-secondary);
+            }
+
+            .animation-card-video-placeholder i {
+                font-size: 32px;
+                color: rgba(255, 255, 255, 0.15);
+                margin-bottom: 8px;
+            }
+
+            .animation-card-video-placeholder span {
+                font-size: 11px;
+                color: rgba(255, 255, 255, 0.4);
+            }
+
+            .animation-card-item.generated {
+                border-color: rgba(16, 185, 129, 0.3);
+            }
+
+            .animation-card-body {
+                padding: 12px;
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .animation-card-actions {
+                display: flex;
+                gap: 8px;
+                margin-top: auto;
+                padding-top: 12px;
+            }
+            .animation-card-actions .btn {
+                flex: 1;
+            }
+
+            .scene-card-download-btn {
+                position: absolute;
+                top: 8px;
+                right: 8px;
+                width: 28px;
+                height: 28px;
+                background: rgba(0, 0, 0, 0.7);
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                border-radius: 6px;
+                color: white;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 12px;
+                transition: all 0.2s ease;
+                z-index: 10;
+                opacity: 0;
+            }
+            .animation-card-video:hover .scene-card-download-btn {
+                opacity: 1;
+            }
+            .scene-card-download-btn:hover {
+                background: rgba(99, 102, 241, 0.8);
+                border-color: rgba(99, 102, 241, 0.8);
+            }
+
+            /* Per-card model picker in animation cards */
+            .scene-card-model-picker {
+                position: relative;
+                width: 100%;
+            }
+            .scene-card-model-trigger {
+                width: 100%;
+                padding: 8px 12px;
+                font-size: 12px;
+                font-weight: 600;
+                font-family: inherit;
+                background: rgba(255, 255, 255, 0.05);
+                border: 1px solid rgba(255, 255, 255, 0.15);
+                border-radius: 6px;
+                color: rgba(255, 255, 255, 0.9);
+                cursor: pointer;
+                transition: all 0.2s ease;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                box-sizing: border-box;
+            }
+            .scene-card-model-trigger:hover {
+                background-color: rgba(255, 255, 255, 0.1);
+                border-color: rgba(255, 255, 255, 0.25);
+            }
+            .scene-card-model-trigger i.fa-chevron-down {
+                font-size: 10px !important;
+                color: rgba(255, 255, 255, 0.5);
+                transition: transform 0.2s ease;
+            }
+            .scene-card-model-picker.open .scene-card-model-trigger i {
+                transform: rotate(180deg);
+            }
+            .scene-card-model-dropdown {
+                display: none;
+                position: absolute;
+                left: 0;
+                right: 0;
+                top: 100%;
+                margin-top: 4px;
+                background: rgb(14, 14, 14);
+                backdrop-filter: blur(12px);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 10px;
+                padding: 6px 0;
+                z-index: 100;
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+            }
+            .scene-card-model-picker.open .scene-card-model-dropdown {
+                display: block;
+            }
+            .scene-card-model-option {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 8px 12px;
+                font-size: 12px;
+                color: rgba(255, 255, 255, 0.7);
+                cursor: pointer;
+                transition: background 0.15s ease;
+                white-space: nowrap;
+            }
+            .scene-card-model-option:hover {
+                background: rgba(255, 255, 255, 0.08);
+                color: rgba(255, 255, 255, 0.95);
+            }
+            .scene-card-model-option.selected {
+                color: rgba(255, 255, 255, 0.95);
+            }
+            .scene-card-model-option .model-check {
+                color: rgba(255, 255, 255, 0.5);
+                font-size: 10px;
+                visibility: hidden;
+            }
+            .scene-card-model-option.selected .model-check {
+                visibility: visible;
+            }
+
+            .animation-full-prompt {
+                background: rgba(16, 185, 129, 0.1);
+                border: 1px solid rgba(16, 185, 129, 0.2);
+                border-radius: 8px;
+                padding: 12px;
+                margin-top: 8px;
+            }
+
+            .animation-full-prompt-label {
+                font-size: 10px;
+                font-weight: 600;
+                color: #34d399;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                margin-bottom: 8px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 6px;
+            }
+
+            .animation-full-prompt-label i {
+                font-size: 11px;
+            }
+
+            .animation-prompt-text {
+                font-size: 12px;
+                color: var(--text-secondary);
+                line-height: 1.5;
+                word-break: break-word;
+                display: -webkit-box;
+                -webkit-line-clamp: 5;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+
+            /* Scene card image overlay actions */
+            .scene-card-image {
+                position: relative;
+            }
+            .scene-card-image-actions {
+                position: absolute;
+                top: 8px;
+                left: 8px;
+                right: 8px;
+                display: flex;
+                justify-content: space-between;
+                opacity: 0;
+                transition: opacity 0.2s;
+            }
+            .scene-card-item:hover .scene-card-image-actions {
+                opacity: 1;
+            }
+            .scene-img-btn {
+                width: 28px;
+                height: 28px;
+                background: rgba(0, 0, 0, 0.6);
+                border-radius: 6px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: rgba(255, 255, 255, 0.8);
+                font-size: 12px;
+                cursor: pointer;
+                text-decoration: none;
+                transition: background 0.2s;
+            }
+            .scene-img-btn:hover {
+                background: rgba(99, 102, 241, 0.8);
+                color: white;
+            }
+
+            /* Scene card generated state */
+            .scene-card-item.generated {
+                border-color: rgba(16, 185, 129, 0.3);
+            }
+
+            /* Reference images row */
+            .scene-card-ref-row {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                padding: 6px 8px;
+                margin-bottom: 8px;
+                border-radius: 6px;
+                cursor: pointer;
+                background: rgba(255, 255, 255, 0.03);
+                border: 1px solid rgba(255, 255, 255, 0.08);
+                transition: all 0.2s ease;
+            }
+            .scene-card-ref-row:hover {
+                background: rgba(255, 255, 255, 0.06);
+                border-color: rgba(255, 255, 255, 0.15);
+            }
+            .scene-card-ref-thumb {
+                width: 36px;
+                height: 36px;
+                border-radius: 4px;
+                object-fit: cover;
+                flex-shrink: 0;
+                background: rgba(255, 255, 255, 0.05);
+            }
+            .scene-card-ref-label {
+                flex: 1;
+                font-size: 12px;
+                color: var(--text-secondary);
+            }
+            .scene-card-ref-change-btn {
+                font-size: 12px;
+                color: var(--text-secondary);
+                opacity: 0.6;
+                transition: opacity 0.2s ease;
+            }
+            .scene-card-ref-row:hover .scene-card-ref-change-btn {
+                opacity: 1;
+            }
+
+            /* Edit specific image checkbox */
+            .scene-card-ref-option {
+                margin-bottom: 8px;
+            }
+            .ref-checkbox-label {
+                display: flex;
+                align-items: center;
+                gap: 6px;
+                font-size: 12px;
+                color: var(--text-secondary);
+                cursor: pointer;
+            }
+            .ref-checkbox-label:hover {
+                color: var(--text-primary);
+            }
+            .ref-checkbox {
+                width: 14px;
+                height: 14px;
+                cursor: pointer;
+                accent-color: var(--accent-color);
+            }
+
+            /* Scene card actions container */
+            .scene-card-actions {
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+                margin-top: auto;
+            }
+            .scene-card-actions .btn {
+                padding: 8px 12px;
+                font-size: 12px;
+                justify-content: center;
+            }
+
+            /* Model picker row */
+            .scene-card-model-row {
+                display: flex;
+                gap: 6px;
+                align-items: center;
+            }
+
+            /* Style URL input & example styles */
+            .style-url-input {
+                display: none;
+                margin-top: 12px;
+            }
+            .style-url-input.show {
+                display: block;
+            }
+            .example-videos {
+                margin-top: 16px;
+            }
+            .example-videos-label {
+                font-size: 12px;
+                color: var(--text-secondary);
+                margin-bottom: 10px;
+            }
+            .example-videos-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+                gap: 10px;
+            }
+            #exampleStyleImagesGrid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 16px;
+            }
+            .example-video-card {
+                background: rgba(0, 0, 0, 0.3);
+                border: 2px solid rgba(255, 255, 255, 0.1);
+                border-radius: 12px;
+                overflow: hidden;
+                cursor: pointer;
+                transition: all 0.2s ease;
+            }
+            .example-video-card:hover {
+                border-color: rgba(255, 255, 255, 0.3);
+                transform: translateY(-2px);
+            }
+            .example-video-card.selected {
+                border-color: var(--primary-color);
+            }
+            .example-video-thumb {
+                width: 100%;
+                aspect-ratio: 1/1;
+                object-fit: cover;
+            }
+            .example-video-info {
+                padding: 12px 14px;
+            }
+            .example-video-title {
+                font-size: 14px;
+                font-weight: 500;
+                color: white;
+                margin-bottom: 4px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            .example-video-desc {
+                font-size: 12px;
+                color: var(--text-secondary);
+            }
+
+            /* Scene undo/redo/reset */
+            .scene-undo-redo {
+                display: flex;
+                gap: 6px;
+            }
+            .scene-undo-btn {
+                background: rgba(255, 255, 255, 0.05);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                color: white;
+                cursor: pointer;
+                padding: 8px 12px;
+                border-radius: 6px;
+                font-size: 13px;
+                font-family: inherit;
+                display: inline-flex;
+                align-items: center;
+                gap: 6px;
+            }
+            .scene-undo-btn:hover:not(:disabled) {
+                background: rgba(255, 255, 255, 0.1);
+            }
+            .scene-undo-btn:disabled {
+                opacity: 0.3;
+                cursor: not-allowed;
+            }
+
+            /* Scene card drag/insert/delete */
+            .scene-drag-handle {
+                color: var(--text-secondary);
+                cursor: grab;
+                padding: 4px;
+                font-size: 12px;
+                opacity: 0.5;
+                transition: opacity 0.2s;
+            }
+            .scene-drag-handle:hover {
+                opacity: 1;
+            }
+            .scene-insert-btn {
+                background: none;
+                border: none;
+                color: var(--text-secondary);
+                cursor: pointer;
+                padding: 4px 8px;
+                border-radius: 6px;
+                font-size: 13px;
+            }
+            .scene-insert-btn:hover {
+                color: #4ade80;
+                background: rgba(74, 222, 128, 0.1);
+            }
+            .scene-delete-btn {
+                background: none;
+                border: none;
+                color: var(--text-secondary);
+                cursor: pointer;
+                padding: 4px 8px;
+                border-radius: 6px;
+                font-size: 13px;
+                margin-left: auto;
+            }
+            .scene-delete-btn:hover {
+                color: #f87171;
+                background: rgba(248, 113, 113, 0.1);
+            }
+
+            /* Scene edit textarea */
+            .scene-edit-textarea {
+                width: 100%;
+                background: rgba(0, 0, 0, 0.3);
+                border: 1px solid rgba(255, 255, 255, 0.15);
+                border-radius: 8px;
+                color: white;
+                font-size: 13px;
+                line-height: 1.5;
+                padding: 8px 12px;
+                resize: vertical;
+                font-family: inherit;
+                box-sizing: border-box;
+            }
+            .scene-edit-textarea:focus {
+                outline: none;
+                border-color: var(--primary-color);
+            }
+
+            /* Add scene button */
+            .add-scene-btn {
+                width: 100%;
+                padding: 12px;
+                background: rgba(255, 255, 255, 0.05);
+                border: 1px dashed rgba(255, 255, 255, 0.2);
+                border-radius: 12px;
+                color: var(--text-secondary);
+                cursor: pointer;
+                font-size: 13px;
+                font-family: inherit;
+                transition: all 0.2s ease;
+            }
+            .add-scene-btn:hover {
+                background: rgba(255, 255, 255, 0.1);
+                border-color: rgba(255, 255, 255, 0.3);
+                color: white;
+            }
+
+            /* Responsive */
+            @media (max-width: 768px) {
+                .prompt-generator-page {
+                    padding: 16px;
+                }
+
+                .page-title {
+                    font-size: 1.5rem;
+                }
+
+                .style-options {
+                    grid-template-columns: 1fr;
+                }
+
+                .wizard-progress {
+                    gap: 4px;
+                }
+
+                .step-connector {
+                    width: 20px;
+                }
+
+                .step-circle {
+                    width: 28px;
+                    height: 28px;
+                    font-size: 12px;
+                }
+
+                .input-card {
+                    padding: 16px;
+                }
+
+                .btn-group {
+                    flex-direction: column;
+                }
+
+                .btn-group .btn {
+                    width: 100%;
+                    justify-content: center;
+                }
+
+                .image-grid {
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 12px;
+                }
+
+                .character-input-group {
+                    flex-direction: column;
+                }
+
+                .scene-cards-grid {
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 12px;
+                }
+
+                .animation-cards-grid {
+                    grid-template-columns: 1fr;
+                }
+            }
+
+            @media (max-width: 600px) {
+                .animation-card-media {
+                    flex-direction: column;
+                }
+                .animation-card-source,
+                .animation-card-video {
+                    aspect-ratio: 16/9;
+                }
+            }
+
+            /* Cost Calculator */
+            .calc-hero {
+                display: flex;
+                align-items: baseline;
+                justify-content: center;
+                gap: 12px;
+                margin-bottom: 48px;
+            }
+            .calc-hero-dollar {
+                font-size: clamp(3.5rem, 8vw, 5.5rem);
+                font-weight: 700;
+                color: white;
+                letter-spacing: -0.04em;
+                line-height: 1;
+            }
+            .calc-hero-sep {
+                font-size: 2rem;
+                font-weight: 300;
+                color: rgba(255,255,255,0.12);
+            }
+            .calc-hero-credits {
+                font-size: clamp(1rem, 2.5vw, 1.35rem);
+                font-weight: 500;
+                color: rgb(77, 156, 255);
+                display: flex;
+                align-items: center;
+                gap: 6px;
+            }
+            .calc-hero-credits i {
+                font-size: 0.85em;
+                opacity: 0.7;
+            }
+            .calc-field {
+                margin-bottom: 32px;
+            }
+            .calc-field-top {
+                display: flex;
+                justify-content: space-between;
+                align-items: baseline;
+                margin-bottom: 14px;
+            }
+            .calc-label {
+                font-size: 13px;
+                font-weight: 600;
+                color: rgba(255,255,255,0.4);
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+                display: block;
+                margin-bottom: 12px;
+            }
+            .calc-label i {
+                font-size: 12px;
+            }
+            .calc-field-top .calc-label {
+                margin-bottom: 0;
+            }
+            .calc-value {
+                font-size: 28px;
+                font-weight: 700;
+                color: white;
+                letter-spacing: -0.02em;
+            }
+            .calc-range {
+                width: 100%;
+                -webkit-appearance: none;
+                appearance: none;
+                height: 3px;
+                background: rgba(255,255,255,0.08);
+                border-radius: 2px;
+                outline: none;
+                cursor: pointer;
+            }
+            .calc-range::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                width: 22px;
+                height: 22px;
+                border-radius: 50%;
+                background: white;
+                cursor: grab;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+            }
+            .calc-range::-moz-range-thumb {
+                width: 22px;
+                height: 22px;
+                border-radius: 50%;
+                background: white;
+                border: none;
+                cursor: grab;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+            }
+            .calc-tabs {
+                display: flex;
+                gap: 8px;
+                flex-wrap: wrap;
+            }
+            .calc-tab {
+                padding: 10px 16px;
+                border-radius: 10px;
+                border: 1px solid rgba(255,255,255,0.08);
+                background: transparent;
+                color: rgba(255,255,255,0.5);
+                font-size: 14px;
+                font-weight: 500;
+                font-family: inherit;
+                cursor: pointer;
+                transition: all 0.15s ease;
+                display: flex;
+                align-items: center;
+                gap: 6px;
+            }
+            .calc-tab small {
+                font-size: 11px;
+                font-weight: 400;
+                opacity: 0.5;
+                display: inline-flex;
+                align-items: center;
+                gap: 3px;
+            }
+            .calc-tab small i {
+                font-size: 9px;
+            }
+            .calc-tab:hover {
+                border-color: rgba(255,255,255,0.2);
+                color: rgba(255,255,255,0.8);
+            }
+            .calc-tab.active {
+                background: rgba(0,115,255,0.15);
+                color: #fff;
+                border-color: rgba(0,115,255,0.4);
+            }
+            .calc-tab.active small {
+                opacity: 0.65;
+            }
+            .calc-note {
+                text-align: center;
+                font-size: 13px;
+                color: rgba(255,255,255,0.3);
+                margin: 0;
+            }
+            .calc-note a {
+                color: rgba(255,255,255,0.5);
+                text-decoration: underline;
+                text-underline-offset: 2px;
+            }
+            @media (max-width: 500px) {
+                .calc-tabs { gap: 6px; }
+                .calc-tab { padding: 8px 12px; font-size: 13px; }
+                .calc-hero { gap: 8px; }
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Navbar -->
+        <nav class="navbar">
+            <div class="nav-container">
+                <a href="/" class="logo">
+                    <img
+                        src="/static/images/logo.png"
+                        alt="Algrow"
+                    />
+                    Algrow
+                </a>
+                <div class="nav-links">
+                    <a href="/#features">Features</a>
+                    <a href="/#pricing">Pricing</a>
+                    <a href="/#testimonials">Feedback</a>
+                    <a href="/affiliates">Affiliates</a>
+                </div>
+                <div class="auth-buttons">
+                    <a href="/#pricing" class="get-started-btn">Get Started</a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="hero-top">
+            <div class="landing-container">
+                <h1 class="hero-top-title">
+                    <span class="hero-gradient-text">AI video generation</span>
+                    that actually works
+                </h1>
+                <p class="hero-top-subtitle">
+                    Paste a script. Get scenes, images, and animated video with
+                    consistent characters throughout.
+                </p>
+            </div>
+        </section>
+
+        <!-- Interactive Demo Section -->
+        <section class="demo-wrapper" id="demo">
+            <div class="landing-container demo-layout">
+                <!-- Annotation left -->
+                <div class="demo-annotation demo-annotation-left">
+                    <p class="demo-annotation-text">
+                        Every step can be tailored to your own video.
+                    </p>
+                    <svg
+                        class="demo-annotation-arrow"
+                        width="40"
+                        height="60"
+                        viewBox="0 0 40 60"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path
+                            d="M20 2 C32 8, 36 20, 28 32 C22 42, 18 48, 20 56"
+                            stroke="rgba(255,255,255,0.35)"
+                            stroke-width="1.5"
+                            fill="none"
+                            stroke-linecap="round"
+                        />
+                        <path
+                            d="M14 50 L20 58 L24 49"
+                            stroke="rgba(255,255,255,0.35)"
+                            stroke-width="1.5"
+                            fill="none"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        />
+                    </svg>
+                </div>
+
+                <!-- Annotation right -->
+                <div class="demo-annotation">
+                    <p class="demo-annotation-text">
+                        Click through each step to see how it works — no account
+                        needed.
+                    </p>
+                    <svg
+                        class="demo-annotation-arrow"
+                        width="40"
+                        height="60"
+                        viewBox="0 0 40 60"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path
+                            d="M20 2 C8 8, 4 20, 12 32 C18 42, 22 48, 20 56"
+                            stroke="rgba(255,255,255,0.35)"
+                            stroke-width="1.5"
+                            fill="none"
+                            stroke-linecap="round"
+                        />
+                        <path
+                            d="M14 50 L20 58 L24 49"
+                            stroke="rgba(255,255,255,0.35)"
+                            stroke-width="1.5"
+                            fill="none"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        />
+                    </svg>
+                </div>
+
+                <!-- Interactive demo badge -->
+                <div style="text-align: center; margin-bottom: 20px">
+                    <span
+                        style="
+                            display: inline-flex;
+                            align-items: center;
+                            gap: 8px;
+                            background: rgba(0, 115, 255, 0.15);
+                            border: 1px solid rgba(0, 115, 255, 0.4);
+                            border-radius: 100px;
+                            padding: 10px 20px;
+                            font-size: 15px;
+                            font-weight: 500;
+                            color: rgb(77, 156, 255);
+                            box-shadow: 0 0 20px rgba(0, 115, 255, 0.1), inset 0 0 0 1px rgba(0, 115, 255, 0.2);
+                        "
+                    >
+                        <i class="fas fa-play" style="font-size: 12px"></i>
+                        Interactive demo
+                    </span>
+                    <div style="margin-top: 4px;">
+                        <svg width="24" height="36" viewBox="0 0 24 36" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity: 0.4;">
+                            <path d="M12 2 C6 8, 4 14, 8 20 C12 26, 16 28, 12 34" stroke="rgb(77, 156, 255)" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+                            <path d="M8 30 L12 35 L16 30" stroke="rgb(77, 156, 255)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Prompt Generator UI — 1:1 replica -->
+                <div class="demo-box-outline">
+                <div class="prompt-generator-page">
+                    <div class="wizard-container">
+                        <!-- Wizard Progress (matches prompt_generator.html exactly) -->
+                        <div class="wizard-progress">
+                            <div class="wizard-step active">
+                                <div
+                                    class="step-circle active"
+                                    id="step1Circle"
+                                >
+                                    1
+                                </div>
+                                <span class="step-label">Input</span>
+                            </div>
+                            <div class="step-connector" id="connector1"></div>
+                            <div class="wizard-step">
+                                <div class="step-circle" id="step2Circle">
+                                    2
+                                </div>
+                                <span class="step-label">Style</span>
+                            </div>
+                            <div class="step-connector" id="connector2"></div>
+                            <div class="wizard-step">
+                                <div class="step-circle" id="step3Circle">
+                                    3
+                                </div>
+                                <span class="step-label">Images</span>
+                            </div>
+                            <div class="step-connector" id="connector3"></div>
+                            <div class="wizard-step">
+                                <div class="step-circle" id="step4Circle">
+                                    4
+                                </div>
+                                <span class="step-label">Animation</span>
+                            </div>
+                        </div>
+
+                        <!-- ==================== STEP 1: Input ==================== -->
+                        <div class="step-panel active" id="step1Panel">
+                            <div class="input-card">
+                                <h3>
+                                    <i class="fab fa-youtube"></i> Reference
+                                    Video
+                                </h3>
+                                <div class="form-group">
+                                    <label class="form-label"
+                                        >YouTube Video URL</label
+                                    >
+                                    <div class="fake-input">
+                                        https://www.youtube.com/shorts/p8Hio-Knyn4
+                                    </div>
+                                    <div class="form-hint">
+                                        Enter a YouTube video URL to analyze
+                                        scene structure and timing
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="input-card">
+                                <h3>
+                                    <i class="fas fa-file-alt"></i> Your Script
+                                </h3>
+                                <div class="form-group">
+                                    <label class="form-label"
+                                        >Script Text</label
+                                    >
+                                    <div class="fake-input fake-textarea">
+                                        How fast can you rise through the mafia?
+                                        Year 1, you're an associate. You go
+                                        through the back streets collecting
+                                        envelopes with cash from every shop on
+                                        the block. You hand them to your boss
+                                        the next day. Year five, you're a made
+                                        man. You run underground poker games in
+                                        a smoke filled basement, counting stacks
+                                        of cash taller than the drinks. Anyone
+                                        who can't pay doesn't leave. Year 8,
+                                        you're a capo. You step out of a black
+                                        car at a construction site, shaking the
+                                        manager's hand, while your crew
+                                        redirects an entire city contract worth
+                                        millions into your pocket. Year 15,
+                                        concealier. You're sitting across from a
+                                        rival family in a candle lit wine
+                                        seller. He refuses your offer. 2 days
+                                        later, his entire operation burns to the
+                                        ground. Year 20, under boss, your most
+                                        trusted captain walks into your office
+                                        wearing a wire. You already knew he
+                                        doesn't make it to the elevator. Year
+                                        25, you're now the boss
+                                    </div>
+                                    <div class="form-hint">
+                                        Your script will be split into scenes
+                                        based on the reference video structure
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="btn-group">
+                                <button class="btn btn-primary" id="analyzeBtn">
+                                    <i class="fas fa-wand-magic-sparkles"></i>
+                                    Analyze Video
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- ==================== STEP 2: Style & Prompts ==================== -->
+                        <div class="step-panel" id="step2Panel">
+                            <!-- Style Reference -->
+                            <div class="input-card">
+                                <h3
+                                    style="
+                                        display: flex;
+                                        align-items: center;
+                                        justify-content: space-between;
+                                    "
+                                >
+                                    <span
+                                        ><i class="fas fa-palette"></i> Style
+                                        Reference</span
+                                    >
+                                    <button
+                                        style="
+                                            font-family: inherit;
+                                            font-size: 12px;
+                                            padding: 6px 12px;
+                                            background: rgba(0, 115, 255, 0.15);
+                                            border: 1px solid
+                                                rgba(0, 115, 255, 0.3);
+                                            border-radius: 6px;
+                                            color: var(--primary-color);
+                                            cursor: pointer;
+                                            transition: all 0.2s ease;
+                                            display: flex;
+                                            align-items: center;
+                                            gap: 6px;
+                                        "
+                                    >
+                                        <i class="fas fa-question-circle"></i>
+                                        How to choose
+                                    </button>
+                                </h3>
+                                <p
+                                    style="
+                                        color: var(--text-secondary);
+                                        font-size: 14px;
+                                        margin-bottom: 16px;
+                                    "
+                                >
+                                    Choose how to define the visual style for
+                                    your image prompts
+                                </p>
+                                <div class="style-options">
+                                    <div
+                                        class="style-option"
+                                        data-style="same_video"
+                                    >
+                                        <i class="fas fa-copy"></i>
+                                        <div class="style-title">
+                                            Same Video
+                                        </div>
+                                        <div class="style-desc">
+                                            Use the reference video's style
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="style-option"
+                                        data-style="different_video"
+                                    >
+                                        <i class="fab fa-youtube"></i>
+                                        <div class="style-title">
+                                            Different Video
+                                        </div>
+                                        <div class="style-desc">
+                                            Use another video's style
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="style-option selected"
+                                        data-style="image"
+                                    >
+                                        <i class="fas fa-image"></i>
+                                        <div class="style-title">
+                                            Reference Image
+                                        </div>
+                                        <div class="style-desc">
+                                            Use an image for style
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div
+                                    class="style-url-input show"
+                                    id="styleImageInput"
+                                >
+                                    <div class="form-group">
+                                        <label class="form-label"
+                                            >Style Image URL</label
+                                        >
+                                        <input
+                                            type="text"
+                                            class="form-input"
+                                            placeholder="https://example.com/style-image.jpg"
+                                            readonly
+                                        />
+                                    </div>
+                                    <div
+                                        class="example-videos"
+                                        style="margin-top: 12px"
+                                    >
+                                        <div class="example-videos-label">
+                                            Or choose an example style:
+                                        </div>
+                                        <div
+                                            class="example-videos-grid"
+                                            id="exampleStyleImagesGrid"
+                                        >
+                                            <div class="example-video-card">
+                                                <img
+                                                    class="example-video-thumb"
+                                                    src="https://audio.algrow.online/image/image_1769846650317_gyxumv.png"
+                                                    alt="Studio Backdrop"
+                                                />
+                                                <div class="example-video-info">
+                                                    <div
+                                                        class="example-video-title"
+                                                    >
+                                                        Studio Backdrop
+                                                    </div>
+                                                    <div
+                                                        class="example-video-desc"
+                                                    >
+                                                        Clean character focus
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div
+                                                class="example-video-card selected"
+                                            >
+                                                <img
+                                                    class="example-video-thumb"
+                                                    src="https://audio.algrow.online/image/asdadadsadsa.png"
+                                                    alt="Creative Environment"
+                                                />
+                                                <div class="example-video-info">
+                                                    <div
+                                                        class="example-video-title"
+                                                    >
+                                                        Creative Environment
+                                                        <span
+                                                            style="
+                                                                color: #22c55e;
+                                                                font-size: 11px;
+                                                                font-weight: 500;
+                                                                margin-left: 6px;
+                                                            "
+                                                            ><i
+                                                                class="fas fa-star"
+                                                                style="
+                                                                    font-size: 10px;
+                                                                "
+                                                            ></i>
+                                                            Recommended</span
+                                                        >
+                                                    </div>
+                                                    <div
+                                                        class="example-video-desc"
+                                                    >
+                                                        Detailed backgrounds
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="example-video-card">
+                                                <img
+                                                    class="example-video-thumb"
+                                                    src="https://audio.algrow.online/image/Assets%20as%20wel.png"
+                                                    alt="Studio with Assets"
+                                                />
+                                                <div class="example-video-info">
+                                                    <div
+                                                        class="example-video-title"
+                                                    >
+                                                        Studio with Assets
+                                                    </div>
+                                                    <div
+                                                        class="example-video-desc"
+                                                    >
+                                                        Studio backdrop + script
+                                                        visuals
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Character Description -->
+                            <div class="input-card">
+                                <h3>
+                                    <i class="fas fa-user"></i> Character
+                                    Description
+                                    <span style="color: #ef4444">*</span>
+                                </h3>
+                                <p
+                                    style="
+                                        color: var(--text-secondary);
+                                        font-size: 14px;
+                                        margin-bottom: 16px;
+                                    "
+                                >
+                                    Describe your main character clearly. This
+                                    will be used in all image prompts to
+                                    maintain consistency. Please ensure that you
+                                    don't describe background details or
+                                    settings. Just focus on the character's
+                                    appearance
+                                </p>
+                                <div class="form-group">
+                                    <div
+                                        class="fake-input"
+                                        style="
+                                            font-size: 15px;
+                                            padding: 14px 16px;
+                                        "
+                                    >
+                                        mafia skeleton character
+                                    </div>
+                                    <div class="form-hint">
+                                        Don't be specific! You will attach a
+                                        reference image in the next step which
+                                        will do most of the work for you. Good
+                                        example: 'translucent skeleton
+                                        character', 'cartoon monkey', 'anime
+                                        girl'
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Detected Scenes -->
+                            <div class="input-card">
+                                <h3
+                                    style="
+                                        display: flex;
+                                        justify-content: space-between;
+                                        align-items: center;
+                                        flex-wrap: wrap;
+                                        gap: 8px;
+                                    "
+                                >
+                                    <span
+                                        ><i class="fas fa-film"></i> Detected
+                                        Scenes (<span>18</span>)</span
+                                    >
+                                    <div class="scene-undo-redo">
+                                        <button
+                                            class="scene-undo-btn"
+                                            disabled
+                                            title="Undo"
+                                        >
+                                            <i class="fas fa-undo"></i>
+                                        </button>
+                                        <button
+                                            class="scene-undo-btn"
+                                            disabled
+                                            title="Redo"
+                                        >
+                                            <i class="fas fa-redo"></i>
+                                        </button>
+                                        <button
+                                            class="scene-undo-btn"
+                                            title="Reset to original scenes"
+                                        >
+                                            <i class="fas fa-rotate-left"></i>
+                                            Reset
+                                        </button>
+                                    </div>
+                                </h3>
+                                <p
+                                    style="
+                                        color: var(--text-secondary);
+                                        font-size: 13px;
+                                        margin-bottom: 12px;
+                                    "
+                                >
+                                    Each scene generates a separate image and
+                                    animation. Split or merge scenes to control
+                                    how many visuals your video has.
+                                </p>
+                                <div
+                                    class="scenes-list"
+                                    id="demoScenesList"
+                                ></div>
+                                <button
+                                    class="add-scene-btn"
+                                    style="margin-top: 12px"
+                                >
+                                    <i class="fas fa-plus"></i> Add Scene
+                                </button>
+                            </div>
+
+                            <div class="btn-group">
+                                <button
+                                    class="btn btn-secondary"
+                                    onclick="goToStep(1)"
+                                >
+                                    <i class="fas fa-arrow-left"></i> Back
+                                </button>
+                                <button
+                                    class="btn btn-primary"
+                                    id="generatePromptsBtn"
+                                >
+                                    <i class="fas fa-wand-magic-sparkles"></i>
+                                    Generate Prompts
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- ==================== STEP 3: Images ==================== -->
+                        <div class="step-panel" id="step3Panel">
+                            <!-- Character Reference Images -->
+                            <div class="input-card">
+                                <h3>
+                                    <i
+                                        class="fas fa-image"
+                                        style="color: var(--primary-color)"
+                                    ></i>
+                                    Character Reference Images
+                                    <span
+                                        style="color: #ef4444; font-size: 14px"
+                                        >*</span
+                                    >
+                                </h3>
+                                <p
+                                    style="
+                                        color: var(--text-secondary);
+                                        font-size: 14px;
+                                        margin-bottom: 16px;
+                                    "
+                                >
+                                    Add reference images to maintain character
+                                    consistency across all generated images
+                                    (required)
+                                </p>
+
+                                <div class="form-group">
+                                    <label class="form-label"
+                                        >Upload Reference Images</label
+                                    >
+                                    <div
+                                        style="
+                                            border: 2px dashed
+                                                rgba(255, 255, 255, 0.15);
+                                            border-radius: 12px;
+                                            padding: 32px 20px;
+                                            text-align: center;
+                                            cursor: default;
+                                        "
+                                    >
+                                        <i
+                                            class="fas fa-cloud-arrow-up"
+                                            style="
+                                                font-size: 28px;
+                                                color: var(--primary-color);
+                                                display: block;
+                                                margin-bottom: 8px;
+                                            "
+                                        ></i>
+                                        <div
+                                            style="
+                                                font-size: 14px;
+                                                color: rgba(255, 255, 255, 0.7);
+                                            "
+                                        >
+                                            Click to upload or drag and drop
+                                        </div>
+                                        <div
+                                            style="
+                                                font-size: 12px;
+                                                color: rgba(255, 255, 255, 0.4);
+                                                margin-top: 4px;
+                                            "
+                                        >
+                                            PNG, JPG, WebP (max 10MB each)
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Uploaded reference thumbnail -->
+                                <div style="margin-bottom: 16px">
+                                    <div
+                                        style="
+                                            width: 64px;
+                                            height: 64px;
+                                            border-radius: 8px;
+                                            overflow: hidden;
+                                            border: 1px solid
+                                                rgba(255, 255, 255, 0.1);
+                                            position: relative;
+                                        "
+                                    >
+                                        <img
+                                            src="https://audio.algrow.online/gemini/images/657bd510-b27c-4fb2-a19e-6b5cdba8eb9e/28532_0_9ec76054.png"
+                                            alt="Character reference"
+                                            style="
+                                                width: 100%;
+                                                height: 100%;
+                                                object-fit: cover;
+                                            "
+                                        />
+                                        <div
+                                            style="
+                                                position: absolute;
+                                                top: -6px;
+                                                right: -6px;
+                                                width: 18px;
+                                                height: 18px;
+                                                background: #ef4444;
+                                                border-radius: 50%;
+                                                display: flex;
+                                                align-items: center;
+                                                justify-content: center;
+                                            "
+                                        >
+                                            <i
+                                                class="fas fa-times"
+                                                style="
+                                                    font-size: 9px;
+                                                    color: white;
+                                                "
+                                            ></i>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label"
+                                        >Or paste image URL</label
+                                    >
+                                    <div
+                                        class="fake-input"
+                                        style="color: rgba(255, 255, 255, 0.3)"
+                                    >
+                                        https://example.com/character-reference.jpg
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label"
+                                        >Aspect Ratio</label
+                                    >
+                                    <div
+                                        class="fake-input"
+                                        style="
+                                            width: auto;
+                                            display: inline-flex;
+                                            align-items: center;
+                                            gap: 8px;
+                                            padding: 10px 16px;
+                                        "
+                                    >
+                                        9:16 (Vertical)
+                                        <i
+                                            class="fas fa-chevron-down"
+                                            style="
+                                                font-size: 10px;
+                                                color: rgba(255, 255, 255, 0.4);
+                                            "
+                                        ></i>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label"
+                                        >Image Generation Model</label
+                                    >
+                                    <div
+                                        class="fake-input"
+                                        style="
+                                            width: auto;
+                                            display: inline-flex;
+                                            align-items: center;
+                                            gap: 8px;
+                                            padding: 10px 16px;
+                                        "
+                                    >
+                                        Nano Banana Pro (3 credits)
+                                        <i
+                                            class="fas fa-chevron-down"
+                                            style="
+                                                font-size: 10px;
+                                                color: rgba(255, 255, 255, 0.4);
+                                            "
+                                        ></i>
+                                    </div>
+                                    <div class="form-hint">
+                                        Nano Banana Pro (3 credits) is
+                                        recommended for best quality. Seedream
+                                        (2 credits) offers a good balance. Nano
+                                        Banana (1 credit) is faster and more
+                                        economical.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Credit cost bar -->
+                            <div
+                                style="
+                                    background: rgba(0, 115, 255, 0.1);
+                                    border: 1px solid rgba(0, 115, 255, 0.2);
+                                    border-radius: 10px;
+                                    padding: 12px 16px;
+                                    margin-bottom: 20px;
+                                    display: flex;
+                                    align-items: center;
+                                    gap: 8px;
+                                    font-size: 13px;
+                                "
+                            >
+                                <i
+                                    class="fas fa-coins"
+                                    style="color: var(--primary-color)"
+                                ></i>
+                                <span style="color: rgba(255, 255, 255, 0.8)"
+                                    ><strong style="color: white"
+                                        >Nano Banana Pro</strong
+                                    >
+                                    |
+                                    <strong style="color: white"
+                                        >3 credits</strong
+                                    >
+                                    per image | 18 images remaining =
+                                    <strong style="color: white"
+                                        >54 credits</strong
+                                    ></span
+                                >
+                            </div>
+
+                            <div class="btn-group">
+                                <button
+                                    class="btn btn-secondary"
+                                    onclick="goToStep(2)"
+                                >
+                                    <i class="fas fa-arrow-left"></i> Back
+                                </button>
+                                <button
+                                    class="btn btn-primary"
+                                    id="generateImagesBtn"
+                                >
+                                    <i class="fas fa-wand-magic-sparkles"></i>
+                                    Generate All Images
+                                </button>
+                            </div>
+
+                            <!-- Results: Scene card grid — rendered from JS data -->
+                            <div class="step-results visible" id="step3Results">
+                                <div
+                                    class="scene-cards-grid"
+                                    id="demoSceneCardsGrid"
+                                    style="margin-top: 20px"
+                                ></div>
+                                <div class="btn-group" style="flex-wrap: wrap">
+                                    <button
+                                        class="btn btn-secondary"
+                                        onclick="goToStep(2)"
+                                    >
+                                        <i class="fas fa-arrow-left"></i> Back
+                                    </button>
+                                    <button
+                                        class="btn btn-primary next-step-btn"
+                                        data-next="4"
+                                    >
+                                        Continue to Animation
+                                        <i class="fas fa-arrow-right"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ==================== STEP 4: Animation & Video ==================== -->
+                        <div class="step-panel" id="step4Panel">
+                            <div class="input-card">
+                                <h3
+                                    style="
+                                        display: flex;
+                                        justify-content: space-between;
+                                        align-items: center;
+                                        flex-wrap: wrap;
+                                        gap: 12px;
+                                    "
+                                >
+                                    <span
+                                        ><i class="fas fa-film"></i> Animations
+                                        (<span id="animationCardCount">18</span
+                                        >)</span
+                                    >
+                                    <div
+                                        style="
+                                            display: flex;
+                                            align-items: center;
+                                            gap: 12px;
+                                        "
+                                    >
+                                        <div
+                                            class="scene-card-model-picker"
+                                            id="masterVideoModelPicker"
+                                            style="max-width: 260px; margin: 0"
+                                        >
+                                            <div
+                                                class="scene-card-model-trigger"
+                                                onclick="
+                                                    event.stopPropagation();
+                                                    this.closest(
+                                                        '.scene-card-model-picker',
+                                                    ).classList.toggle('open');
+                                                "
+                                            >
+                                                <span
+                                                    >Grok 6s (Audio) (3
+                                                    credits)</span
+                                                >
+                                                <i
+                                                    class="fas fa-chevron-down"
+                                                ></i>
+                                            </div>
+                                            <div
+                                                class="scene-card-model-dropdown"
+                                            >
+                                                <div
+                                                    class="scene-card-model-option"
+                                                    onclick="
+                                                        this.closest(
+                                                            '.scene-card-model-picker',
+                                                        ).classList.remove(
+                                                            'open',
+                                                        )
+                                                    "
+                                                >
+                                                    <span
+                                                        >Kling 5s (No Audio) (8
+                                                        credits)</span
+                                                    ><i
+                                                        class="fas fa-check model-check"
+                                                    ></i>
+                                                </div>
+                                                <div
+                                                    class="scene-card-model-option"
+                                                    onclick="
+                                                        this.closest(
+                                                            '.scene-card-model-picker',
+                                                        ).classList.remove(
+                                                            'open',
+                                                        )
+                                                    "
+                                                >
+                                                    <span
+                                                        >Kling 5s (Audio) (15
+                                                        credits)</span
+                                                    ><i
+                                                        class="fas fa-check model-check"
+                                                    ></i>
+                                                </div>
+                                                <div
+                                                    class="scene-card-model-option"
+                                                    onclick="
+                                                        this.closest(
+                                                            '.scene-card-model-picker',
+                                                        ).classList.remove(
+                                                            'open',
+                                                        )
+                                                    "
+                                                >
+                                                    <span
+                                                        >Kling 10s (No Audio)
+                                                        (15 credits)</span
+                                                    ><i
+                                                        class="fas fa-check model-check"
+                                                    ></i>
+                                                </div>
+                                                <div
+                                                    class="scene-card-model-option"
+                                                    onclick="
+                                                        this.closest(
+                                                            '.scene-card-model-picker',
+                                                        ).classList.remove(
+                                                            'open',
+                                                        )
+                                                    "
+                                                >
+                                                    <span
+                                                        >Kling 10s (Audio) (30
+                                                        credits)</span
+                                                    ><i
+                                                        class="fas fa-check model-check"
+                                                    ></i>
+                                                </div>
+                                                <div
+                                                    class="scene-card-model-option selected"
+                                                    onclick="
+                                                        this.closest(
+                                                            '.scene-card-model-picker',
+                                                        ).classList.remove(
+                                                            'open',
+                                                        )
+                                                    "
+                                                >
+                                                    <span
+                                                        >Grok 6s (Audio) (3
+                                                        credits)</span
+                                                    ><i
+                                                        class="fas fa-check model-check"
+                                                    ></i>
+                                                </div>
+                                                <div
+                                                    class="scene-card-model-option"
+                                                    onclick="
+                                                        this.closest(
+                                                            '.scene-card-model-picker',
+                                                        ).classList.remove(
+                                                            'open',
+                                                        )
+                                                    "
+                                                >
+                                                    <span
+                                                        >Veo 3.1 Fast (~8s) (4
+                                                        credits)</span
+                                                    ><i
+                                                        class="fas fa-check model-check"
+                                                    ></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </h3>
+                                <div
+                                    class="animation-cards-grid"
+                                    id="demoAnimationCardsGrid"
+                                    style="margin-top: 16px"
+                                ></div>
+                            </div>
+
+                            <div class="btn-group">
+                                <button
+                                    class="btn btn-secondary"
+                                    onclick="goToStep(3)"
+                                >
+                                    <i class="fas fa-arrow-left"></i> Back
+                                </button>
+                                <button
+                                    class="btn btn-primary"
+                                    onclick="goToStep(1)"
+                                >
+                                    <i class="fas fa-redo"></i> Start Over
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /wizard-container -->
+                </div>
+                <!-- /prompt-generator-page -->
+                <button class="tutorial-toggle-btn" onclick="toggleTutorialSidebar()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><path d="M12 17h.01"></path></svg>
+                    Guide
+                </button>
+                <div class="tutorial-sidebar-overlay" id="tutorialOverlay" onclick="toggleTutorialSidebar()"></div>
+                <div class="tutorial-sidebar" id="tutorialSidebar">
+                    <div class="tutorial-sidebar-header">
+                        <h3>Step-by-Step Guide</h3>
+                        <button class="tutorial-sidebar-close" onclick="toggleTutorialSidebar()">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                        </button>
+                    </div>
+                    <div class="tutorial-sidebar-body">
+                        <div class="guide-section"><div class="guide-section-label">Step 1 &mdash; Input</div></div>
+                        <div class="guide-step">
+                            <div class="guide-step-number">1</div>
+                            <h4>Paste Your Script</h4>
+                            <p>Paste your full video script into the script box. This is the narration or voiceover text that your video will be based on.</p>
+                        </div>
+                        <div class="guide-step">
+                            <div class="guide-step-number">2</div>
+                            <h4>Add a Reference Video</h4>
+                            <p>Paste a YouTube URL of a video with good pacing and the type of scene structure you want. The tool will analyze its scene breakdown and use it to split your script into scenes.</p>
+                            <div class="guide-tip">Pick a video that has a lot of scene changes and good visual pacing &mdash; this directly affects how your script gets broken into scenes.</div>
+                        </div>
+                        <div class="guide-section"><div class="guide-section-label">Step 2 &mdash; Style</div></div>
+                        <div class="guide-step">
+                            <div class="guide-step-number">3</div>
+                            <h4>Choose Your Style</h4>
+                            <p>Select how your video will look:</p>
+                            <p><strong>Creative Environment</strong> &mdash; lets the AI create a unique visual style.<br>
+                            <strong>Same Video</strong> &mdash; uses the visual style from your reference video.<br>
+                            <strong>Reference Image</strong> &mdash; upload your own style reference image.</p>
+                        </div>
+                        <div class="guide-step">
+                            <div class="guide-step-number">4</div>
+                            <h4>Describe Your Main Character</h4>
+                            <p>Write a description of your main character. This character will appear across all your scenes for consistency.</p>
+                        </div>
+                        <div class="guide-step">
+                            <div class="guide-step-number">5</div>
+                            <h4>Review Detected Scenes</h4>
+                            <p>Your script is automatically broken into individual scenes. Each scene becomes a separate image prompt.</p>
+                        </div>
+                        <div class="guide-step">
+                            <div class="guide-step-number">6</div>
+                            <h4>Generate Prompts</h4>
+                            <p>Press "Generate Prompts" to create AI image prompts for every scene.</p>
+                        </div>
+                        <div class="guide-section"><div class="guide-section-label">Step 3 &mdash; Images</div></div>
+                        <div class="guide-step">
+                            <div class="guide-step-number">7</div>
+                            <h4>Set Up Reference Images</h4>
+                            <p>Generate or upload a reference image of your main character. It gets applied to all scenes for consistency.</p>
+                            <div class="guide-tip">For aging characters: generate different versions and assign each to the relevant scenes.</div>
+                        </div>
+                        <div class="guide-step">
+                            <div class="guide-step-number">8</div>
+                            <h4>Generate &amp; Refine Images</h4>
+                            <p>Generate images for each scene. Regenerate, edit, or switch between versions until you're happy.</p>
+                            <div class="guide-tip">Spend time getting the images right &mdash; animations are only as good as the images.</div>
+                        </div>
+                        <div class="guide-section"><div class="guide-section-label">Step 4 &mdash; Animation</div></div>
+                        <div class="guide-step">
+                            <div class="guide-step-number">9</div>
+                            <h4>Generate Animations</h4>
+                            <p>Pick your preferred model and press generate to animate all scenes.</p>
+                        </div>
+                        <div class="guide-step">
+                            <div class="guide-step-number">10</div>
+                            <h4>Download &amp; Post-Production</h4>
+                            <p>Download all clips, import into your editor, speed up by 1.6x, upscale, and add voiceover.</p>
+                            <div class="guide-tip">Post-production should only take 5&ndash;10 minutes once you have all your clips.</div>
+                        </div>
+                    </div>
+                    <div class="tutorial-sidebar-footer">
+                        <a href="https://focusee.imobie.com/share/885bf25b39534dd88317cd4b9a8c0a0f" target="_blank" rel="noopener" style="display: flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 16px; background: rgb(0,115,255); color: #fff; border-radius: 10px; text-decoration: none; font-size: 13px; font-weight: 600;">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                            Watch Video Tutorial
+                        </a>
+                    </div>
+                </div>
+                </div>
+                <!-- /demo-box-outline -->
+            </div>
+        </section>
+
+        <!-- Showcase — real videos made with the tool -->
+        <section class="showcase-section reveal-section">
+            <div class="landing-container">
+                <div class="showcase-header">
+                    <div class="section-badge"><span class="badge-dot"></span> Results</div>
+                    <h2>These hit millions of views</h2>
+                    <p>100% generated on Algrow — script to scenes to animation. Merge in any editor and publish. That's it.</p>
+                </div>
+
+                <div class="showcase-stats-row">
+                    <div class="showcase-stat-block">
+                        <span class="stat-number">1M+</span>
+                        <span class="stat-label">views on a single video</span>
+                    </div>
+                    <div class="showcase-stat-block">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">AI-generated visuals</span>
+                    </div>
+                    <div class="showcase-stat-block">
+                        <span class="stat-number">15 min</span>
+                        <span class="stat-label">from script to video</span>
+                    </div>
+                </div>
+
+                <div class="showcase-grid">
+                    <a href="https://www.youtube.com/shorts/F1qanELQvb8" target="_blank" rel="noopener" class="showcase-card" style="text-decoration: none; color: inherit;">
+                        <div class="showcase-video-wrap">
+                            <img src="https://audio.algrow.online/landing/showcase/F1qanELQvb8.jpg" alt="What if you train with Goku for a month?" style="width: 100%; height: 100%; object-fit: cover;" />
+                            <div class="showcase-play-btn"><i class="fab fa-youtube"></i></div>
+                        </div>
+                        <div class="showcase-card-body">
+                            <div class="showcase-card-info">
+                                <h3>What if you train with Goku for a month?</h3>
+                                <p>Skelly_Sensei</p>
+                            </div>
+                            <div class="showcase-stat"><i class="fas fa-fire"></i> 2.8M+ views</div>
+                        </div>
+                    </a>
+                    <a href="https://www.youtube.com/shorts/WUfDZl_OOvM" target="_blank" rel="noopener" class="showcase-card" style="text-decoration: none; color: inherit;">
+                        <div class="showcase-video-wrap">
+                            <img src="https://audio.algrow.online/landing/showcase/WUfDZl_OOvM.jpg" alt="Life As Pharaoh In Ancient Egypt" style="width: 100%; height: 100%; object-fit: cover;" />
+                            <div class="showcase-play-btn"><i class="fab fa-youtube"></i></div>
+                        </div>
+                        <div class="showcase-card-body">
+                            <div class="showcase-card-info">
+                                <h3>Life As Pharaoh In Ancient Egypt</h3>
+                                <p>Prymal</p>
+                            </div>
+                            <div class="showcase-stat"><i class="fas fa-fire"></i> 2.4M+ views</div>
+                        </div>
+                    </a>
+                    <a href="https://www.youtube.com/shorts/rCLh66W4_pA" target="_blank" rel="noopener" class="showcase-card" style="text-decoration: none; color: inherit;">
+                        <div class="showcase-video-wrap">
+                            <img src="https://audio.algrow.online/landing/showcase/rCLh66W4_pA.jpg" alt="What If You Had a Smartphone in Ancient Egypt?" style="width: 100%; height: 100%; object-fit: cover;" />
+                            <div class="showcase-play-btn"><i class="fab fa-youtube"></i></div>
+                        </div>
+                        <div class="showcase-card-body">
+                            <div class="showcase-card-info">
+                                <h3>What If You Had a Smartphone in Ancient Egypt?</h3>
+                                <p>Prymal</p>
+                            </div>
+                            <div class="showcase-stat"><i class="fas fa-fire"></i> 1.5M+ views</div>
+                        </div>
+                    </a>
+                    <a href="https://www.youtube.com/shorts/YLexlDBqYiU" target="_blank" rel="noopener" class="showcase-card" style="text-decoration: none; color: inherit;">
+                        <div class="showcase-video-wrap">
+                            <img src="https://audio.algrow.online/landing/showcase/YLexlDBqYiU.jpg" alt="Life As Dictator Of North Korea" style="width: 100%; height: 100%; object-fit: cover;" />
+                            <div class="showcase-play-btn"><i class="fab fa-youtube"></i></div>
+                        </div>
+                        <div class="showcase-card-body">
+                            <div class="showcase-card-info">
+                                <h3>Life As Dictator Of North Korea</h3>
+                                <p>Prymal</p>
+                            </div>
+                            <div class="showcase-stat"><i class="fas fa-fire"></i> 1M+ views</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cost Calculator Section -->
+        <section class="calculator-section reveal-section" id="calculator">
+            <div class="landing-container" style="max-width:680px;">
+                <div class="calculator-header">
+                    <div class="section-badge"><span class="badge-dot"></span> Cost</div>
+                    <h2>How much does one video cost?</h2>
+                    <p>Configure your video below. The price updates live.</p>
+                </div>
+
+                <!-- Price display -->
+                <div class="calc-hero">
+                    <span class="calc-hero-dollar" id="calcPriceDollar">$5.04</span>
+                    <span class="calc-hero-sep">/</span>
+                    <span class="calc-hero-credits"><i class="fas fa-coins"></i> <span id="calcPriceCredits">135 credits</span></span>
+                </div>
+
+                <!-- Scenes -->
+                <div class="calc-field">
+                    <div class="calc-field-top">
+                        <span class="calc-label">Scenes</span>
+                        <span class="calc-value" id="calcScenesValue">15</span>
+                    </div>
+                    <input type="range" min="5" max="40" value="15" class="calc-range" id="calcScenesSlider">
+                </div>
+
+                <!-- Image model -->
+                <div class="calc-field">
+                    <span class="calc-label"><i class="fas fa-image" style="margin-right:4px;"></i> Image model</span>
+                    <div class="calc-tabs" id="calcImageModel">
+                        <button class="calc-tab active" data-credits="1">Nano Banana 2 <small><i class="fas fa-coins"></i> 1</small></button>
+                        <button class="calc-tab" data-credits="2">Seedream <small><i class="fas fa-coins"></i> 2</small></button>
+                        <button class="calc-tab" data-credits="3">Nano Banana Pro <small><i class="fas fa-coins"></i> 3</small></button>
+                    </div>
+                </div>
+
+                <!-- Video model -->
+                <div class="calc-field">
+                    <span class="calc-label"><i class="fas fa-video" style="margin-right:4px;"></i> Video model</span>
+                    <div class="calc-tabs" id="calcVideoModel">
+                        <button class="calc-tab" data-credits="3">Grok 6s <small><i class="fas fa-coins"></i> 3</small></button>
+                        <button class="calc-tab" data-credits="4">Veo 3.1 <small><i class="fas fa-coins"></i> 4</small></button>
+                        <button class="calc-tab active" data-credits="8">Kling 5s <small><i class="fas fa-coins"></i> 8</small></button>
+                        <button class="calc-tab" data-credits="15">Kling 10s <small><i class="fas fa-coins"></i> 15</small></button>
+                    </div>
+                </div>
+
+                <p class="calc-note">Based on <a href="/#pricing">Creator pack</a> ($0.037/credit). Each scene = 1 image + 1 video clip.</p>
+            </div>
+        </section>
+
+        <!-- Credits Pricing Section -->
+        <section class="pricing-section reveal-section">
+            <div class="landing-container">
+                <div class="pricing-header">
+                    <div class="section-badge"><span class="badge-dot"></span> Pricing</div>
+                    <h2>Stupidly cheap credits</h2>
+                    <p>A full AI-generated image for 1 credit. A Veo video clip for 4. An entire 18-scene video for less than a Netflix subscription. No, seriously.</p>
+                </div>
+
+                <div class="credit-packages-grid">
+                    <div class="credit-package-card">
+                        <div class="package-header">
+                            <span class="package-name">Boost</span>
+                            <span class="package-badge">Starter</span>
+                        </div>
+                        <div class="package-credits">250</div>
+                        <div class="package-credits-label">credits</div>
+                        <div class="package-price">$9.99</div>
+                    </div>
+
+                    <div class="credit-package-card featured">
+                        <div class="package-header">
+                            <span class="package-name">Creator</span>
+                            <span class="package-badge featured-badge">Best Value</span>
+                        </div>
+                        <div class="package-credits">750</div>
+                        <div class="package-credits-label">credits</div>
+                        <div class="package-price">$27.99</div>
+                    </div>
+
+                    <div class="credit-package-card">
+                        <div class="package-header">
+                            <span class="package-name">Studio</span>
+                            <span class="package-badge">Best for Teams</span>
+                        </div>
+                        <div class="package-credits">2,500</div>
+                        <div class="package-credits-label">credits</div>
+                        <div class="package-price">$89.99</div>
+                    </div>
+                </div>
+
+                <div class="plans-bar">
+                    <span class="plans-bar-label">Subscription required — each plan includes monthly credits</span>
+                    <div class="plans-bar-items">
+                        <div class="plan-pill">
+                            <span class="plan-pill-name">Starter</span>
+                            <span class="plan-pill-detail">95 credits/mo</span>
+                            <span class="plan-pill-price">$25</span>
+                        </div>
+                        <div class="plan-pill">
+                            <span class="plan-pill-name">Professional</span>
+                            <span class="plan-pill-detail">175 credits/mo</span>
+                            <span class="plan-pill-price">$45</span>
+                        </div>
+                        <div class="plan-pill">
+                            <span class="plan-pill-name">Ultimate</span>
+                            <span class="plan-pill-detail">300 credits/mo</span>
+                            <span class="plan-pill-price">$80</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pricing-tables-grid">
+                    <div class="pricing-table-card">
+                        <h3><i class="fas fa-video"></i> Video Models</h3>
+                        <table class="pricing-table">
+                            <thead>
+                                <tr>
+                                    <th>Model</th>
+                                    <th>Duration</th>
+                                    <th>Credits</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="model-group-header"><td colspan="3">Veo</td></tr>
+                                <tr><td></td><td>8s + audio</td><td><span class="credit-original">7</span><span class="credit-now">4</span> <span class="discount-badge">Limited Offer</span></td></tr>
+                                <tr class="model-group-header"><td colspan="3">Kling</td></tr>
+                                <tr><td></td><td>5s</td><td>8</td></tr>
+                                <tr><td></td><td>10s</td><td>15</td></tr>
+                                <tr><td></td><td>5s + audio</td><td>15</td></tr>
+                                <tr><td></td><td>10s + audio</td><td>30</td></tr>
+                                <tr class="model-group-header"><td colspan="3">Grok</td></tr>
+                                <tr><td></td><td>6s + audio</td><td>3</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="pricing-table-card">
+                        <h3><i class="fas fa-image"></i> Image Generation</h3>
+                        <table class="pricing-table">
+                            <thead>
+                                <tr>
+                                    <th>Model</th>
+                                    <th>Credits per Image</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Nano Banana</td><td>1</td></tr>
+                                <tr><td>Seedream 4.5</td><td>2</td></tr>
+                                <tr><td>Nano Banana Pro</td><td>3</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section reveal-section">
+            <div class="landing-container">
+                <div class="cta-box">
+                    <h2>Your next video starts here</h2>
+                    <p>Paste a script, generate scenes, and export cinematic video — all from one tool. No editing experience required.</p>
+                    <a href="/#pricing" class="cta-primary">
+                        Get Started <span class="cta-arrow">&rarr;</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Video modal (9:16 fullscreen) -->
+        <div id="videoModal" style="display:none; position:fixed; inset:0; z-index:10000; background:rgba(0,0,0,0.95); align-items:center; justify-content:center; cursor:pointer;" onclick="closeVideoModal(event)">
+            <div style="position:relative; height:90vh; aspect-ratio:9/16; max-width:90vw;" onclick="event.stopPropagation()">
+                <video id="videoModalPlayer" controls autoplay style="width:100%; height:100%; object-fit:contain; border-radius:12px;">
+                </video>
+                <button onclick="closeVideoModal(event)" style="position:absolute; top:-40px; right:0; background:none; border:none; color:#fff; font-size:24px; cursor:pointer; opacity:0.7;"><i class="fas fa-times"></i></button>
+            </div>
+        </div>
+
+        <!-- Lightbox overlay -->
+        <div
+            id="lightboxOverlay"
+            style="
+                display: none;
+                position: fixed;
+                inset: 0;
+                z-index: 9999;
+                background: rgba(0, 0, 0, 0.92);
+                align-items: center;
+                justify-content: center;
+                cursor: zoom-out;
+            "
+            onclick="closeLightbox()"
+        >
+            <img
+                id="lightboxImg"
+                src=""
+                alt=""
+                style="
+                    max-width: 90vw;
+                    max-height: 90vh;
+                    border-radius: 8px;
+                    object-fit: contain;
+                "
+            />
+            <a
+                id="lightboxDownload"
+                href=""
+                download=""
+                style="
+                    position: absolute;
+                    bottom: 24px;
+                    right: 24px;
+                    background: rgba(255, 255, 255, 0.1);
+                    border: 1px solid rgba(255, 255, 255, 0.2);
+                    color: white;
+                    padding: 10px 18px;
+                    border-radius: 8px;
+                    font-size: 13px;
+                    font-weight: 500;
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                    text-decoration: none;
+                    transition: background 0.2s;
+                "
+                onmouseover="this.style.background = 'rgba(255,255,255,0.2)'"
+                onmouseout="this.style.background = 'rgba(255,255,255,0.1)'"
+                onclick="event.stopPropagation()"
+            >
+                <i class="fas fa-download"></i> Download
+            </a>
+            <span
+                style="
+                    position: absolute;
+                    top: 20px;
+                    right: 24px;
+                    color: rgba(255, 255, 255, 0.6);
+                    font-size: 28px;
+                    cursor: pointer;
+                    line-height: 1;
+                "
+                onclick="closeLightbox()"
+                >&times;</span
+            >
+        </div>
+
+        <script>
+            function toggleTutorialSidebar() {
+                var sidebar = document.getElementById('tutorialSidebar');
+                var overlay = document.getElementById('tutorialOverlay');
+                sidebar.classList.toggle('open');
+                overlay.classList.toggle('open');
+            }
+
+            function openLightbox(src) {
+                var overlay = document.getElementById("lightboxOverlay");
+                var img = document.getElementById("lightboxImg");
+                var dl = document.getElementById("lightboxDownload");
+                img.src = src;
+                dl.href = src;
+                dl.download = src.split("/").pop();
+                overlay.style.display = "flex";
+                document.body.style.overflow = "hidden";
+            }
+            function closeLightbox() {
+                document.getElementById("lightboxOverlay").style.display =
+                    "none";
+                document.body.style.overflow = "";
+            }
+            document.addEventListener("keydown", function (e) {
+                if (e.key === "Escape") closeLightbox();
+            });
+            // Close model picker dropdowns on click outside
+            document.addEventListener("click", function (e) {
+                if (!e.target.closest(".scene-card-model-picker")) {
+                    document
+                        .querySelectorAll(".scene-card-model-picker.open")
+                        .forEach(function (p) {
+                            p.classList.remove("open");
+                        });
+                }
+            });
+        </script>
+
+        <script>
+            // Demo scene data
+            var DEMO_SCENES = [
+                {
+                    n: 1,
+                    img: "https://audio.algrow.online/generated/job_249193_scene_000_1771540512_27b8172d.png",
+                    script: "How fast can you rise through the mafia?",
+                    prompt: "The reference character, a mafia skeleton character, quickly pulling on the tailored sleeve of an expensive, dark suit jacket, a determined expression on their face. The scene is set in a dimly lit, luxurious dressing room with dark wooden paneling and plush velvet drapes. Deep shadows dance across the opulent room, hinting at hidden power. Waist-up shot, character slightly left of center, eye-level.",
+                },
+                {
+                    n: 2,
+                    img: "https://audio.algrow.online/generated/job_249194_scene_001_1771540469_52021ab1.png",
+                    script: "Year 1, you\u2019re an associate.",
+                    prompt: "The reference character, a mafia skeleton character, nervously tugging at the lapel of a cheap, ill-fitting suit while sharply glancing over their shoulder with apprehension. They are in a grimy, graffiti-covered urban alleyway with rusted fire escapes and overflowing dumpsters. The dim, gritty urban light emphasizes the bleakness. Waist-up shot, character slightly left of center, eye-level.",
+                },
+                {
+                    n: 3,
+                    img: "https://audio.algrow.online/generated/job_249218_scene_002_1771540696_5b264245.png",
+                    script: "You go through the back streets collecting envelopes with cash from every shop on the block.",
+                    prompt: "The reference character, a mafia skeleton character, swiftly and discreetly slipping cash-filled envelopes into an inner jacket pocket from the outstretched, nervous hands of various shopkeepers. They move through a dark, narrow, rain-slicked back alley between old brick buildings. Gritty, low light from distant street lamps enhances the clandestine atmosphere. Waist-up shot, character slightly left of center, eye-level, focusing on the exchange.",
+                },
+                {
+                    n: 4,
+                    img: "https://audio.algrow.online/generated/job_249198_scene_003_1771540467_f47d12f6.png",
+                    script: "You hand them to your boss the next day.",
+                    prompt: "The reference character, a mafia skeleton character, placing a thick stack of cash-filled envelopes onto a large, polished mahogany desk. An older, stern-faced man in an expensive suit is seated behind the desk, watching them intently from the shadows. The lavish, dimly lit private office features rich mahogany paneling. Dramatic lighting emphasizes the stoic expression and the boss\u2019s watchful presence. Waist-up shot, character slightly left of center, eye-level.",
+                },
+                {
+                    n: 5,
+                    img: "https://audio.algrow.online/generated/job_249196_scene_004_1771540519_b14c9f06.png",
+                    script: "Year five, you\u2019re a made man.",
+                    prompt: "The reference character, a mafia skeleton character, confidently extending a hand for an elderly, powerful-looking man to ceremonially prick their finger with a small blade. They are sharply dressed in a dimly lit, ornate private room with heavy velvet curtains and dark wood paneling. Other serious men in suits observe the ritual with grave expressions. Warm, dim lighting creates a solemn atmosphere. Waist-up shot, character slightly left of center, eye-level.",
+                },
+                {
+                    n: 6,
+                    img: "https://audio.algrow.online/generated/job_249199_scene_005_1771540463_e6f4ca89.png",
+                    script: "You run underground poker games in a smoke filled basement, counting stacks of cash taller than the drinks.",
+                    prompt: "The reference character, a mafia skeleton character, deftly shuffling a deck of cards at a grimy poker table, a cigar smoldering between their fingers. They are in a smoky, neon-lit underground basement poker room. Stacks of money tower beside half-empty bottles of liquor. Various shady figures play poker around them, their faces obscured by smoke. Dramatic neon lighting cuts through the thick smoke. Waist-up shot, character slightly left of center, eye-level.",
+                },
+                {
+                    n: 7,
+                    img: "https://audio.algrow.online/generated/job_249203_scene_006_1771540517_dff4d337.png",
+                    script: "Anyone who can\u2019t pay doesn\u2019t leave.",
+                    prompt: "The reference character, a mafia skeleton character, with a grim and resolved expression, slowly and deliberately pulling shut a heavy, creaking metal door. The door leads to a dark, desolate corner of a concrete basement with exposed pipes. A shadowy, pleading figure can be seen through a shrinking crack in the door before it shuts completely. Extremely low, ominous lighting casts deep, unsettling shadows. Waist-up shot, character slightly left of center, eye-level.",
+                },
+                {
+                    n: 8,
+                    img: "https://audio.algrow.online/generated/job_249213_scene_007_1771540612_6bae6cdb.png",
+                    script: "Year 8, you\u2019re a capo.",
+                    prompt: "The reference character, a mafia skeleton character, meticulously buttoning the luxurious, tailored suit jacket, radiating authority. They are in a sleek, modern penthouse apartment, silhouetted against a floor-to-ceiling window overlooking a sprawling, bustling city skyline at dawn. The soft, cool light of dawn illuminates the city, highlighting the sense of new beginnings and power. Waist-up shot, character slightly left of center, eye-level.",
+                },
+                {
+                    n: 9,
+                    img: "https://audio.algrow.online/generated/job_249201_scene_008_1771540466_edb0dda6.png",
+                    script: "You step out of a black car at a construction site, shaking the manager\u2019s hand,",
+                    prompt: "The reference character, a mafia skeleton character, stepping confidently from a sleek, black sedan at a muddy construction site, extending a firm hand to shake a nervous construction manager\u2019s hand. Towering cranes and skeletal half-built structures loom in the background under a heavy, cloudy sky. Overcast, diffused light casts soft, even shadows. Waist-up shot, character slightly left of center, eye-level, focusing on the handshake.",
+                },
+                {
+                    n: 10,
+                    img: "https://audio.algrow.online/generated/job_249269_scene_009_1771541928_209837d1.png",
+                    script: "while your crew redirects an entire city contract worth millions into your pocket.",
+                    prompt: "The reference character, a mafia skeleton character, maintaining a pleasant but firm grip on the nervous construction manager\u2019s hand while subtly gesturing with their other hand. In the background, their crew members aggressively push aside official documents on a large blueprint table, replacing them with a new folder. Bright, practical overhead lighting. Waist-up shot, character slightly left of center, eye-level.",
+                },
+                {
+                    n: 11,
+                    img: "https://audio.algrow.online/generated/job_249204_scene_010_1771540479_c96734ce.png",
+                    script: "Year 15, concealier.",
+                    prompt: "The reference character, a mafia skeleton character, meticulously polishing an expensive pair of leather shoes with a focused expression, seated in a dimly lit, richly decorated private office. Dark wood paneling and antique furniture surround them. A large, intricate chessboard with half-played pieces sits on a side table, hinting at strategic depth. Warm, ambient lighting creates a refined atmosphere. Waist-up shot, character slightly left of center, eye-level.",
+                },
+                {
+                    n: 12,
+                    img: "https://audio.algrow.online/generated/job_249207_scene_011_1771540465_e57fa516.png",
+                    script: "You\u2019re sitting across from a rival family in a candle lit wine seller.",
+                    prompt: "The reference character, a mafia skeleton character, slowly swirling a glass of red wine in a cavernous, candle-lit wine cellar, maintaining a calm, intense gaze. Across a heavy wooden table, a rival family\u2019s leader, a man with a thick mustache, glowers back. Wine bottles are stacked on dusty shelves behind them. Flickering candlelight casts dramatic shadows, emphasizing the tension. Waist-up shot, character slightly left of center, eye-level.",
+                },
+                {
+                    n: 13,
+                    img: "https://audio.algrow.online/generated/job_249200_scene_012_1771540514_51e893c0.png",
+                    script: "He refuses your offer.",
+                    prompt: "The reference character, a mafia skeleton character, slowly clenching their hand into a subtle fist under the heavy wooden table, barely perceptible. Across the table, the rival family\u2019s leader defiantly shakes his head, pushing a document away with a dismissive gesture. Intimate candlelight illuminates the scene. Close-up shot on the character\u2019s hand, eye-level, with the rustic wooden table and blurred wine cellar background.",
+                },
+                {
+                    n: 14,
+                    img: "https://audio.algrow.online/generated/job_249206_scene_013_1771540473_9fb6bcf2.png",
+                    script: "2 days later, his entire operation burns to the ground.",
+                    prompt: "The reference character, a mafia skeleton character, leaning against a sturdy railing on a distant hilltop, calmly observing a massive warehouse structure engulfed in a raging inferno. Flames leap high into the pre-dawn darkness, casting an intense orange glow. The character is silhouetted against the dramatic, fiery backdrop. Waist-up shot, character slightly left of center, eye-level.",
+                },
+                {
+                    n: 15,
+                    img: "https://audio.algrow.online/generated/job_249205_scene_014_1771540487_ad5dbf91.png",
+                    script: "Year 20, under boss,",
+                    prompt: "The reference character, a mafia skeleton character, sharpening a fine writing pen with a precise, deliberate motion at a large, imposing dark wood desk. They are in a modern, minimalist office with clean lines. City lights twinkle outside the floor-to-ceiling window. Cool, ambient office lighting contrasts with the warm city lights, creating a sophisticated and powerful mood. Waist-up shot, character slightly left of center, eye-level.",
+                },
+                {
+                    n: 16,
+                    img: "https://audio.algrow.online/generated/job_249208_scene_015_1771540474_123a5d89.png",
+                    script: "your most trusted captain walks into your office wearing a wire.",
+                    prompt: "The reference character, a mafia skeleton character, tapping fingers rhythmically on the armrest of an executive chair, subtly narrowing their eyes. A nervous-looking man in a suit is entering the sleek, modern executive office through an open doorway, his hand subtly touching his lapel, indicating a hidden wire. Crisp, professional office lighting emphasizes the tension. Waist-up shot, character slightly left of center, eye-level.",
+                },
+                {
+                    n: 17,
+                    img: "https://audio.algrow.online/generated/job_249209_scene_016_1771540518_1fa7acdf.png",
+                    script: "You already knew he doesn\u2019t make it to the elevator.",
+                    prompt: "The reference character, a mafia skeleton character, slowly raising a hand to touch their chin, a cold, knowing smirk playing on their lips. In the background, deliberately out of focus, two shadowy figures are forcefully dragging the nervous man away towards a dark, ominous hallway. Dramatic, low-key lighting focused on the character\u2019s face, with the background plunged into deep shadow. Close-up, character slightly left of center, eye-level.",
+                },
+                {
+                    n: 18,
+                    img: "https://audio.algrow.online/generated/job_249268_scene_017_1771541912_9c8ecae6.png",
+                    script: "Year 25, you\u2019re now the boss",
+                    prompt: "The reference character, a mafia skeleton character, confidently gripping the concrete railing of a skyscraper rooftop, surveying a sprawling city at night. Their silhouette is sharp against the vibrant city lights, exuding ultimate power and control. A subtle, ethereal crown-like glow emanates from their head. Dramatic night lighting with the character silhouetted against the glowing city. Waist-up shot, character slightly left of center, eye-level.",
+                },
+            ];
+            var REF_IMG =
+                "https://audio.algrow.online/gemini/images/657bd510-b27c-4fb2-a19e-6b5cdba8eb9e/28532_0_9ec76054.png";
+
+            var DEMO_VIDEOS = {
+                1: "https://audio.algrow.online/generated/video_job_249342_scene_000_1771543117_ca7cac55.mp4",
+                2: "https://audio.algrow.online/generated/video_job_249343_scene_001_1771543131_76609f3c.mp4",
+                3: "https://audio.algrow.online/generated/video_job_249344_scene_002_1771543139_042dd894.mp4",
+                4: "https://audio.algrow.online/generated/video_job_249345_scene_003_1771543113_2aed4683.mp4",
+                5: "https://audio.algrow.online/generated/video_job_249346_scene_004_1771543129_17f41b2a.mp4",
+                6: "https://audio.algrow.online/generated/video_job_249347_scene_005_1771543122_29f0e886.mp4",
+                7: "https://audio.algrow.online/generated/video_job_249348_scene_006_1771543119_be45cdce.mp4",
+                8: "https://audio.algrow.online/generated/video_job_249349_scene_007_1771543116_34104a3d.mp4",
+                9: "https://audio.algrow.online/generated/video_job_249350_scene_008_1771543135_d4f24d0c.mp4",
+                10: "https://audio.algrow.online/generated/video_job_249504_scene_009_1771546441_d45dc10f.mp4",
+                11: "https://audio.algrow.online/generated/video_job_249351_scene_010_1771543137_3bd8a22c.mp4",
+                12: "https://audio.algrow.online/generated/video_job_249353_scene_011_1771543132_369cd05d.mp4",
+                13: "https://audio.algrow.online/generated/video_job_249503_scene_012_1771546437_fe6280e3.mp4",
+                14: "https://audio.algrow.online/generated/video_job_249354_scene_013_1771543128_a8fc9afe.mp4",
+                15: "https://audio.algrow.online/generated/video_job_249355_scene_014_1771543124_dd33c55d.mp4",
+                16: "https://audio.algrow.online/generated/video_job_249357_scene_015_1771543134_a6ffbaa7.mp4",
+                17: "https://audio.algrow.online/generated/video_job_249439_scene_016_1771545539_106a891d.mp4",
+                18: "https://audio.algrow.online/generated/video_job_249502_scene_017_1771546434_27b888fb.mp4",
+            };
+
+            var DEMO_ANIM_PROMPTS = {
+                1: "A push-in camera movement at a determined pace, increasing intensity on the reference character, with subtle light shifts in the opulent room. The reference character sharply yanks the lapel of their suit jacket with one hand, then with a powerful, sweeping motion, brings their other hand up to adjust the cuff, eyes fixed forward with commanding presence. Heavy velvet curtains subtly sway with an imperceptible draft, dust motes dance in the golden shafts of light, and the polished wood paneling gleams as if breathing. Sound effects include: deep ambient room tone, fabric rustling loudly, cigar puff, soft creak of polished wood. No dialogue, no music.",
+                2: "A pan right camera movement at a gritty pace, following the character\u2019s decisive movement, with harsh street light glinting on wet pavement. The reference character sharply pulls up their suit lapels with both hands, then thrusts their chest forward with a confident, almost challenging posture, taking a powerful step forward and scanning the alley with an abrupt head turn. Steam billows vigorously from a nearby grate, trash bags rustle violently as if disturbed by wind, and the distant street lamp flickers erratically, casting long, jumping shadows. Sound effects include: distant city hum, street ambiance with distant traffic, fabric rustle, cigar puff, steam hissing, trash bag crinkling. No dialogue, no music.",
+                3: "A truck left camera movement at a swift speed, focusing on the transaction, with neon light reflecting off wet ground. The reference character snatches the envelope from the other man\u2019s outstretched hand with a forceful grip, then rips it open with a sharp, tearing motion, pulling out a wad of cash and fanning it out to inspect it with quick, decisive movements. The other man\u2019s arm recoils quickly, the dumpster lid clangs loudly as if disturbed, and distant neon signs pulse with a vibrant, rhythmic hum. Sound effects include: paper tearing, cash rustling loudly, firm grip sound, distant city hum, dumpster lid clanging. No dialogue, no music.",
+                4: "A pull-back camera movement at a dramatic reveal pace, showing the boss\u2019s reaction, with warm office lighting. The reference character slams the stack of envelopes onto the desk with a heavy thud, causing the papers to bounce, then pulls their hand back sharply, making a decisive gesture towards the boss with an open palm. The boss leans back abruptly in his chair, eyes widening slightly, and the stack of papers on the desk shudders from the impact, scattering a few loose sheets that flutter to the side. Sound effects include: papers thudding heavily, wood desk creaking, sharp exhale from character, subtle office ambiance. No dialogue, no music.",
+                5: "An orbit clockwise camera movement at a smooth cinematic pace, circling the reference character as they are inducted, with light shifting across the scene. The reference character extends their hand with a firm, confident gesture to receive the object, then immediately clenches their entire hand into a tight fist, pulling it close to their chest with a powerful, possessive motion. The surrounding men in suits stiffen slightly, their gazes fixed intently, and the rich curtains behind them subtly ripple as if from a sudden shift in air pressure. Sound effects include: soft murmurs from onlookers, fabric rustling, subtle metallic clink, cigar puff. No dialogue, no music.",
+                6: "A crane/boom down camera movement at a quick descent pace, revealing the high-stakes game, with a pulsating neon glow. The reference character sharply slaps a card down on the table with a decisive flick of the wrist, then sweeps their entire arm across the table, forcefully raking in a towering stack of chips and cash with a powerful, confident motion. Thick, swirling smoke billows intensely across the table, neon lights pulse with an erratic rhythm, and poker chips clatter loudly as they are gathered, bouncing slightly from the force. Sound effects include: cards slapping loudly, poker chips clattering, bottles clinking, heavy smoke machine hum, distant murmuring, cash rustling. No dialogue, no music.",
+                7: "A tracking shot camera movement, following the character\u2019s aggressive action, with a dark and foreboding atmosphere. The reference character kicks the heavy metal door wide open with a forceful swing of their leg, then steps back and gestures ominously with a full arm extension, before slamming the door shut with a powerful, echoing thud, turning their body completely. The dark figure in the doorway recoils sharply, the rusty metal door creaks loudly on its hinges, and shadows flicker wildly as the door slams, plunging the entrance into darkness. Sound effects include: heavy metal door creaking, loud clang as door slams shut, distant muffled grunt, footsteps echoing. No dialogue, no music.",
+                8: "A pedestal up camera movement at a slow reveal pace, emphasizing the character\u2019s elevation, with city lights sprawling below. The reference character sharply buttons their suit jacket with a decisive snap, then thrusts their chest out, placing both hands firmly on their hips, and slowly turns their entire body to gaze commandingly out the window at the sprawling city below. The city lights below twinkle and shift as if alive, clouds drift slowly across the skyline, and subtle reflections ripple across the vast glass window. Sound effects include: fabric rustling sharply, distant city hum, subtle wind against the building, deep inhale from character. No dialogue, no music.",
+                9: "A pan right camera movement at a decisive speed, following the character\u2019s powerful entrance, with gritty construction site ambiance. The reference character bursts out of the black car with a powerful, long stride, then extends their arm for a firm, crushing handshake with the worker, pulling the worker\u2019s arm towards them before releasing with a sharp snap. The car door slams shut with a heavy thud, construction cranes in the distance slowly pivot and creak, and dust swirls violently around their feet from the impact of their stride. Sound effects include: car door slamming loudly, heavy footfalls on mud, firm handshake sound, distant construction machinery grinding, dust swirling. No dialogue, no music.",
+                10: "A push-in camera movement at an intense focus pace, capturing the conspiratorial exchange, with bright office lighting. The reference character grips the construction worker\u2019s hand in a viselike handshake, then leans in abruptly, pointing a forceful, jabbing finger at a specific spot on the blueprint, while simultaneously pulling the worker closer with their other hand. The surrounding men intensely turn pages with loud rustles, blueprints on the table flutter violently from the character\u2019s forceful gesture, and coffee cups jiggle precariously on the table edge. Sound effects include: firm handshake grip, loud paper rustling, pencils scratching quickly, low, urgent murmuring, coffee cups clinking. No dialogue, no music.",
+                11: "An orbit clockwise camera movement at a smooth cinematic pace, circling the character, with rich study ambiance. The reference character vigorously brushes the shoe with powerful, sweeping motions, then lifts the polished shoe high to inspect it with a critical, appraising eye, rotating it slowly and deliberately with a satisfied nod. Subtle light shifts across the rich wooden study, casting moving shadows, and the chessboard pieces gleam softly as if freshly polished themselves. Sound effects include: shoe brush scrubbing vigorously, leather creaking, soft room ambiance, cigar puff. No dialogue, no music.",
+                12: "A pan left camera movement at a deliberate speed, emphasizing the character\u2019s calm intensity, with flickering candlelight. The reference character slowly raises the wine glass with a deliberate, challenging motion, takes a long, contemplative sip, eyes fixed on the rival, then slams the glass down on the table with a sharp, resonant thud. Candles flicker intensely, casting dancing shadows across the wine bottles on the shelves, and the rival family member shifts uncomfortably in his seat. Sound effects include: wine sloshing in glass, glass clinking on table, sharp thud of glass, distant cellar ambiance, crackling candles. No dialogue, no music.",
+                13: "A crash zoom camera movement, rapid and impactful, focusing on the character\u2019s rage, with violent candle flickers. The reference character slams both fists down on the table with a loud, resounding thud, then slowly clenches them into tight, shaking fists, knuckles visibly straining, with a deep, frustrated growl emanating from their throat. The rival recoils sharply, the document flutters violently from the impact, and the candles flicker erratically, almost extinguishing, casting wild, dancing shadows. Sound effects include: loud table thud, paper rustling violently, sharp intake of breath from character, low growl, crackling candles. No dialogue, no music.",
+                14: "A pull-back camera movement at an ominous pace, revealing the full extent of the destruction, with the orange glow of the inferno. The reference character grips the railing with intense, straining hands, then slowly turns their entire body to face the massive inferno, a subtle, cold smile spreading across their face as their body sways slightly with the heat and distant explosions. Flames roar and surge upward with terrifying intensity, thick black smoke billows violently into the sky, embers fly upward like angry sparks, and the metal railing visibly rusts and flakes from the heat. Sound effects include: roaring fire, crackling wood and debris, distant explosions, metal groaning, distant sirens. No dialogue, no music.",
+                15: "A push-in camera movement at an intimate pace, focusing on the character\u2019s ritual, with twinkling city lights in the background. The reference character snaps the cigar cutter shut with a sharp, decisive click, then lifts the cigar to their mouth with a flourish, taking a deep, satisfied puff, and exhaling a thick cloud of smoke with a powerful exhalation. The city lights outside the window twinkle and subtly shift, and the office space hums with a low, ambient energy. Sound effects include: sharp click of cigar cutter, cigar puffing loudly, exhale of smoke, distant city sounds, soft office hum. No dialogue, no music.",
+                16: "A pan right camera movement at a slow reveal pace, building tension as the captain enters, with an office door creaking. The reference character slowly swivels their entire chair around with a deliberate, creaking motion, cigar clamped in jaw, eyes narrowing to slits as they fix their gaze on the entering captain, making a subtle, dismissive hand gesture. The office door swings open slowly with a soft creak, the captain stiffens noticeably as he enters, and the ambient office sounds seem to quiet dramatically. Sound effects include: chair creaking loudly, door opening slowly, distant footsteps, fabric rustling, cigar puff, sharp intake of breath from character. No dialogue, no music.",
+                17: "A crash zoom camera movement, sudden and violent, capturing the character\u2019s cold reaction, with muffled sounds of struggle. The reference character slowly raises a hand to their chin in a thoughtful gesture, then sharply drops it with a loud slap against their leg, turning their head with a decisive, cold expression, as if giving an unseen, ruthless command, their body tensing. In the blurry background, the figures struggle violently, muffled grunts and thuds can be heard, and shadows flicker rapidly as movement intensifies. Sound effects include: muffled grunts and struggles, sharp thud of hand on leg, sharp intake of breath from character, distant thud. No dialogue, no music.",
+                18: "A pedestal up camera movement at a slow orbit/arc pace, revealing the character\u2019s supreme control, with pulsating holographic lights. The reference character sweeps their hands with a powerful, commanding gesture over the holographic city model, then slowly raises their head, cigar in mouth, eyes scanning the real city outside with a sense of ultimate, unchallenged power, as they take a deep, satisfied puff. The holographic city lights pulse and shift with vibrant energy, the real city lights outside twinkle with rhythmic patterns, and the glowing crown above the character\u2019s head pulsates with an ethereal light. Sound effects include: soft hum of holographic display, distant city sounds, subtle ambient office tone, cigar puff, low, guttural chuckle from character. No dialogue, no music.",
+            };
+
+            (function () {
+                // Render step 2 detected scenes list
+                var scenesList = document.getElementById("demoScenesList");
+                if (scenesList) {
+                    DEMO_SCENES.forEach(function (s) {
+                        scenesList.insertAdjacentHTML(
+                            "beforeend",
+                            '<div class="scene-card">' +
+                                '<div class="scene-header">' +
+                                '<div class="scene-drag-handle" title="Drag to reorder"><i class="fas fa-grip-vertical"></i></div>' +
+                                '<div class="scene-number">' +
+                                s.n +
+                                "</div>" +
+                                '<div class="scene-title">Scene ' +
+                                s.n +
+                                "</div>" +
+                                '<button class="scene-insert-btn" title="Insert scene above"><i class="fas fa-plus"></i></button>' +
+                                '<button class="scene-delete-btn" title="Delete scene"><i class="fas fa-trash-alt"></i></button>' +
+                                "</div>" +
+                                '<div class="scene-content">' +
+                                '<div class="scene-field">' +
+                                '<div class="scene-field-label">Script</div>' +
+                                '<textarea class="scene-edit-textarea" rows="2" readonly>' +
+                                s.script +
+                                "</textarea>" +
+                                "</div>" +
+                                "</div>" +
+                                "</div>",
+                        );
+                    });
+                }
+
+                var grid = document.getElementById("demoSceneCardsGrid");
+                if (!grid) return;
+                DEMO_SCENES.forEach(function (s) {
+                    var hasImg = !!s.img;
+                    var imgHtml = hasImg
+                        ? '<img src="' +
+                          s.img +
+                          '" alt="Scene ' +
+                          s.n +
+                          '" style="cursor:pointer;" onclick="openLightbox(\'' +
+                          s.img +
+                          "')\">" +
+                          '<div class="scene-card-image-actions">' +
+                          '<a class="scene-img-btn" href="' +
+                          s.img +
+                          '" target="_blank" title="Download"><i class="fas fa-download"></i></a>' +
+                          '<span class="scene-img-btn" onclick="openLightbox(\'' +
+                          s.img +
+                          '\')" title="Fullscreen"><i class="fas fa-up-right-and-down-left-from-center"></i></span>' +
+                          "</div>"
+                        : '<div class="scene-card-placeholder"><div class="loading-spinner" style="width:32px;height:32px;border-width:3px;"></div><div style="color:var(--text-secondary);font-size:12px;margin-top:12px;">Generating...</div></div>';
+
+                    grid.insertAdjacentHTML(
+                        "beforeend",
+                        '<div class="scene-card-item ' +
+                            (hasImg ? "generated" : "generating") +
+                            '">' +
+                            '<div class="scene-card-image">' +
+                            imgHtml +
+                            "</div>" +
+                            '<div class="scene-card-body">' +
+                            '<div class="scene-card-header"><div class="scene-card-number">' +
+                            s.n +
+                            '</div><div class="scene-card-title">Scene ' +
+                            s.n +
+                            "</div></div>" +
+                            '<div class="scene-card-script">' +
+                            s.script +
+                            "</div>" +
+                            '<div class="scene-card-prompt" style="cursor:pointer;" title="Click to view/edit prompt">' +
+                            '<div class="scene-card-prompt-header"><span class="scene-card-prompt-label">Image Prompt</span><span class="scene-card-prompt-edit"><i class="fas fa-pen"></i> Edit</span></div>' +
+                            '<div class="scene-card-prompt-text">' +
+                            s.prompt +
+                            "</div>" +
+                            "</div>" +
+                            '<div class="scene-card-actions">' +
+                            '<div class="scene-card-ref-option">' +
+                            '<label class="ref-checkbox-label"><input type="checkbox" class="ref-checkbox"><span>Edit this specific image</span></label>' +
+                            "</div>" +
+                            '<div class="scene-card-ref-row">' +
+                            '<img class="scene-card-ref-thumb" src="' +
+                            REF_IMG +
+                            '">' +
+                            '<span class="scene-card-ref-label">All refs (1)</span>' +
+                            '<span class="scene-card-ref-change-btn"><i class="fas fa-exchange-alt"></i></span>' +
+                            "</div>" +
+                            '<div class="scene-card-model-row"><div class="scene-card-model-picker"><div class="scene-card-model-trigger" onclick="event.stopPropagation();this.closest(\'.scene-card-model-picker\').classList.toggle(\'open\');">' +
+                            "<span>Nano Banana Pro (3 credits)</span>" +
+                            '<i class="fas fa-chevron-down"></i>' +
+                            '</div><div class="scene-card-model-dropdown">' +
+                            '<div class="scene-card-model-option selected" onclick="this.closest(\'.scene-card-model-picker\').classList.remove(\'open\');"><span>Nano Banana Pro (3 credits)</span><i class="fas fa-check model-check"></i></div>' +
+                            '<div class="scene-card-model-option" onclick="this.closest(\'.scene-card-model-picker\').classList.remove(\'open\');"><span>Seedream 3.0 (3 credits)</span><i class="fas fa-check model-check"></i></div>' +
+                            '<div class="scene-card-model-option" onclick="this.closest(\'.scene-card-model-picker\').classList.remove(\'open\');"><span>GPT Image 1 (3 credits)</span><i class="fas fa-check model-check"></i></div>' +
+                            "</div></div></div>" +
+                            '<div style="display:flex;gap:8px;">' +
+                            '<button class="btn btn-primary" style="flex:1;">Regenerate <i class="fas fa-coins" style="margin-left:6px;"></i> 3</button>' +
+                            '<button class="btn btn-secondary"><i class="fas fa-upload"></i> Upload Image</button>' +
+                            "</div>" +
+                            "</div>" +
+                            "</div>" +
+                            "</div>",
+                    );
+                });
+
+                // Render animation cards for step 4
+                var animGrid = document.getElementById(
+                    "demoAnimationCardsGrid",
+                );
+                if (!animGrid) return;
+                DEMO_SCENES.forEach(function (s, idx) {
+                    var vid = DEMO_VIDEOS[s.n];
+                    var srcImg = s.img;
+                    var animPrompt = DEMO_ANIM_PROMPTS[s.n] || s.prompt;
+
+                    var sourceHtml = srcImg
+                        ? '<img src="' + srcImg + '" alt="Scene ' + s.n + '">'
+                        : '<div class="animation-card-video-placeholder"><i class="fas fa-image"></i><span>No image</span></div>';
+
+                    var videoHtml = vid
+                        ? '<video src="' +
+                          vid +
+                          '" controls loop muted playsinline style="width:100%;height:100%;object-fit:cover;"></video>' +
+                          '<button class="scene-card-download-btn" onclick="event.stopPropagation();window.open(\'' +
+                          vid +
+                          '\',\'_blank\');" title="Download video"><i class="fas fa-download"></i></button>'
+                        : '<div class="animation-card-video-placeholder"><i class="fas fa-film"></i><span>Video</span></div>';
+
+                    animGrid.insertAdjacentHTML(
+                        "beforeend",
+                        '<div class="animation-card-item' +
+                            (vid ? " generated" : "") +
+                            '">' +
+                            '<div class="animation-card-media" style="position:relative;">' +
+                            '<div class="animation-card-source"><div class="animation-card-label">Image</div>' +
+                            sourceHtml +
+                            "</div>" +
+                            '<div class="animation-card-video"><div class="animation-card-label">Video</div>' +
+                            videoHtml +
+                            "</div>" +
+                            "</div>" +
+                            '<div class="animation-card-body">' +
+                            '<div class="scene-card-header">' +
+                            '<div class="scene-card-number">' +
+                            s.n +
+                            "</div>" +
+                            '<div class="scene-card-title">Scene ' +
+                            s.n +
+                            "</div>" +
+                            '<button class="scene-card-download-btn" style="position:static;margin-left:auto;opacity:1;" title="Download animation prompt"><i class="fas fa-file-alt"></i></button>' +
+                            "</div>" +
+                            '<div class="scene-card-script">' +
+                            s.script +
+                            "</div>" +
+                            '<div class="scene-card-prompt" style="cursor:pointer;" title="Click to view/edit prompt">' +
+                            '<div class="scene-card-prompt-header">' +
+                            '<span class="scene-card-prompt-label">Animation Prompt</span>' +
+                            '<span class="scene-card-prompt-edit"><i class="fas fa-pen"></i> Edit</span>' +
+                            "</div>" +
+                            '<div class="scene-card-prompt-text">' +
+                            animPrompt +
+                            "</div>" +
+                            "</div>" +
+                            '<div class="scene-card-model-row" style="margin-top:8px;">' +
+                            '<div class="scene-card-model-picker" id="videoModelPicker' +
+                            idx +
+                            '">' +
+                            "<div class=\"scene-card-model-trigger\" onclick=\"event.stopPropagation();this.closest('.scene-card-model-picker').classList.toggle('open');\">" +
+                            "<span>Grok 6s (Audio) (3 credits)</span>" +
+                            '<i class="fas fa-chevron-down"></i>' +
+                            "</div>" +
+                            '<div class="scene-card-model-dropdown">' +
+                            '<div class="scene-card-model-option" onclick="this.closest(\'.scene-card-model-picker\').classList.remove(\'open\');"><span>Kling 5s (No Audio) (8 credits)</span><i class="fas fa-check model-check"></i></div>' +
+                            '<div class="scene-card-model-option" onclick="this.closest(\'.scene-card-model-picker\').classList.remove(\'open\');"><span>Kling 5s (Audio) (15 credits)</span><i class="fas fa-check model-check"></i></div>' +
+                            '<div class="scene-card-model-option" onclick="this.closest(\'.scene-card-model-picker\').classList.remove(\'open\');"><span>Kling 10s (No Audio) (15 credits)</span><i class="fas fa-check model-check"></i></div>' +
+                            '<div class="scene-card-model-option" onclick="this.closest(\'.scene-card-model-picker\').classList.remove(\'open\');"><span>Kling 10s (Audio) (30 credits)</span><i class="fas fa-check model-check"></i></div>' +
+                            '<div class="scene-card-model-option selected" onclick="this.closest(\'.scene-card-model-picker\').classList.remove(\'open\');"><span>Grok 6s (Audio) (3 credits)</span><i class="fas fa-check model-check"></i></div>' +
+                            '<div class="scene-card-model-option" onclick="this.closest(\'.scene-card-model-picker\').classList.remove(\'open\');"><span>Veo 3.1 Fast (~8s) (4 credits)</span><i class="fas fa-check model-check"></i></div>' +
+                            "</div>" +
+                            "</div>" +
+                            "</div>" +
+                            "</div>" +
+                            "</div>",
+                    );
+                });
+            })();
+        </script>
+        <script src="/static/ai_video_generator/ai_video_generator.js"></script>
+        <script>
+            // Scroll reveal — triggers fadeInUp keyframe animations on scroll
+            (function() {
+                var sections = document.querySelectorAll('.reveal-section');
+                if (!sections.length) return;
+                var observer = new IntersectionObserver(function(entries) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('in-view');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+                sections.forEach(function(el) { observer.observe(el); });
+            })();
+
+            // Cost calculator
+            (function() {
+                var slider = document.getElementById('calcScenesSlider');
+                var imgModel = document.getElementById('calcImageModel');
+                var vidModel = document.getElementById('calcVideoModel');
+                if (!slider) return;
+
+                var PRICE_PER_CREDIT = 27.99 / 750;
+
+                function getSelected(container) {
+                    var sel = container.querySelector('.calc-tab.active');
+                    return sel ? parseInt(sel.getAttribute('data-credits'), 10) : 1;
+                }
+
+                function update() {
+                    var scenes = parseInt(slider.value, 10);
+                    var imgCr = getSelected(imgModel);
+                    var vidCr = getSelected(vidModel);
+                    var total = scenes * (imgCr + vidCr);
+                    var price = total * PRICE_PER_CREDIT;
+
+                    document.getElementById('calcScenesValue').textContent = scenes;
+                    document.getElementById('calcPriceDollar').textContent = '$' + price.toFixed(2);
+                    document.getElementById('calcPriceCredits').textContent = total + ' credits';
+                }
+
+                slider.addEventListener('input', update);
+
+                [imgModel, vidModel].forEach(function(container) {
+                    container.addEventListener('click', function(e) {
+                        var tab = e.target.closest('.calc-tab');
+                        if (!tab) return;
+                        container.querySelectorAll('.calc-tab').forEach(function(t) { t.classList.remove('active'); });
+                        tab.classList.add('active');
+                        update();
+                    });
+                });
+
+                update();
+            })();
+
+            // Showcase cards are now <a> links — no video JS needed
+
+            // Video modal
+            function openVideoModal(src) {
+                var modal = document.getElementById('videoModal');
+                var player = document.getElementById('videoModalPlayer');
+                player.src = src;
+                modal.style.display = 'flex';
+            }
+            function closeVideoModal(e) {
+                var modal = document.getElementById('videoModal');
+                var player = document.getElementById('videoModalPlayer');
+                player.pause();
+                player.src = '';
+                modal.style.display = 'none';
+            }
+        </script>
+    </body>
+</html>

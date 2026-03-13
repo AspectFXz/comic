@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(tree \"C:\\\\Users\\\\Sam\\\\Desktop\\\\comicniche\" -L 3 -I '__pycache__' 2>/dev/null || find \"C:\\\\Users\\\\Sam\\\\Desktop\\\\comicniche\" -not -path '*__pycache__*' | head -60n)",
+      "Bash(curl -s http://127.0.0.1:5000/api/project/video1 2>&1 | python -c \"\nimport sys,json\nd=json.load\\(sys.stdin\\)\nprint\\('Characters:'\\)\nfor c in d['characters']:\n    print\\(f'  {c[\\\\\"character_name\\\\\"]}: {c[\\\\\"line_count\\\\\"]} lines'\\)\nprint\\(f'Pages: {len\\(d[\\\\\"pages\\\\\"]\\)}'\\)\nfor p in d['pages']:\n    print\\(f'  Page {p[\\\\\"page_number\\\\\"]}: {len\\(p[\\\\\"lines\\\\\"]\\)} lines'\\)\n\")"
+    ]
+  }
+}

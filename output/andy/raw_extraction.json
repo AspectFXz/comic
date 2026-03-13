@@ -1,0 +1,307 @@
+{
+  "characters": {
+    "BARBER": "Young man with short dark hair, medium skin, wearing a brown T\u2011shirt and jeans; holds clippers or scissors while cutting hair.",
+    "CUSTOMER": "Light\u2011skinned man, initially in gray T\u2011shirt and red beanie, later in blue barber cape; scruffy facial hair and expressive eyes.",
+    "RED_IMP": "Small red, devilish inner\u2011voice creature with sharp teeth and yellow eyes, often angry or mocking.",
+    "BLUE_IMP": "Small blue, friendly inner\u2011voice creature with smooth features, usually calm and reassuring."
+  },
+  "pages": [
+    {
+      "page_number": 1,
+      "has_dialogue": true,
+      "visual_note": null,
+      "lines": [
+        {
+          "character": "BARBER",
+          "dialogue": "Take a seat.",
+          "emotion": "professional and casual",
+          "emotion_shift": null,
+          "shift_at": null,
+          "bold_words": [],
+          "notes": "Spoken while gesturing to the chair, welcoming tone."
+        },
+        {
+          "character": "BARBER",
+          "dialogue": "So, what kinda **haircut** do you want?",
+          "emotion": "friendly and curious",
+          "emotion_shift": null,
+          "shift_at": null,
+          "bold_words": [
+            "haircut"
+          ],
+          "notes": "Light small talk as he starts the appointment."
+        },
+        {
+          "character": "CUSTOMER",
+          "dialogue": "Here, I've got some **pictures**.",
+          "emotion": "eager and cheerful",
+          "emotion_shift": null,
+          "shift_at": null,
+          "bold_words": [
+            "pictures"
+          ],
+          "notes": "Smiling as he shows his phone to explain the style."
+        }
+      ]
+    },
+    {
+      "page_number": 2,
+      "has_dialogue": true,
+      "visual_note": null,
+      "lines": [
+        {
+          "character": "CUSTOMER",
+          "dialogue": "Something like this!",
+          "emotion": "enthusiastic",
+          "emotion_shift": null,
+          "shift_at": null,
+          "bold_words": [],
+          "notes": "Spoken off\u2011panel as his hand holds up the phone with hairstyle reference photos."
+        }
+      ]
+    },
+    {
+      "page_number": 3,
+      "has_dialogue": true,
+      "visual_note": null,
+      "lines": [
+        {
+          "character": "CUSTOMER",
+          "dialogue": "That's pretty much the look I'm going for.",
+          "emotion": "optimistic and satisfied",
+          "emotion_shift": null,
+          "shift_at": null,
+          "bold_words": [],
+          "notes": "He looks pleased, imagining the final result."
+        },
+        {
+          "character": "BARBER",
+          "dialogue": "Uh... sure, man. I'll do my best.",
+          "emotion": "nervous and uncertain",
+          "emotion_shift": null,
+          "shift_at": null,
+          "bold_words": [],
+          "notes": "Awkward, hesitant delivery as he studies the ambitious haircut reference."
+        }
+      ]
+    },
+    {
+      "page_number": 4,
+      "has_dialogue": true,
+      "visual_note": null,
+      "lines": [
+        {
+          "character": "BARBER",
+          "dialogue": "What do you do for **work**, man?",
+          "emotion": "chatty and mildly anxious",
+          "emotion_shift": null,
+          "shift_at": null,
+          "bold_words": [
+            "work"
+          ],
+          "notes": "Trying to make small talk while carefully cutting."
+        },
+        {
+          "character": "CUSTOMER",
+          "dialogue": "I'm a **comic artist**.",
+          "emotion": "matter\u2011of\u2011fact and a little proud",
+          "emotion_shift": null,
+          "shift_at": null,
+          "bold_words": [
+            "comic artist"
+          ],
+          "notes": "Straightforward explanation of his job."
+        },
+        {
+          "character": "BARBER",
+          "dialogue": "Oh, that's cool!",
+          "emotion": "genuinely impressed",
+          "emotion_shift": null,
+          "shift_at": null,
+          "bold_words": [],
+          "notes": "Quick, upbeat response."
+        },
+        {
+          "character": "CUSTOMER",
+          "dialogue": "Yeah, I like it a lot! What about **you**?",
+          "emotion": "friendly and engaging",
+          "emotion_shift": null,
+          "shift_at": null,
+          "bold_words": [
+            "you"
+          ],
+          "notes": "Turns the conversation back to the barber with open interest."
+        }
+      ]
+    },
+    {
+      "page_number": 5,
+      "has_dialogue": true,
+      "visual_note": null,
+      "lines": [
+        {
+          "character": "BARBER",
+          "dialogue": "I cut hair... I'm a **barber**.",
+          "emotion": "slightly confused and self\u2011conscious",
+          "emotion_shift": null,
+          "shift_at": null,
+          "bold_words": [
+            "barber"
+          ],
+          "notes": "He realizes he's answering an obvious question, trailing off before clarifying."
+        },
+        {
+          "character": "CUSTOMER",
+          "dialogue": "Oh, right! **Duh!**",
+          "emotion": "self\u2011deprecating and embarrassed",
+          "emotion_shift": null,
+          "shift_at": null,
+          "bold_words": [
+            "Duh!"
+          ],
+          "notes": "He chastises himself for asking something obvious."
+        },
+        {
+          "character": "CUSTOMER",
+          "dialogue": "You can go ahead and cut off my tongue with those scissors.",
+          "emotion": "darkly joking and ashamed",
+          "emotion_shift": null,
+          "shift_at": null,
+          "bold_words": [],
+          "notes": "Internal monologue style; sarcastic exaggeration of his embarrassment."
+        },
+        {
+          "character": "BARBER",
+          "dialogue": "Huh? What was that?",
+          "emotion": "puzzled",
+          "emotion_shift": null,
+          "shift_at": null,
+          "bold_words": [],
+          "notes": "He hears the customer mutter and asks for clarification."
+        },
+        {
+          "character": "CUSTOMER",
+          "dialogue": "Nothing.",
+          "emotion": "sheepish and dismissive",
+          "emotion_shift": null,
+          "shift_at": null,
+          "bold_words": [],
+          "notes": "Quickly downplays what he just said, trying to move on."
+        }
+      ]
+    },
+    {
+      "page_number": 6,
+      "has_dialogue": true,
+      "visual_note": null,
+      "lines": [
+        {
+          "character": "RED_IMP",
+          "dialogue": "**KNOCK KNOCK!**",
+          "emotion": "loud and aggressively taunting",
+          "emotion_shift": null,
+          "shift_at": null,
+          "bold_words": [
+            "KNOCK",
+            "KNOCK!"
+          ],
+          "notes": "Yelled like an alarm as it pounds on the customer's head; represents intrusive thoughts."
+        },
+        {
+          "character": "RED_IMP",
+          "dialogue": "Anyone home? What kinda **stupid question** was that?!",
+          "emotion": "scornful and ranting",
+          "emotion_shift": null,
+          "shift_at": null,
+          "bold_words": [
+            "stupid question"
+          ],
+          "notes": "Berates the customer for his earlier comment to the barber."
+        }
+      ]
+    },
+    {
+      "page_number": 7,
+      "has_dialogue": true,
+      "visual_note": null,
+      "lines": [
+        {
+          "character": "BLUE_IMP",
+          "dialogue": "Hey! **Not nice.** We don't talk like that anymore, remember?",
+          "emotion": "firm but caring",
+          "emotion_shift": null,
+          "shift_at": null,
+          "bold_words": [
+            "Not nice."
+          ],
+          "notes": "Scolds the red imp, enforcing healthier self\u2011talk rules."
+        }
+      ]
+    },
+    {
+      "page_number": 8,
+      "has_dialogue": true,
+      "visual_note": null,
+      "lines": [
+        {
+          "character": "BLUE_IMP",
+          "dialogue": "Everyone says **dumb-dumb stupid idiot things** on occasion.",
+          "emotion": "reassuring and lightly humorous",
+          "emotion_shift": null,
+          "shift_at": null,
+          "bold_words": [
+            "dumb-dumb stupid idiot things"
+          ],
+          "notes": "Uses exaggerated wording to normalize making social mistakes."
+        },
+        {
+          "character": "BLUE_IMP",
+          "dialogue": "It happens to the best of us.",
+          "emotion": "comforting",
+          "emotion_shift": null,
+          "shift_at": null,
+          "bold_words": [],
+          "notes": "Gentle reassurance while patting the customer's head."
+        }
+      ]
+    },
+    {
+      "page_number": 9,
+      "has_dialogue": true,
+      "visual_note": null,
+      "lines": [
+        {
+          "character": "BARBER",
+          "dialogue": "Hey man, can you move your **symbolic manifestations of inner-dialogue** outta the way?",
+          "emotion": "mildly annoyed but humorous",
+          "emotion_shift": null,
+          "shift_at": null,
+          "bold_words": [
+            "symbolic",
+            "manifestations",
+            "inner-dialogue"
+          ],
+          "notes": "He acknowledges the visible imps with a deadpan, jokey complaint."
+        },
+        {
+          "character": "BARBER",
+          "dialogue": "I can't see what I'm working on.",
+          "emotion": "slightly exasperated",
+          "emotion_shift": null,
+          "shift_at": null,
+          "bold_words": [],
+          "notes": "Continuing the joke while still focused on the haircut."
+        },
+        {
+          "character": "CUSTOMER",
+          "dialogue": "Oh, sure. Sorry.",
+          "emotion": "apologetic and flustered",
+          "emotion_shift": null,
+          "shift_at": null,
+          "bold_words": [],
+          "notes": "He raises his hand to move the imps, embarrassed again."
+        }
+      ]
+    }
+  ]
+}

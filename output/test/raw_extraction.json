@@ -1,0 +1,303 @@
+{
+  "characters": {
+    "MOM": "Blonde woman with bob haircut, green coat, purple scarf; caring but increasingly worried expression.",
+    "BOY": "Young boy in blue winter coat with hood and pom\u2011pom hat; round eyes, expressive face.",
+    "WOMAN_RED_HAT": "Adult woman with long dark hair, red beanie, blue jacket, red mittens; starts out friendly, becomes angry and vindictive."
+  },
+  "pages": [
+    {
+      "page_number": 1,
+      "has_dialogue": true,
+      "visual_note": null,
+      "lines": [
+        {
+          "character": "MOM",
+          "dialogue": "What do you see, honey?",
+          "emotion": "gently encouraging",
+          "emotion_shift": null,
+          "shift_at": null,
+          "bold_words": [],
+          "notes": "Soft, upbeat tone as she prompts her child."
+        },
+        {
+          "character": "BOY",
+          "dialogue": "Uhhh... Blue car!",
+          "emotion": "hesitant then proud",
+          "emotion_shift": "pleased",
+          "shift_at": "Blue car!",
+          "bold_words": [],
+          "notes": "Starts unsure with the pause, then gains confidence when naming the object."
+        },
+        {
+          "character": "MOM",
+          "dialogue": "Good job! What else?",
+          "emotion": "cheerfully encouraging",
+          "emotion_shift": null,
+          "shift_at": null,
+          "bold_words": [],
+          "notes": "Praising and prodding for more answers."
+        },
+        {
+          "character": "BOY",
+          "dialogue": "Beard man!",
+          "emotion": "excited",
+          "emotion_shift": null,
+          "shift_at": null,
+          "bold_words": [],
+          "notes": "Blurts it out while pointing; amused and energetic."
+        },
+        {
+          "character": "MOM",
+          "dialogue": "Good job! He **DOES** have a beard.",
+          "emotion": "lightly amused, affirming",
+          "emotion_shift": null,
+          "shift_at": null,
+          "bold_words": [
+            "DOES"
+          ],
+          "notes": "Emphasizes 'DOES' playfully as she reinforces the observation."
+        },
+        {
+          "character": "WOMAN_RED_HAT",
+          "dialogue": "Awww. That's cute.",
+          "emotion": "touched, mildly amused",
+          "emotion_shift": null,
+          "shift_at": null,
+          "bold_words": [],
+          "notes": "Soft, fond reaction while watching from the bench."
+        }
+      ]
+    },
+    {
+      "page_number": 2,
+      "has_dialogue": true,
+      "visual_note": null,
+      "lines": [
+        {
+          "character": "MOM",
+          "dialogue": "What else do you see?",
+          "emotion": "encouraging",
+          "emotion_shift": null,
+          "shift_at": null,
+          "bold_words": [],
+          "notes": "Continuing the game, warm tone."
+        },
+        {
+          "character": "BOY",
+          "dialogue": "Red hat!",
+          "emotion": "confident, cheerful",
+          "emotion_shift": null,
+          "shift_at": null,
+          "bold_words": [],
+          "notes": "Calls it out eagerly while pointing at the woman."
+        },
+        {
+          "character": "WOMAN_RED_HAT",
+          "dialogue": "**Oh!** Haha, yeah! Good job kid!",
+          "emotion": "pleasantly surprised then friendly",
+          "emotion_shift": "warmly approving",
+          "shift_at": "Haha, yeah!",
+          "bold_words": [
+            "Oh!"
+          ],
+          "notes": "Startled but quickly laughs it off and encourages him."
+        },
+        {
+          "character": "BOY",
+          "dialogue": "Messy hair!",
+          "emotion": "matter-of-fact, oblivious",
+          "emotion_shift": null,
+          "shift_at": null,
+          "bold_words": [],
+          "notes": "Still playing the game, unaware it's insulting."
+        },
+        {
+          "character": "WOMAN_RED_HAT",
+          "dialogue": "What?",
+          "emotion": "taken aback",
+          "emotion_shift": null,
+          "shift_at": null,
+          "bold_words": [],
+          "notes": "Confused and slightly offended."
+        },
+        {
+          "character": "BOY",
+          "dialogue": "Pointy witch nose!",
+          "emotion": "bluntly descriptive, teasing",
+          "emotion_shift": null,
+          "shift_at": null,
+          "bold_words": [],
+          "notes": "Says it with unfiltered honesty; doesn\u2019t realize the cruelty."
+        },
+        {
+          "character": "WOMAN_RED_HAT",
+          "dialogue": "**Hey!** That's rude!",
+          "emotion": "offended and scolding",
+          "emotion_shift": null,
+          "shift_at": null,
+          "bold_words": [
+            "Hey!"
+          ],
+          "notes": "Raises her voice at 'Hey!' while chastising him."
+        }
+      ]
+    },
+    {
+      "page_number": 3,
+      "has_dialogue": true,
+      "visual_note": null,
+      "lines": [
+        {
+          "character": "WOMAN_RED_HAT",
+          "dialogue": "How would you like it if I made fun of **you**?\nWhat are you, **five**?\nYou probably don't even know **basic math**.",
+          "emotion": "angry and condescending",
+          "emotion_shift": null,
+          "shift_at": null,
+          "bold_words": [
+            "you",
+            "five",
+            "basic math"
+          ],
+          "notes": "Leaning in aggressively, piling on insults with emphasized words."
+        },
+        {
+          "character": "BOY",
+          "dialogue": "I know math good.",
+          "emotion": "defensive, slightly sullen",
+          "emotion_shift": null,
+          "shift_at": null,
+          "bold_words": [],
+          "notes": "Pushes back, but with shaky confidence."
+        },
+        {
+          "character": "WOMAN_RED_HAT",
+          "dialogue": "**Ha!** I see you **also** don't know **basic grammar**.",
+          "emotion": "mocking, triumphant",
+          "emotion_shift": null,
+          "shift_at": null,
+          "bold_words": [
+            "Ha!",
+            "also",
+            "basic grammar"
+          ],
+          "notes": "Laughs derisively while correcting him."
+        },
+        {
+          "character": "WOMAN_RED_HAT",
+          "dialogue": "It's \"I'm good at math.\"",
+          "emotion": "snidely corrective",
+          "emotion_shift": null,
+          "shift_at": null,
+          "bold_words": [],
+          "notes": "Pedantic tone, pointing as she explains."
+        }
+      ]
+    },
+    {
+      "page_number": 4,
+      "has_dialogue": true,
+      "visual_note": null,
+      "lines": [
+        {
+          "character": "BOY",
+          "dialogue": "Oh yeah?",
+          "emotion": "angry, challenging",
+          "emotion_shift": null,
+          "shift_at": null,
+          "bold_words": [],
+          "notes": "Snaps back at her, eyebrows furrowed."
+        },
+        {
+          "character": "BOY",
+          "dialogue": "Well, if you're so smart, what's **one-hundred times one-hundred**?",
+          "emotion": "defiant, testing",
+          "emotion_shift": null,
+          "shift_at": null,
+          "bold_words": [
+            "one-hundred times one-hundred"
+          ],
+          "notes": "Raises voice, trying to catch her out with the question."
+        },
+        {
+          "character": "WOMAN_RED_HAT",
+          "dialogue": "**TCH!** The fact you even **think** that's a hard question just proves my point.",
+          "emotion": "dismissive, smug",
+          "emotion_shift": null,
+          "shift_at": null,
+          "bold_words": [
+            "TCH!",
+            "think"
+          ],
+          "notes": "Scoffing sound at the start, arms crossed, dripping with contempt."
+        },
+        {
+          "character": "WOMAN_RED_HAT",
+          "dialogue": "The answer is **ten-thousand**.",
+          "emotion": "self-satisfied",
+          "emotion_shift": null,
+          "shift_at": null,
+          "bold_words": [
+            "ten-thousand"
+          ],
+          "notes": "States it confidently, almost bragging."
+        },
+        {
+          "character": "WOMAN_RED_HAT",
+          "dialogue": "Isn't that right, **mom**?",
+          "emotion": "taunting, pressuring",
+          "emotion_shift": null,
+          "shift_at": null,
+          "bold_words": [
+            "mom"
+          ],
+          "notes": "Turns to the boy's mother to back her up, using 'mom' pointedly."
+        },
+        {
+          "character": "MOM",
+          "dialogue": "She... she's right, honey.",
+          "emotion": "anxious, apologetic",
+          "emotion_shift": null,
+          "shift_at": null,
+          "bold_words": [],
+          "notes": "Stammers, clearly uncomfortable but confirming the answer."
+        }
+      ]
+    },
+    {
+      "page_number": 5,
+      "has_dialogue": true,
+      "visual_note": null,
+      "lines": [
+        {
+          "character": "WOMAN_RED_HAT",
+          "dialogue": "Now ask me what **I** see. Go on, ask.",
+          "emotion": "menacingly eager",
+          "emotion_shift": null,
+          "shift_at": null,
+          "bold_words": [
+            "I"
+          ],
+          "notes": "Leans in with a predatory grin, goading them."
+        },
+        {
+          "character": "BOY",
+          "dialogue": "... What do you see?",
+          "emotion": "nervous, intimidated",
+          "emotion_shift": null,
+          "shift_at": null,
+          "bold_words": [],
+          "notes": "Hesitates before speaking; small, shaky voice."
+        },
+        {
+          "character": "WOMAN_RED_HAT",
+          "dialogue": "Dumb, judgemental little boy!",
+          "emotion": "viciously triumphant",
+          "emotion_shift": null,
+          "shift_at": null,
+          "bold_words": [],
+          "notes": "Shouts while pointing directly at him, expression crazed and cruel."
+        }
+      ]
+    }
+  ]
+}

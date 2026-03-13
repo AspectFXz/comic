@@ -1,0 +1,187 @@
+{
+  "characters": {
+    "HUMAN": "Bald human in an orange space suit with dark shoulder pads; expressive wide eyes.",
+    "ALIEN": "Small green alien with big round eyes, a pink gem on its forehead, and a white robotic walking rig with two segmented legs.",
+    "BUNNY_SMALL": "Teal rabbit-like creature with black eyes, tall ears, and small head antennas; normal animal size.",
+    "BUNNY_GIANT": "Enormous teal rabbit-like creature, same look as smaller one but towering over characters and sporting sharp fangs."
+  },
+  "pages": [
+    {
+      "page_number": 1,
+      "has_dialogue": true,
+      "visual_note": null,
+      "lines": [
+        {
+          "character": "ALIEN",
+          "dialogue": "See? They look nearly identical to your Earth \"bunny.\"",
+          "emotion": "cheerfully proud",
+          "emotion_shift": null,
+          "shift_at": null,
+          "bold_words": [
+            "nearly identical"
+          ],
+          "notes": "Alien is smiling, presenting its comparison confidently."
+        },
+        {
+          "character": "ALIEN",
+          "dialogue": "Well, besides the color and antennas of course.",
+          "emotion": "lightly amused",
+          "emotion_shift": null,
+          "shift_at": null,
+          "bold_words": [],
+          "notes": "Delivered as a casual afterthought while gesturing toward the creature."
+        }
+      ]
+    },
+    {
+      "page_number": 2,
+      "has_dialogue": true,
+      "visual_note": null,
+      "lines": [
+        {
+          "character": "HUMAN",
+          "dialogue": "Uh... It's also quite a bit bigger.",
+          "emotion": "uneasy",
+          "emotion_shift": null,
+          "shift_at": null,
+          "bold_words": [
+            "bigger"
+          ],
+          "notes": "Hesitant start with ellipsis; human stares up at the oversized creature."
+        },
+        {
+          "character": "ALIEN",
+          "dialogue": "Most certainly!",
+          "emotion": "blithely enthusiastic",
+          "emotion_shift": null,
+          "shift_at": null,
+          "bold_words": [],
+          "notes": "Alien cheerfully agrees, seemingly unconcerned about the size."
+        }
+      ]
+    },
+    {
+      "page_number": 3,
+      "has_dialogue": true,
+      "visual_note": null,
+      "lines": [
+        {
+          "character": "HUMAN",
+          "dialogue": "It also has fangs.",
+          "emotion": "worried realization",
+          "emotion_shift": null,
+          "shift_at": null,
+          "bold_words": [
+            "fangs"
+          ],
+          "notes": "Human points out the danger as the creature reveals its teeth."
+        },
+        {
+          "character": "ALIEN",
+          "dialogue": "It's a carnivore.",
+          "emotion": "matter-of-fact",
+          "emotion_shift": null,
+          "shift_at": null,
+          "bold_words": [
+            "carnivore"
+          ],
+          "notes": "Stated dryly, as if sharing an interesting fact."
+        },
+        {
+          "character": "ALIEN",
+          "dialogue": "Most certainly!",
+          "emotion": "cheerfully confirming",
+          "emotion_shift": null,
+          "shift_at": null,
+          "bold_words": [],
+          "notes": "Upbeat confirmation, contrasting with the threat."
+        },
+        {
+          "character": "ALIEN",
+          "dialogue": "Mooost certainly!",
+          "emotion": "playfully emphatic",
+          "emotion_shift": null,
+          "shift_at": null,
+          "bold_words": [],
+          "notes": "Drawn-out word suggests exaggerated enthusiasm, possibly nervous underneath."
+        }
+      ]
+    },
+    {
+      "page_number": 4,
+      "has_dialogue": true,
+      "visual_note": null,
+      "lines": [
+        {
+          "character": "HUMAN",
+          "dialogue": "You DID NOT mean to teleport this close to it, did you.",
+          "emotion": "accusingly anxious",
+          "emotion_shift": null,
+          "shift_at": null,
+          "bold_words": [
+            "DID NOT"
+          ],
+          "notes": "Human\u2019s eyes are wide; tone scolding but edged with fear."
+        },
+        {
+          "character": "ALIEN",
+          "dialogue": "Most certainly NOT!",
+          "emotion": "panicked insistence",
+          "emotion_shift": null,
+          "shift_at": null,
+          "bold_words": [
+            "NOT"
+          ],
+          "notes": "Alien yells the denial, clearly frightened."
+        },
+        {
+          "character": "HUMAN",
+          "dialogue": "You should teleport us back.",
+          "emotion": "urgently pleading",
+          "emotion_shift": null,
+          "shift_at": null,
+          "bold_words": [],
+          "notes": "Spoken quickly, trying to stay calm while facing the creature\u2019s jaws."
+        },
+        {
+          "character": "ALIEN",
+          "dialogue": "Most certainly!",
+          "emotion": "agreeing in a panic",
+          "emotion_shift": null,
+          "shift_at": null,
+          "bold_words": [],
+          "notes": "Immediate agreement, but body language is frozen."
+        },
+        {
+          "character": "ALIEN",
+          "dialogue": "Unfortunately, however, it seems I have become utterly paralyzed by fear!",
+          "emotion": "frantic self-aware",
+          "emotion_shift": null,
+          "shift_at": null,
+          "bold_words": [],
+          "notes": "Delivered in a verbose, formal way that contrasts with the terror it describes."
+        },
+        {
+          "character": "ALIEN",
+          "dialogue": "Therefore, if I may use a bit of Earth slang, I suspect we have become toast.",
+          "emotion": "grimly humorous resignation",
+          "emotion_shift": null,
+          "shift_at": null,
+          "bold_words": [
+            "we have become toast"
+          ],
+          "notes": "Trying to keep a witty tone despite expecting doom."
+        },
+        {
+          "character": "HUMAN",
+          "dialogue": "Most certainly.",
+          "emotion": "deadpan dread",
+          "emotion_shift": null,
+          "shift_at": null,
+          "bold_words": [],
+          "notes": "Flat echo of the alien\u2019s catchphrase, acknowledging their predicament."
+        }
+      ]
+    }
+  ]
+}

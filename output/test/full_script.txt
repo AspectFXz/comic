@@ -1,0 +1,48 @@
+============================================================
+CHARACTER ROSTER
+============================================================
+  MOM: Blonde woman with bob haircut, green coat, purple scarf; caring but increasingly worried expression.
+  BOY: Young boy in blue winter coat with hood and pom‑pom hat; round eyes, expressive face.
+  WOMAN_RED_HAT: Adult woman with long dark hair, red beanie, blue jacket, red mittens; starts out friendly, becomes angry and vindictive.
+
+============================================================
+SCRIPT (Chronological Order)
+============================================================
+
+--- PAGE 1 ---
+  MOM: [gently encouraging] What do you see, honey?
+  BOY: [hesitant then proud] Uhhh... [pleased] Blue car!
+  MOM: [cheerfully encouraging] Good job! What else?
+  BOY: [excited] Beard man!
+  MOM: [lightly amused, affirming] Good job! He **DOES** have a beard.
+  WOMAN_RED_HAT: [touched, mildly amused] Awww. That's cute.
+
+--- PAGE 2 ---
+  MOM: [encouraging] What else do you see?
+  BOY: [confident, cheerful] Red hat!
+  WOMAN_RED_HAT: [pleasantly surprised then friendly] **Oh!** [warmly approving] Haha, yeah! Good job kid!
+  BOY: [matter-of-fact, oblivious] Messy hair!
+  WOMAN_RED_HAT: [taken aback] What?
+  BOY: [bluntly descriptive, teasing] Pointy witch nose!
+  WOMAN_RED_HAT: [offended and scolding] **Hey!** That's rude!
+
+--- PAGE 3 ---
+  WOMAN_RED_HAT: [angry and condescending] How would you like it if I made fun of **you**?
+What are you, **five**?
+You probably don't even know **basic math**.
+  BOY: [defensive, slightly sullen] I know math good.
+  WOMAN_RED_HAT: [mocking, triumphant] **Ha!** I see you **also** don't know **basic grammar**.
+  WOMAN_RED_HAT: [snidely corrective] It's "I'm good at math."
+
+--- PAGE 4 ---
+  BOY: [angry, challenging] Oh yeah?
+  BOY: [defiant, testing] Well, if you're so smart, what's **one-hundred times one-hundred**?
+  WOMAN_RED_HAT: [dismissive, smug] **TCH!** The fact you even **think** that's a hard question just proves my point.
+  WOMAN_RED_HAT: [self-satisfied] The answer is **ten-thousand**.
+  WOMAN_RED_HAT: [taunting, pressuring] Isn't that right, **mom**?
+  MOM: [anxious, apologetic] She... she's right, honey.
+
+--- PAGE 5 ---
+  WOMAN_RED_HAT: [menacingly eager] Now ask me what **I** see. Go on, ask.
+  BOY: [nervous, intimidated] ... What do you see?
+  WOMAN_RED_HAT: [viciously triumphant] Dumb, judgemental little boy!
