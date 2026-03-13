@@ -13,7 +13,6 @@ from pathlib import Path
 
 import boto3
 import requests as http_requests
-from dotenv import load_dotenv
 from flask import Flask, Response, jsonify, request, send_from_directory
 from psycopg2.extras import RealDictCursor
 
@@ -27,13 +26,11 @@ from tagger import (
 )
 from formatter import save_scripts, save_raw_extraction
 
-load_dotenv()
-
 app = Flask(__name__, static_folder="static")
 
 OUTPUT_DIR = os.path.join(os.path.dirname(__file__), "output")
 MEDIA_DIR = os.path.join(os.path.dirname(__file__), "media")
-WAVESPEED_API_KEY = os.getenv("WAVESPEED_API_KEY", "")
+WAVESPEED_API_KEY = "9c563897882372a8f252224a2ea44a9abb6331e2cf818424923e6492c2ee6e90"
 
 # ── Cloudflare R2 ────────────────────────────────────
 R2_BUCKET = "algrow-voiceovers"
@@ -216,12 +213,15 @@ def create_project():
 
     shutil.rmtree(temp_dir, ignore_errors=True)
 
-    # Save file-based outputs too
-    chrono = build_chronological_script(data)
-    per_char = build_per_character_scripts(data)
-    el_ready = build_elevenlabs_ready(data)
-    save_scripts(name, chrono, per_char, el_ready)
-    save_raw_extraction(name, data)
+    # Save file-based outputs (skip on read-only filesystems like Vercel)
+    try:
+        chrono = build_chronological_script(data)
+        per_char = build_per_character_scripts(data)
+        el_ready = build_elevenlabs_ready(data)
+        save_scripts(name, chrono, per_char, el_ready)
+        save_raw_extraction(name, data)
+    except OSError:
+        pass
 
     # Insert into DB
     characters = data.get("characters", {})

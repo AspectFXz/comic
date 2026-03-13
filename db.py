@@ -2,16 +2,12 @@
 Database module — single table 'comic_niche' for everything.
 """
 
-import os
 from contextlib import contextmanager
 
 import psycopg2
 from psycopg2.extras import RealDictCursor
-from dotenv import load_dotenv
 
-load_dotenv()
-
-DATABASE_URL = os.getenv("DATABASE_URL", "").replace("postgres://", "postgresql://", 1)
+DATABASE_URL = "postgresql://app_user:p71d4ecaf55149042985cf1a738bb3524167069ff81f0faa3f4517ee8d35c5ef6@91.98.188.35:5432/myappdb"
 
 
 @contextmanager
