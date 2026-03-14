@@ -620,13 +620,11 @@ function togglePlay(id){
 
 /* Download */
 function downloadLine(id){
-    let url='',char='',idx=0;
+    let url='';
     for(const pg of S.pages) for(const ln of pg.lines)
-        if(ln.id===id){url=ln.audio_url;char=ln.character_name;idx=ln.char_line_index;break;}
+        if(ln.id===id){url=ln.audio_url;break;}
     if(!url){toast('No audio to download','error');return;}
-    const a=document.createElement('a');
-    a.href=url;a.download=`${char}_line_${idx+1}.mp3`;
-    document.body.appendChild(a);a.click();a.remove();
+    window.open(url,'_blank');
 }
 
 async function downloadAll(){
