@@ -2,16 +2,18 @@
 Comic Voiceover Studio — Flask backend, DB-backed, R2 storage.
 """
 
+import io
 import os
 import mimetypes
 import shutil
 import tempfile
+import zipfile
 from pathlib import Path
 
 import boto3
 import requests as http_requests
 from dotenv import load_dotenv
-from flask import Flask, jsonify, request, send_from_directory
+from flask import Flask, Response, jsonify, request, send_from_directory
 from psycopg2.extras import RealDictCursor
 
 from db import get_db, init_db
@@ -402,6 +404,53 @@ def migrate_to_r2():
         conn.commit()
 
     return jsonify({"ok": True, "migrated": migrated})
+
+
+# ── Download all audio as ZIP ─────────────────────────
+
+@app.route("/api/project/<name>/download")
+def download_project_audio(name):
+    """Stream a ZIP of all generated audio files for a project."""
+    with get_db() as conn:
+        with conn.cursor(cursor_factory=RealDictCursor) as cur:
+            cur.execute("""
+                SELECT character_name, audio_url, char_line_index
+                FROM (
+                    SELECT character_name, audio_url,
+                           ROW_NUMBER() OVER (
+                               PARTITION BY character_name ORDER BY global_order
+                           ) - 1 AS char_line_index
+                    FROM comic_niche
+                    WHERE project_name = %s AND audio_generated = TRUE
+                      AND audio_url IS NOT NULL
+                    ORDER BY global_order
+                ) sub
+            """, (name,))
+            rows = cur.fetchall()
+
+    if not rows:
+        return jsonify({"error": "No generated audio to download"}), 404
+
+    buf = io.BytesIO()
+    with zipfile.ZipFile(buf, "w", zipfile.ZIP_DEFLATED) as zf:
+        for row in rows:
+            char = row["character_name"]
+            idx = row["char_line_index"]
+            url = row["audio_url"]
+            filename = f"{char}/line_{idx + 1:03d}.mp3"
+            try:
+                resp = http_requests.get(url, timeout=30)
+                if resp.status_code == 200:
+                    zf.writestr(filename, resp.content)
+            except Exception:
+                continue
+
+    buf.seek(0)
+    return Response(
+        buf.getvalue(),
+        mimetype="application/zip",
+        headers={"Content-Disposition": f'attachment; filename="{name}_voiceovers.zip"'},
+    )
 
 
 # ── Serve files (fallback for old local paths) ───────
