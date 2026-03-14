@@ -8,6 +8,7 @@ import mimetypes
 import shutil
 import tempfile
 import zipfile
+from urllib.parse import unquote
 from pathlib import Path
 
 import boto3
@@ -129,6 +130,7 @@ def list_projects():
 
 @app.route("/api/project/<name>")
 def get_project(name):
+    name = unquote(name)
     with get_db() as conn:
         with conn.cursor(cursor_factory=RealDictCursor) as cur:
             # Characters (only those with lines)
@@ -267,6 +269,7 @@ def create_project():
 
 @app.route("/api/project/<name>/page/<int:page_num>/image", methods=["POST"])
 def upload_page_image(name, page_num):
+    name = unquote(name)
     f = request.files.get("image")
     if not f:
         return jsonify({"error": "No image file"}), 400
@@ -295,6 +298,7 @@ def upload_page_image(name, page_num):
 
 @app.route("/api/project/<name>/voice", methods=["PUT"])
 def update_voice(name):
+    name = unquote(name)
     body = request.json
     char = body.get("character")
     voice_id = body.get("voice_id", "")
@@ -428,6 +432,7 @@ def migrate_to_r2():
 @app.route("/api/project/<name>/download")
 def download_project_audio(name):
     """Stream a ZIP of all generated audio files for a project."""
+    name = unquote(name)
     with get_db() as conn:
         with conn.cursor(cursor_factory=RealDictCursor) as cur:
             cur.execute("""
