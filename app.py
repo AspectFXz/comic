@@ -74,7 +74,10 @@ def upload_bytes_to_r2(data, r2_key, content_type="audio/mpeg"):
 
 app.config["MAX_CONTENT_LENGTH"] = 50 * 1024 * 1024  # 50 MB
 
-init_db()
+try:
+    init_db()
+except Exception as e:
+    print(f"[WARN] init_db failed: {e}")
 
 
 # ── Pages ─────────────────────────────────────────────
@@ -82,6 +85,20 @@ init_db()
 @app.route("/")
 def index():
     return send_from_directory("static", "index.html")
+
+
+@app.route("/api/health")
+def health():
+    import sys
+    checks = {"python": sys.version, "db_url_set": bool(os.getenv("DATABASE_URL"))}
+    try:
+        with get_db() as conn:
+            with conn.cursor() as cur:
+                cur.execute("SELECT 1")
+        checks["db"] = "ok"
+    except Exception as e:
+        checks["db"] = str(e)
+    return jsonify(checks)
 
 
 @app.route("/api/config")
