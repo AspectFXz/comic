@@ -12,7 +12,13 @@ from openai import OpenAI
 
 import config
 
-client = OpenAI(api_key=config.OPENAI_API_KEY)
+client = None
+
+def _get_client():
+    global client
+    if client is None:
+        client = OpenAI(api_key=config.OPENAI_API_KEY)
+    return client
 
 SYSTEM_PROMPT = """You are an expert comic book analyst. You will receive comic panel images IN ORDER (page 1, page 2, etc.) from a comic strip.
 
@@ -134,7 +140,7 @@ def extract_from_images(image_paths: list[str]) -> dict:
             }
         )
 
-    response = client.chat.completions.create(
+    response = _get_client().chat.completions.create(
         model=config.VISION_MODEL,
         messages=[
             {"role": "system", "content": SYSTEM_PROMPT},
