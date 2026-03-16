@@ -1,7 +1,13 @@
 import os
 
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
+
 # OpenAI
-OPENAI_API_KEY = "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"
+OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY", "")
 VISION_MODEL = "gpt-5.1"  # or "gpt-5.1" for higher accuracy
 
 # Paths
