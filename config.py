@@ -1,7 +1,7 @@
 import os
 
 # OpenAI
-OPENAI_API_KEY = "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"
+OPENAI_API_KEY = "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"
 VISION_MODEL = "gpt-5.1"  # or "gpt-5.1" for higher accuracy
 
 # Paths
