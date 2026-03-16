@@ -362,7 +362,7 @@ document.addEventListener('DOMContentLoaded',()=>{
         fd.append('image',f);
 
         try{
-            const r=await(await fetch(`/api/project/${S.project}/page/${uploadPageNum}/image`,{method:'POST',body:fd})).json();
+            const r=await(await fetch(`/api/project/${encodeURIComponent(S.project)}/page/${uploadPageNum}/image`,{method:'POST',body:fd})).json();
             if(r.error) throw new Error(r.error);
 
             // Update local state and re-render
@@ -395,7 +395,7 @@ async function loadProjects(){
 
     html+=r.map((p,i)=>{
         const bg=COLORS[i%COLORS.length];
-        return `<div class="card" onclick="openProject('${p.project_name}')">
+        return `<div class="card" onclick="openProject(\`${p.project_name}\`)">
             <div class="card-cover" style="background:linear-gradient(135deg,${bg}20,${bg}08)">${p.project_name.charAt(0).toUpperCase()}</div>
             <div class="card-body">
                 <div class="card-name">${p.project_name}</div>
@@ -416,7 +416,7 @@ async function loadProjects(){
    ═══════════════════════════════════════════════════════ */
 
 async function openProject(name){
-    const r=await(await fetch('/api/project/'+name)).json();
+    const r=await(await fetch('/api/project/'+encodeURIComponent(name))).json();
     S.project=name;S.characters=r.characters;S.pages=r.pages;S.pageIdx=0;
     cMap={};cI=0;
     S.characters.forEach(c=>cc(c.character_name));
@@ -430,7 +430,7 @@ let vd={};
 function onVoice(ch,val){
     clearTimeout(vd[ch]);
     vd[ch]=setTimeout(()=>{
-        fetch('/api/project/'+S.project+'/voice',{
+        fetch('/api/project/'+encodeURIComponent(S.project)+'/voice',{
             method:'PUT',headers:{'Content-Type':'application/json'},
             body:JSON.stringify({character:ch,voice_id:val})
         });
