@@ -265,6 +265,19 @@ def create_project():
     return jsonify({"ok": True, "project_name": name, "lines": global_order})
 
 
+# ── Delete project ───────────────────────────────────
+
+@app.route("/api/project/<name>", methods=["DELETE"])
+def delete_project(name):
+    name = unquote(name)
+    with get_db() as conn:
+        with conn.cursor() as cur:
+            cur.execute("DELETE FROM comic_niche WHERE project_name = %s", (name,))
+            deleted = cur.rowcount
+        conn.commit()
+    return jsonify({"ok": True, "deleted": deleted})
+
+
 # ── Upload image for an existing page ────────────────
 
 @app.route("/api/project/<name>/page/<int:page_num>/image", methods=["POST"])

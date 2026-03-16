@@ -46,6 +46,10 @@
         /* New project card */
         .card-new .card-cover{border:2px dashed rgba(255,255,255,.1);background:none;color:var(--pri);font-size:32px;font-weight:400}
         .card-new .card-name{color:var(--t2)}
+        .card-del{position:absolute;top:8px;right:8px;width:24px;height:24px;border-radius:6px;border:1px solid rgba(255,255,255,.1);background:rgba(0,0,0,.6);color:var(--t3);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:10px;transition:all .2s;opacity:0}
+        .card:hover .card-del{opacity:1}
+        .card-del:hover{background:var(--red);color:#fff;border-color:var(--red)}
+        .card{position:relative}
 
         /* Modal */
         .modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(6px);z-index:200;display:none;align-items:center;justify-content:center}
@@ -396,6 +400,7 @@ async function loadProjects(){
     html+=r.map((p,i)=>{
         const bg=COLORS[i%COLORS.length];
         return `<div class="card" onclick="openProject(\`${p.project_name}\`)">
+            <button class="card-del" onclick="event.stopPropagation();deleteProject(\`${p.project_name}\`)" title="Delete project"><i class="fas fa-trash"></i></button>
             <div class="card-cover" style="background:linear-gradient(135deg,${bg}20,${bg}08)">${p.project_name.charAt(0).toUpperCase()}</div>
             <div class="card-body">
                 <div class="card-name">${p.project_name}</div>
@@ -409,6 +414,16 @@ async function loadProjects(){
     }).join('');
 
     g.innerHTML=html;
+}
+
+async function deleteProject(name){
+    if(!confirm(`Delete "${name}"? This cannot be undone.`)) return;
+    try{
+        const r=await(await fetch('/api/project/'+encodeURIComponent(name),{method:'DELETE'})).json();
+        if(r.error) throw new Error(r.error);
+        toast(`Deleted "${name}"`,'success');
+        loadProjects();
+    }catch(e){toast(e.message,'error');}
 }
 
 /* ═══════════════════════════════════════════════════════
