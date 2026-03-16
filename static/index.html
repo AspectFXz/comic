@@ -407,12 +407,14 @@ async function loadProjects(){
 
     html+=r.map((p,i)=>{
         const bg=COLORS[i%COLORS.length];
+        const thumb=p.thumbnail;
         return `<div class="card" onclick="openProject(\`${p.project_name}\`)">
             <div class="card-actions">
                 <button class="card-act" onclick="event.stopPropagation();renameProject(\`${p.project_name}\`)" title="Rename"><i class="fas fa-pen"></i></button>
                 <button class="card-act del" onclick="event.stopPropagation();deleteProject(\`${p.project_name}\`)" title="Delete"><i class="fas fa-trash"></i></button>
             </div>
-            <div class="card-cover" style="background:linear-gradient(135deg,${bg}20,${bg}08)">${p.project_name.charAt(0).toUpperCase()}</div>
+            ${thumb?`<div class="card-cover" style="background:url('${thumb}') center/cover">&nbsp;</div>`
+                   :`<div class="card-cover" style="background:linear-gradient(135deg,${bg}20,${bg}08)">${p.project_name.charAt(0).toUpperCase()}</div>`}
             <div class="card-body">
                 <div class="card-name">${p.project_name}</div>
                 <div class="card-meta">

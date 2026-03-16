@@ -116,7 +116,11 @@ def list_projects():
                        COUNT(*) FILTER (WHERE audio_generated) as generated_count,
                        COUNT(DISTINCT character_name) as character_count,
                        COUNT(DISTINCT page_number) as page_count,
-                       MAX(instagram_url) as instagram_url
+                       MAX(instagram_url) as instagram_url,
+                       (SELECT page_image_path FROM comic_niche c2
+                        WHERE c2.project_name = comic_niche.project_name
+                          AND c2.page_image_path IS NOT NULL
+                        ORDER BY c2.page_number, c2.line_order LIMIT 1) as thumbnail
                 FROM comic_niche
                 GROUP BY project_name
                 ORDER BY project_name
