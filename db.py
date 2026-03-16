@@ -41,11 +41,16 @@ def init_db():
                     notes TEXT DEFAULT '',
                     audio_url TEXT,
                     audio_generated BOOLEAN DEFAULT FALSE,
+                    instagram_url TEXT DEFAULT '',
                     created_at TIMESTAMP DEFAULT NOW()
                 );
                 CREATE INDEX IF NOT EXISTS idx_cn_project
                     ON comic_niche(project_name);
                 CREATE INDEX IF NOT EXISTS idx_cn_project_page
                     ON comic_niche(project_name, page_number);
+            """)
+            # Add instagram_url column if missing (existing tables)
+            cur.execute("""
+                ALTER TABLE comic_niche ADD COLUMN IF NOT EXISTS instagram_url TEXT DEFAULT '';
             """)
         conn.commit()

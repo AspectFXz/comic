@@ -115,7 +115,8 @@ def list_projects():
                        COUNT(*) as line_count,
                        COUNT(*) FILTER (WHERE audio_generated) as generated_count,
                        COUNT(DISTINCT character_name) as character_count,
-                       COUNT(DISTINCT page_number) as page_count
+                       COUNT(DISTINCT page_number) as page_count,
+                       MAX(instagram_url) as instagram_url
                 FROM comic_niche
                 GROUP BY project_name
                 ORDER BY project_name
@@ -168,8 +169,14 @@ def get_project(name):
                     }
                 pages[pn]["lines"].append(line)
 
+            # Get instagram URL from first line
+            ig_url = ""
+            if lines:
+                ig_url = lines[0].get("instagram_url") or ""
+
             return jsonify({
                 "name": name,
+                "instagram_url": ig_url,
                 "characters": characters,
                 "pages": sorted(pages.values(), key=lambda p: p["page_number"]),
             })
@@ -276,6 +283,44 @@ def delete_project(name):
             deleted = cur.rowcount
         conn.commit()
     return jsonify({"ok": True, "deleted": deleted})
+
+
+# ── Rename project ───────────────────────────────────
+
+@app.route("/api/project/<name>/rename", methods=["PUT"])
+def rename_project(name):
+    name = unquote(name)
+    body = request.json
+    new_name = (body.get("new_name") or "").strip()
+    if not new_name:
+        return jsonify({"error": "New name is required"}), 400
+
+    with get_db() as conn:
+        with conn.cursor() as cur:
+            cur.execute(
+                "UPDATE comic_niche SET project_name = %s WHERE project_name = %s",
+                (new_name, name),
+            )
+        conn.commit()
+    return jsonify({"ok": True, "new_name": new_name})
+
+
+# ── Instagram link ───────────────────────────────────
+
+@app.route("/api/project/<name>/instagram", methods=["PUT"])
+def update_instagram(name):
+    name = unquote(name)
+    body = request.json
+    url = (body.get("instagram_url") or "").strip()
+
+    with get_db() as conn:
+        with conn.cursor() as cur:
+            cur.execute(
+                "UPDATE comic_niche SET instagram_url = %s WHERE project_name = %s",
+                (url, name),
+            )
+        conn.commit()
+    return jsonify({"ok": True})
 
 
 # ── Upload image for an existing page ────────────────

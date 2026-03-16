@@ -46,10 +46,18 @@
         /* New project card */
         .card-new .card-cover{border:2px dashed rgba(255,255,255,.1);background:none;color:var(--pri);font-size:32px;font-weight:400}
         .card-new .card-name{color:var(--t2)}
-        .card-del{position:absolute;top:8px;right:8px;width:24px;height:24px;border-radius:6px;border:1px solid rgba(255,255,255,.1);background:rgba(0,0,0,.6);color:var(--t3);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:10px;transition:all .2s;opacity:0}
-        .card:hover .card-del{opacity:1}
-        .card-del:hover{background:var(--red);color:#fff;border-color:var(--red)}
+        .card-actions{position:absolute;top:8px;right:8px;display:flex;gap:4px;opacity:0;transition:opacity .2s}
+        .card:hover .card-actions{opacity:1}
+        .card-act{width:24px;height:24px;border-radius:6px;border:1px solid rgba(255,255,255,.1);background:rgba(0,0,0,.6);color:var(--t3);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:10px;transition:all .2s}
+        .card-act:hover{background:rgba(255,255,255,.15);color:#fff;border-color:rgba(255,255,255,.2)}
+        .card-act.del:hover{background:var(--red);color:#fff;border-color:var(--red)}
         .card{position:relative}
+        .ig-bar{display:flex;align-items:center;gap:8px;background:var(--glass);border:1px solid var(--border);border-radius:10px;padding:10px 14px;margin-bottom:16px}
+        .ig-bar i{color:#E1306C;font-size:14px;flex-shrink:0}
+        .ig-bar input{flex:1;background:none;border:none;color:#fff;font-size:12px;font-family:inherit;outline:none}
+        .ig-bar input::placeholder{color:var(--t3)}
+        .ig-bar a{color:var(--pri);font-size:11px;font-weight:600;text-decoration:none;white-space:nowrap}
+        .ig-bar a:hover{text-decoration:underline}
 
         /* Modal */
         .modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(6px);z-index:200;display:none;align-items:center;justify-content:center}
@@ -400,7 +408,10 @@ async function loadProjects(){
     html+=r.map((p,i)=>{
         const bg=COLORS[i%COLORS.length];
         return `<div class="card" onclick="openProject(\`${p.project_name}\`)">
-            <button class="card-del" onclick="event.stopPropagation();deleteProject(\`${p.project_name}\`)" title="Delete project"><i class="fas fa-trash"></i></button>
+            <div class="card-actions">
+                <button class="card-act" onclick="event.stopPropagation();renameProject(\`${p.project_name}\`)" title="Rename"><i class="fas fa-pen"></i></button>
+                <button class="card-act del" onclick="event.stopPropagation();deleteProject(\`${p.project_name}\`)" title="Delete"><i class="fas fa-trash"></i></button>
+            </div>
             <div class="card-cover" style="background:linear-gradient(135deg,${bg}20,${bg}08)">${p.project_name.charAt(0).toUpperCase()}</div>
             <div class="card-body">
                 <div class="card-name">${p.project_name}</div>
@@ -426,6 +437,20 @@ async function deleteProject(name){
     }catch(e){toast(e.message,'error');}
 }
 
+async function renameProject(name){
+    const newName=prompt(`Rename "${name}" to:`,name);
+    if(!newName||newName.trim()===name) return;
+    try{
+        const r=await(await fetch('/api/project/'+encodeURIComponent(name)+'/rename',{
+            method:'PUT',headers:{'Content-Type':'application/json'},
+            body:JSON.stringify({new_name:newName.trim()})
+        })).json();
+        if(r.error) throw new Error(r.error);
+        toast(`Renamed to "${r.new_name}"`,'success');
+        loadProjects();
+    }catch(e){toast(e.message,'error');}
+}
+
 /* ═══════════════════════════════════════════════════════
    READER
    ═══════════════════════════════════════════════════════ */
@@ -433,11 +458,12 @@ async function deleteProject(name){
 async function openProject(name){
     const r=await(await fetch('/api/project/'+encodeURIComponent(name))).json();
     S.project=name;S.characters=r.characters;S.pages=r.pages;S.pageIdx=0;
+    S.instagramUrl=r.instagram_url||'';
     cMap={};cI=0;
     S.characters.forEach(c=>cc(c.character_name));
     document.getElementById('rTitle').textContent=name;
     document.getElementById('genAllBtn').disabled=false;
-    showReader();renderRoster();renderPage();renderNav();
+    showReader();renderInstagram();renderRoster();renderPage();renderNav();
 }
 
 /* Voice IDs */
@@ -456,6 +482,31 @@ function getVoice(ch){
     if(inp&&inp.value.trim()) return inp.value.trim();
     const c=S.characters.find(x=>x.character_name===ch);
     return c?c.voice_id||'':'';
+}
+
+let igDebounce;
+function renderInstagram(){
+    const r=document.getElementById('roster');
+    const bar=document.getElementById('igBar');
+    if(bar) bar.remove();
+    const div=document.createElement('div');
+    div.id='igBar';
+    div.innerHTML=`<div class="ig-bar">
+        <i class="fab fa-instagram"></i>
+        <input id="igInput" placeholder="Paste Instagram post URL..." value="${S.instagramUrl||''}">
+        ${S.instagramUrl?`<a href="${S.instagramUrl}" target="_blank">View post</a>`:''}
+    </div>`;
+    r.parentNode.insertBefore(div,r);
+    document.getElementById('igInput').addEventListener('input',e=>{
+        S.instagramUrl=e.target.value.trim();
+        clearTimeout(igDebounce);
+        igDebounce=setTimeout(()=>{
+            fetch('/api/project/'+encodeURIComponent(S.project)+'/instagram',{
+                method:'PUT',headers:{'Content-Type':'application/json'},
+                body:JSON.stringify({instagram_url:S.instagramUrl})
+            });
+        },600);
+    });
 }
 
 function renderRoster(){
